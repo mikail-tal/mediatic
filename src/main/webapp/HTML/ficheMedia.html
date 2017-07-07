@@ -40,7 +40,7 @@
 		</div>
 	</nav>
 	<div class="container">
-	<div class="panel panel-primary" style="margin-top: 40px;">
+	<div class="panel panel-primary">
 		<div class="panel panel-heading">Description Media</div>
 		<form class="form-horizontal" action="#">
 
@@ -48,7 +48,7 @@
 				<label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
 				<div class="col-sm-8 col-xs-6">
 					<input type="text" class="form-control" id="titre"
-						placeholder="Enter Titre" name="titre">
+						placeholder="Enter Titre" name="titre" disabled="disabled">
 
 				</div>
 				<div class="col-sm-2 col-xs-4">
@@ -61,13 +61,18 @@
 				<label class="control-label hidden-xs col-sm-2" for="auteur">Auteur :</label>
 				<div class="col-sm-8 col-xs-6">
 					<input type="text" class="form-control" id="auteur"
-						placeholder="Enter Auteur" name="auteur">
+						placeholder="Enter Auteur" name="auteur" disabled="disabled">
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit"
+						class="btn btn-primary  col-sm-12 col-xs-12">
+						Modifier</button>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="media">Media :</label>
 				<div class="col-sm-8 col-xs-6">
-					<select class="form-control">
+					<select class="form-control" disabled="disabled">
 						<option>LIVRE</option>
 						<option>CD</option>
 						<option>DVD</option>
@@ -78,7 +83,7 @@
 				<div class="col-sm-2 col-xs-4">
 					<button type="submit"
 						class="btn btn-primary disabled col-sm-12 col-xs-12">
-						Modifier</button>
+						Enregistrer</button>
 				</div>
 			</div>
 			
