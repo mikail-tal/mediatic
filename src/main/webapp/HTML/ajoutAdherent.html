@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript" src="bootstrap/js/jquery.js">
+	</script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+	</script>
+<title>Ajout Adherent</title>
+</head>
+<body>
+	<div class="container">
+	<div class="panel panel-primary" style="margin-top: 40px;">
+		<div class="panel panel-heading">Ajouter Adherent</div>
+		<form class="form-horizontal" action="/action_page.php">
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="nom">Nom :</label>
+				<div class=" col-sm-10">
+					<input type="text" class="form-control" id="nom"
+						placeholder="Enter Nom" name="nom" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="nom">Prenom :</label>
+				<div class=" col-sm-10">
+					<input type="text" class="form-control" id="prenom"
+						placeholder="Enter Prenom" name="prenom" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Date Naissance :</label>
+				<div class=" col-sm-10">
+				
+					<input type="date" class="form-control" id="date" name="date" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Age :</label>
+				<div class=" col-sm-10">
+				
+					<input type="number" class="form-control"  id="age" name="age" disabled>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="auteur">E-mail :</label>
+				<div class=" col-sm-10">
+
+					<input type="text" class="form-control" id="nom"
+						placeholder="Enter E-mail" name="email" required>
+				</div>
+				</div>
+				
+					<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Adresse, CP et Ville :</label>
+				<div class=" col-sm-10">
+				
+					<input type="text" class="form-control" id="adress" placeholder="Enter Adresse, CP et Ville"  name="adress">
+				</div>
+			</div>
+			
+				<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Date Payement de la cotisation :</label>
+				<div class=" col-sm-10">
+				
+					<input type="date" class="form-control"  id="datep" name="datep">
+				</div>
+			</div>
+			
+				<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Date de Fin d’Abonnement :</label>
+				<div class=" col-sm-10">
+				
+					<input type="date" class="form-control"   id="montant" name="datef" disabled>
+				</div>
+			</div>
+
+			
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="date">Montant de Cotisation :</label>
+				<div class=" col-sm-10">
+				
+					<input type="number" class="form-control" placeholder="Enter Montant de la Cotisation"   id="montant" name="montant">
+				</div>
+			</div>
+
+			
+
+			
+			<div class="form-group ">
+				<div class="col-sm-12 ">
+					
+					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3">Enregistrer</button>
+					
+				</div>
+			</div>
+		</form>
+		
+		
+	</div>
+</body>
+</html>
