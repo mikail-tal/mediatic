@@ -1,7 +1,5 @@
 package adherent.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -44,5 +42,7 @@ public class AdherentDao extends DAO<Adherent>{
 					
 					return a;
 	}
+	
+	
 
 }

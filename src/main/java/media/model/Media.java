@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,6 +29,8 @@ public class Media {
 	
 	@OneToMany(mappedBy = "media")
 	private List<Emprunt> emprunt;
+	@OneToOne
+	private Emprunt empruntEnCours;
 
 	public TypeMedia getType() {
 		return type;
@@ -71,4 +74,21 @@ public class Media {
 		this.auteur = auteur;
 	}
 
+	public List<Emprunt> getEmprunt() {
+		return emprunt;
+	}
+
+	public void setEmprunt(List<Emprunt> emprunt) {
+		this.emprunt = emprunt;
+	}
+
+	public Emprunt getEmpruntEnCours() {
+		return empruntEnCours;
+	}
+
+	public void setEmpruntEnCours(Emprunt empruntEnCours) {
+		this.empruntEnCours = empruntEnCours;
+	}
+
+	
 }

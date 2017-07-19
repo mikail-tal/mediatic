@@ -37,5 +37,22 @@ public class MediaDao extends DAO<Media> {
 
 		return medias;
 	}
+	
+	public List<Media> findMediaByTitre(String titre){
+		EntityManager em = DatabaseHelper.createEntityManager();
+		DatabaseHelper.beginTx(em);
+		TypedQuery<Media> query = em.createQuery("SELECT distinct m from Media m "
+				+ "left join fetch m.empruntEnCours e "
+				+ "left join fetch e.adherent a "
+				+ "where m.titre like :titre",
+				Media.class);
+		query.setParameter("titre", "%"+titre+"%");
+		List<Media> medias = query.getResultList();		
+		DatabaseHelper.commitTxAndClose(em);
+
+
+		
+		return medias;
+	}
 
 }

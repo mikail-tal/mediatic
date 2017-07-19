@@ -5,7 +5,7 @@ import cotisation.model.Cotisation;
 
 public class CotisationService {
 	static CotisationDao cotisationDao;
-	public CotisationDao getInstance(){
+	public static CotisationDao getInstance(){
 		if(cotisationDao==null){
 			cotisationDao=new CotisationDao();
 		}

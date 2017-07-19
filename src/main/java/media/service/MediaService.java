@@ -1,7 +1,5 @@
 package media.service;
 
-import java.time.LocalDate;
-
 import media.dao.MediaDao;
 import media.model.Media;
 
@@ -9,7 +7,7 @@ public class MediaService {
 	
 	
 	static MediaDao mediaDao;
-	public MediaDao getInstance(){
+	public static MediaDao getInstance(){
 		if(mediaDao==null){
 			mediaDao=new MediaDao();
 		}

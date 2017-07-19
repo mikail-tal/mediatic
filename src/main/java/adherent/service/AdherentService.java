@@ -6,7 +6,7 @@ import adherent.model.Adherent;
 public class AdherentService {
 	static AdherentDao adherentDao;
 	
-	public AdherentDao getInstance(){
+	public static AdherentDao getInstance(){
 		if(adherentDao==null){
 			adherentDao= new AdherentDao();
 		}

@@ -25,13 +25,11 @@ public class Emprunt {
 	private LocalDate dateEmprunt;
 	private LocalDate dateRetourEffectif;
 	private LocalDate dateRetourPrevue;
-	public Emprunt(Media media, Adherent adherent, LocalDate dateEmprunt, LocalDate dateRetourEffectif,
-			LocalDate dateRetourPrevue) {
+	public Emprunt(Media media, Adherent adherent, LocalDate dateEmprunt) {
 		this.media = media;
 		this.adherent = adherent;
 		this.dateEmprunt = dateEmprunt;
-		this.dateRetourEffectif = dateRetourEffectif;
-		this.dateRetourPrevue = dateRetourPrevue;
+		
 	}
 	public Emprunt() {
 	}
