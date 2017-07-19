@@ -1,3 +1,4 @@
+
 package adherent.model;
 
 import java.time.LocalDate;
@@ -162,3 +163,5 @@ public class Adherent {
 	}
 
 }
+
+

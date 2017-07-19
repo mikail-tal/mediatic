@@ -22,7 +22,7 @@ public class Cotisation {
     @Column
 	private LocalDate datePaiment;
     
-    @OneToOne
+    @OneToOne(mappedBy = "cotisation")
 	   private Adherent adherent;
 
 	public Cotisation(Long montant, LocalDate datePaiment) {
