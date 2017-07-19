@@ -161,6 +161,10 @@ public class Adherent {
 		
 		return Period.between(getDateNaissaince(), LocalDate.now()).getYears();
 	}
+	public boolean abonnementIsValide(Adherent a){
+		return LocalDate.now().compareTo(a.getDateFinAbonnement()) < 0;
+		
+	}
 
 }
 

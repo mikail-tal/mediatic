@@ -41,7 +41,7 @@ public class AdherentDao extends DAO<Adherent>{
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
 		TypedQuery<Adherent> query = em.createQuery(
-			       "select a " +
+			       "select a" +
 			       "from Adherent a " +
 			       "where a.nom like :nom ", Adherent.class);
 			query.setParameter("nom","%"+nom+"%");
@@ -50,6 +50,6 @@ public class AdherentDao extends DAO<Adherent>{
 			DatabaseHelper.commitTxAndClose(em);
 			return adherents ;
 	}
-	
+
 	
 }
