@@ -1,11 +1,16 @@
 package media.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import emprunt.model.Emprunt;
 
 @Entity
 @Table(name = "media")
@@ -20,6 +25,9 @@ public class Media {
 	private String auteur;
 	@Column
 	private TypeMedia type;
+	
+	@OneToMany(mappedBy = "media")
+	private List<Emprunt> emprunt;
 
 	public TypeMedia getType() {
 		return type;
