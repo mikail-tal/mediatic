@@ -47,7 +47,7 @@ public class Adherent {
 	@OneToOne
 	private Cotisation cotisation;
 	
-	@OneToMany(mappedBy = "adherent")
+	@OneToMany
 	private List<Emprunt> emprunt;
 
 
