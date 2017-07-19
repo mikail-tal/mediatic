@@ -23,7 +23,9 @@ public class Main {
 		MediaDao mediaDao=new MediaDao();
 		Cotisation cotisation=new Cotisation(500l,LocalDate.of(2017, 7, 10));
 		Adherent adherent=new Adherent("BENGHAL", "AYOUB", LocalDate.of(1989, 8, 14), "ayoub.benghal@gmail.com", "18 RUE MIRON", "06000", "NICE");
+		
 		adherent.setCotisation(cotisation);
+		AdherentDao adherent1 = new AdherentDao();
 		
 		
 		Media javaNul=new Media("JAVA POUR LES NULS", "ABDEL ET DIOGO", TypeMedia.LIVRE);
@@ -41,7 +43,11 @@ public class Main {
 		empruntDao.create(emprunt1);
 		empruntDao.create(emprunt2);
 		
+		//adherent1.findAdherent(1l);
 		
+		Adherent ado = adherent1.findAdherent(adherent.getId());
+		System.out.println(ado.getNom()+" "+ado.getPrenom());
+	
 		
 		
 		
