@@ -1,5 +1,9 @@
 package dao;
 
-public class AdherentDao {
+import javax.persistence.EntityManager;
 
+
+
+public class AdherentDao {
+	
 }
