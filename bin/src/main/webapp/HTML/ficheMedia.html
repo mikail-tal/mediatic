@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fiche Media</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript" src="bootstrap/js/jquery.js">
+	</script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+	</script>
+	
+
+</head>
+<body>
+<div class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="navbar-header col-sm-3">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand col-sm-10 text-center" href="rechercheMedia.html">Mediatic</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Media<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="ajoutMedia.html">Ajouter</a></li>
+								<li><a href="rechercheMedia.html">Visualiser</a></li>
+
+							</ul></li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Adherent<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="ajoutAdherent.html">Ajouter</a></li>
+								<li><a href="rechercheAdherent.html">Visualiser</a></li>
+
+							</ul></li>
+						
+						<li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span>
+								Se deconnecter</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel panel-heading">Description Media</div>
+		<form class="form-horizontal" action="#">
+
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" id="titre"
+						placeholder="Enter Titre" name="titre" disabled="disabled">
+
+				</div>
+				<div class="col-sm-2 col-xs-4">	
+						<a href="ajoutEmprunt.html" class="btn  btn-primary col-sm-12 col-xs-12" role="button"> Emprunter</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="auteur">Auteur :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" id="auteur"
+						placeholder="Enter Auteur" name="auteur" disabled="disabled">
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit"
+						class="btn btn-primary  col-sm-12 col-xs-12">
+						Modifier</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="media">Media :</label>
+				<div class="col-sm-8 col-xs-6">
+					<select class="form-control" disabled="disabled">
+						<option>LIVRE</option>
+						<option>CD</option>
+						<option>DVD</option>
+
+					</select>
+
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit"
+						class="btn btn-primary disabled col-sm-12 col-xs-12">
+						Enregistrer</button>
+				</div>
+			</div>
+			
+			<table class="table table-hover" data-toggle="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nom</th>
+						<th>Prenom</th>
+					</tr> 
+				</thead>
+				<tbody> 
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				<tr>
+				<td>ABC</td>
+				<td>ABC</td>
+				<td>ABC</td>
+				</tr>
+				
+				 </tbody>
+			</table>
+
+		</form>
+
+
+
+	</div>
+	</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package model;
+package emprunt.model;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import adherent.model.Adherent;
+import media.model.Media;
 @Entity
 @Table (name="emprunt")
 @SequenceGenerator(name="seq_emprunt",sequenceName="seq_emprunt",initialValue=1,allocationSize=1)

@@ -1,4 +1,4 @@
-package dao;
+package mediatic.dao;
 
 import javax.persistence.EntityManager;
 
