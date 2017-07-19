@@ -7,7 +7,7 @@ public class AdherentDao extends DAO<Adherent>{
 
 	public AdherentDao() {
 		super(Adherent.class);
-		// TODO Auto-generated constructor stub
+  
 	}
 
 }
