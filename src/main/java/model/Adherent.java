@@ -1,11 +1,14 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -38,6 +41,10 @@ public class Adherent {
 
 	@OneToOne(mappedBy = "adherent")
 	   private Cotisation cotisation;
+	
+	
+	@OneToMany(mappedBy = "adherent")
+	private List<Emprunt> emprunt;
 
 
 	public Adherent(String nom, String prenom, LocalDate dateNaissaince, String email, String adresse, String cp,
