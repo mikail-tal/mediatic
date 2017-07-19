@@ -32,14 +32,6 @@ public class AdherentDao extends DAO<Adherent>{
 					
 					Adherent a = query.getSingleResult();
 					System.out.println(query.getSingleResult().getNom());
-					
-					/*List <Adherent> adherents = query.getResultList();
-					
-					for(Adherent a: adherents)
-					{
-						System.out.println(a.getNom()+" "+a.getPrenom());
-					}
-					*/
 					DatabaseHelper.commitTxAndClose(em);
 					
 					
@@ -47,5 +39,19 @@ public class AdherentDao extends DAO<Adherent>{
 	}
 	
 	
+   
+	public List<Adherent> findAdherentByNom(String nom){
+		EntityManager em = DatabaseHelper.createEntityManager();
+		DatabaseHelper.beginTx(em);
+		TypedQuery<Adherent> query = em.createQuery(
+			       "select a" +
+			       "from Adherent a " +
+			       "where a.nom like :nom ", Adherent.class);
+			query.setParameter("nom","%"+nom+"%");
+			
+			List<Adherent> adherents = query.getResultList();		
+			DatabaseHelper.commitTxAndClose(em);
+			return adherents ;
+	}
 
 }
