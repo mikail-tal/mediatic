@@ -1,6 +1,7 @@
 package mediatic;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import adherent.dao.AdherentDao;
 import adherent.model.Adherent;
@@ -21,11 +22,13 @@ public class Main {
 		CotisationDao cotisationDao=new CotisationDao();
 		AdherentDao adherentDao=new AdherentDao();
 		MediaDao mediaDao=new MediaDao();
+		
 		Cotisation cotisation=new Cotisation(500l,LocalDate.of(2017, 7, 10));
 		Adherent adherent=new Adherent("BENGHAL", "AYOUB", LocalDate.of(1989, 8, 14), "ayoub.benghal@gmail.com", "18 RUE MIRON", "06000", "NICE");
-		
+		Adherent adherent1=new Adherent("Biogo", "monteiro", LocalDate.of(1991,4,4), "diogo@femme.com", "5 rue des etoiles", "12000", "lune");
 		adherent.setCotisation(cotisation);
-		AdherentDao adherent1 = new AdherentDao();
+        
+		adherentDao.create(adherent1);
 		
 		
 		Media javaNul=new Media("JAVA POUR LES NULS", "ABDEL ET DIOGO", TypeMedia.LIVRE);
@@ -43,16 +46,21 @@ public class Main {
 		empruntDao.create(emprunt1);
 		empruntDao.create(emprunt2);
 		
-		//adherent1.findAdherent(1l);
-		
-		Adherent ado = adherent1.findAdherent(adherent.getId());
+		/*		
+		AdherentDao d1 = new AdherentDao();
+		Adherent ado = d1.findAdherent(adherent.getId());
 		System.out.println(ado.getNom()+" "+ado.getPrenom());
-	
+	   */
+		
+		System.out.println("by nom ************************************************************************");
+		List <Adherent> ad1 = new AdherentDao().findAdherentByNom("BE");
+		for (Adherent a : ad1) {
+			System.out.println(a.getNom()+" "+a.getPrenom()+" "+a.getDateNaissaince()+" date de paiment"+a.getCotisation().getDatePaiment());
+		}
+			
+		System.out.println("end ***************************************************************************");
 		
 		
-		
-		
-		//empruntDao.create(new Emprunt(new Media(titre, auteur, media), adherent, dateEmprunt, dateRetourEffectif, dateRetourPrevue));
 	}
 		
 	
