@@ -1,6 +1,7 @@
 package adherent.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,8 @@ public class Adherent {
 
 	@Column
 	private LocalDate dateNaissaince;
+	
+	
 
 	@Column
 	private String email;
@@ -145,6 +148,17 @@ public class Adherent {
 
 	public void setEmprunt(List<Emprunt> emprunt) {
 		this.emprunt = emprunt;
+	}
+	
+	public LocalDate getDateFinAbonnement(){
+		return getCotisation().getDatePaiment().plusYears(1);
+		
+		
+	}
+	public Integer getAge(){
+		
+		
+		return Period.between(getDateNaissaince(), LocalDate.now()).getYears();
 	}
 
 }
