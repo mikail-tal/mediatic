@@ -44,7 +44,7 @@ public class Adherent {
 	@Column
 	private String ville;
 
-	@OneToOne(mappedBy = "adherent")
+	@OneToOne
 	private Cotisation cotisation;
 	
 	@OneToMany(mappedBy = "adherent")
