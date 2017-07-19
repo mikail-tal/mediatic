@@ -37,8 +37,7 @@ public class AdherentDao extends DAO<Adherent>{
 					
 					return a;
 	}
-	
-	
+
    
 	public List<Adherent> findAdherentByNom(String nom){
 		EntityManager em = DatabaseHelper.createEntityManager();
@@ -54,4 +53,5 @@ public class AdherentDao extends DAO<Adherent>{
 			return adherents ;
 	}
 
+	
 }
