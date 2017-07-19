@@ -48,7 +48,7 @@ public class Adherent {
 	@OneToOne
 	private Cotisation cotisation;
 	
-	@OneToMany(mappedBy="adherent")
+	@OneToMany
 	private List<Emprunt> emprunt;
 
 
@@ -160,6 +160,10 @@ public class Adherent {
 		
 		
 		return Period.between(getDateNaissaince(), LocalDate.now()).getYears();
+	}
+	public boolean abonnementIsValide(Adherent a){
+		return LocalDate.now().compareTo(a.getDateFinAbonnement()) < 0;
+		
 	}
 
 }
