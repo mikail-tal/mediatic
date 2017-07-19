@@ -42,7 +42,7 @@ public class Adherent {
 	private String ville;
 
 	@OneToOne(mappedBy = "adherent")
-	   private Cotisation cotisation;
+	private Cotisation cotisation;
 	
 	@OneToMany(mappedBy = "adherent")
 	private List<Emprunt> emprunt;
@@ -129,6 +129,22 @@ public class Adherent {
 
 	public void setVille(String ville) {
 		this.ville = ville;
+	}
+
+	public Cotisation getCotisation() {
+		return cotisation;
+	}
+
+	public void setCotisation(Cotisation cotisation) {
+		this.cotisation = cotisation;
+	}
+
+	public List<Emprunt> getEmprunt() {
+		return emprunt;
+	}
+
+	public void setEmprunt(List<Emprunt> emprunt) {
+		this.emprunt = emprunt;
 	}
 
 }

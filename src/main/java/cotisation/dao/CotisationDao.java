@@ -1,5 +1,13 @@
 package cotisation.dao;
 
-public class CotisationDao {
+import cotisation.model.Cotisation;
+import mediatic.dao.DAO;
+
+public class CotisationDao extends DAO<Cotisation>{
+
+	public CotisationDao() {
+		super(Cotisation.class);
+		// TODO Auto-generated constructor stub
+	}
 
 }
