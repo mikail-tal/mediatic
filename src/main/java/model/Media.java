@@ -8,23 +8,31 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="media")
-@SequenceGenerator(name="seq_media",sequenceName="seq_media",initialValue=1,allocationSize=1)
+@Table(name = "media")
+@SequenceGenerator(name = "seq_media", sequenceName = "seq_media", initialValue = 1, allocationSize = 1)
 public class Media {
-    @Id
-    @GeneratedValue(generator="seq_media")
+	@Id
+	@GeneratedValue(generator = "seq_media")
 	private Long id;
 	@Column
 	private String titre;
 	@Column
 	private String auteur;
 	@Column
-	private TypeMedia media;
+	private TypeMedia type;
+
+	public TypeMedia getType() {
+		return type;
+	}
+
+	public void setType(TypeMedia type) {
+		this.type = type;
+	}
 
 	public Media(String titre, String auteur, TypeMedia media) {
 		this.titre = titre;
 		this.auteur = auteur;
-		this.media = media;
+		this.type = media;
 	}
 
 	public Media() {
@@ -43,10 +51,6 @@ public class Media {
 		return auteur;
 	}
 
-	public TypeMedia getMedia() {
-		return media;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -59,7 +63,4 @@ public class Media {
 		this.auteur = auteur;
 	}
 
-	public void setMedia(TypeMedia media) {
-		this.media = media;
-	}
 }
