@@ -2,13 +2,18 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+@Entity
+@Table (name="emprunt")
+@SequenceGenerator(name="seq_emprunt",sequenceName="seq_emprunt",initialValue=1,allocationSize=1)
 public class Emprunt {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="seq_emprunt")
 	private Long id;
 	@ManyToOne
 	private Media media;
