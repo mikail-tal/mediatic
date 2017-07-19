@@ -1,11 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
@@ -19,6 +21,9 @@ public class Cotisation {
 	private Long montant;
     @Column
 	private LocalDate datePaiment;
+    
+    @OneToOne
+	   private Adherent adherent;
 
 	public Cotisation(Long montant, LocalDate datePaiment) {
 		this.montant = montant;
