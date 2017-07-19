@@ -1,13 +1,11 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -55,8 +53,7 @@ public class Adherent {
 	}
 	
 	public Adherent() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Long getId() {
