@@ -1,10 +1,13 @@
-package model;
+package emprunt.model;
 
 import java.time.LocalDate;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import adherent.model.Adherent;
+import media.model.Media;
 
 public class Emprunt {
 	@Id

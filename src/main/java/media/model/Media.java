@@ -1,4 +1,4 @@
-package model;
+package media.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

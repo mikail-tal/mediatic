@@ -1,4 +1,4 @@
-package model;
+package cotisation.model;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import adherent.model.Adherent;
 @Entity
 @Table (name="cotisation")
 @SequenceGenerator(name="seq_cotisation",sequenceName="seq_cotisation",initialValue=1,allocationSize=1)

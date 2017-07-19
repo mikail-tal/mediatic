@@ -1,4 +1,4 @@
-package dao;
+package adherent.dao;
 
 public class AdherentDao {
 

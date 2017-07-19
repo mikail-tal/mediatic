@@ -1,4 +1,4 @@
-package model;
+package adherent.model;
 
 import java.time.LocalDate;
 
@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import cotisation.model.Cotisation;
 
 @Entity
 @Table (name="adherent")
