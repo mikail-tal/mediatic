@@ -1,5 +1,6 @@
 package adherent.dao;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
