@@ -9,7 +9,7 @@ public class MediaService {
 	static MediaDao mediaDao;
 	public static MediaDao getInstance(){
 		if(mediaDao==null){
-			mediaDao=new MediaDao();
+			mediaDao=MediaDao.getInstance();
 		}
 		return mediaDao;
 	}

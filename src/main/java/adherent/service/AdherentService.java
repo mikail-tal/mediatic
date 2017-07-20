@@ -8,7 +8,7 @@ public class AdherentService {
 	
 	public static AdherentDao getInstance(){
 		if(adherentDao==null){
-			adherentDao= new AdherentDao();
+			adherentDao= AdherentDao.getInstance();
 		}
 		return adherentDao;
 	}
@@ -16,6 +16,8 @@ public class AdherentService {
 	public void create(Adherent adherent){
 		adherentDao.create(adherent);		
 	}
+	
+	
 	
 
 }

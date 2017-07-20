@@ -1,17 +1,30 @@
 package media.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import media.model.Media;
+import media.model.TypeMedia;
+import media.service.DynamicMediaComparator;
 import mediatic.dao.DAO;
 import mediatic.dao.DatabaseHelper;
 
 public class MediaDao extends DAO<Media> {
+	private  List<Media>medias;
+	private static MediaDao mediaDao;
+	
+	public static MediaDao getInstance(){
+		if(mediaDao==null){
+			mediaDao=new MediaDao();
+		
+		}
+		return mediaDao;
+	}
 
-	public MediaDao() {
+	private MediaDao() {
 		super(Media.class);
 	}
 
@@ -32,7 +45,7 @@ public class MediaDao extends DAO<Media> {
 		DatabaseHelper.beginTx(em);
 		TypedQuery<Media> query = em.createQuery("select m " + "from Media m " + "inner join fetch m.emprunt e ",
 				Media.class);
-		List<Media> medias = query.getResultList();		
+		medias = query.getResultList();		
 		DatabaseHelper.commitTxAndClose(em);
 
 		return medias;
@@ -47,12 +60,103 @@ public class MediaDao extends DAO<Media> {
 				+ "where m.titre like :titre",
 				Media.class);
 		query.setParameter("titre", "%"+titre+"%");
-		List<Media> medias = query.getResultList();		
+		medias = query.getResultList();		
+		Collections.sort(medias);
+		//medias.forEach(media->System.out.println(media.getTitre()));
+		DatabaseHelper.commitTxAndClose(em);
+
+		
+		
+		return medias;
+	}
+	public List<Media> findMediaByAuteur(String auteur){
+		EntityManager em = DatabaseHelper.createEntityManager();
+		DatabaseHelper.beginTx(em);
+		TypedQuery<Media> query = em.createQuery("SELECT distinct m from Media m "
+				+ "left join fetch m.empruntEnCours e "
+				+ "left join fetch e.adherent a "
+				+ "where m.auteur like :auteur",
+				Media.class);
+		query.setParameter("auteur", "%"+auteur+"%");
+		medias = query.getResultList();	
+		Collections.sort(medias);
+		DatabaseHelper.commitTxAndClose(em);
+		
+
+		
+		return medias;
+		
+	}
+	public List<Media>findMediaByTypeMedia(String typeMedia){
+		TypeMedia type = null;
+		for (TypeMedia t : TypeMedia.values()) {
+			if(t.name().equals(typeMedia)){
+				type=t;
+			}
+		}
+		EntityManager em = DatabaseHelper.createEntityManager();
+		DatabaseHelper.beginTx(em);
+		TypedQuery<Media> query = em.createQuery("SELECT distinct m from Media m "
+				+ "left join fetch m.empruntEnCours e "
+				+ "left join fetch e.adherent a "
+				+ "where m.type=:type",
+				Media.class);
+		query.setParameter("type", type);
+		medias = query.getResultList();		
+		Collections.sort(medias);
 		DatabaseHelper.commitTxAndClose(em);
 
 
 		
 		return medias;
 	}
+	public List<Media> sortMediaBy(Integer number){
+		
+		
+		
+		
+		
+				Collections.sort(medias, DynamicMediaComparator.getInstance(number));
+			
+		//medias.forEach(media->System.out.println("TEST"+media.getTitre()));
+		return medias;
+	}
+	/*public List<Media> sortMediaByAuteur(String set){
+		if(set=="ASC"){
+			medias.sort((Media m1,Media m2)->m1.getAuteur().compareToIgnoreCase(m2.getAuteur()));
+
+		}
+		if(set=="DESC"){
+			medias.sort((Media m1,Media m2)->m2.getAuteur().compareToIgnoreCase(m1.getAuteur()));
+
+		}
+		return medias;
+	}
+	public List<Media> sortMediaByType(String set){
+		if(set=="ASC"){
+			medias.sort((Media m1,Media m2)->m1.getType().compareTo(m2.getType()));
+
+		}
+		if(set=="DESC"){
+			medias.sort((Media m1,Media m2)->m2.getType().compareTo(m1.getType()));
+
+		}
+		return medias;
+	}
+	
+	public List<Media> sortMediaByAdherent(String set){
+		if(set=="ASC"){
+			medias.sort((Media m1,Media m2)->m1.getEmpruntEnCours().getAdherent().getNom().
+					compareToIgnoreCase(m2.getEmpruntEnCours().getAdherent()));
+
+		}
+		if(set=="DESC"){
+			medias.sort((Media m1,Media m2)->m2.getType().compareTo(m1.getType()));
+
+		}
+		return medias;
+	}
+	*/
+	
 
 }

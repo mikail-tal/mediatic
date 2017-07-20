@@ -6,18 +6,27 @@ import media.model.TypeMedia;
 import media.service.MediaService;
 
 public class EmpruntService {
+	private static EmpruntService empruntService;
 	
-	static EmpruntDao empruntDao;
-	public static EmpruntDao getInstance(){
-		if(empruntDao==null){
-			empruntDao=new EmpruntDao();
+	public static EmpruntService getInstance(){
+		if(empruntService==null){
+			empruntService=new EmpruntService();
+			
 		}
-		return empruntDao;
+		return empruntService;
+	}
+	
+	public EmpruntDao getEmpruntDao() {
+		return EmpruntDao.getInstance();
+	}
+
+	private EmpruntService(){
+		
 	}
 	
 	public void create(Emprunt emprunt){
 		assignDateRetour(emprunt);
-		empruntDao.create(emprunt);
+		getEmpruntDao().create(emprunt);
 	}
 	
 	public void assignDateRetour(Emprunt emprunt){
@@ -32,10 +41,11 @@ public class EmpruntService {
 		
 	}
 	public void emprunter(Emprunt emprunt){
-		create(emprunt);
-		
+		if(emprunt.getMedia().getEmpruntEnCours()==null){
+			create(emprunt);
 			emprunt.getMedia().setEmpruntEnCours(emprunt);
 			MediaService.getInstance().update(emprunt.getMedia());
+		}
 		
 		
 		

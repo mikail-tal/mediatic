@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,7 +18,7 @@ import emprunt.model.Emprunt;
 @Entity
 @Table(name = "media")
 @SequenceGenerator(name = "seq_media", sequenceName = "seq_media", initialValue = 1, allocationSize = 1)
-public class Media {
+public class Media implements Comparable<Media>{
 	@Id
 	@GeneratedValue(generator = "seq_media")
 	private Long id;
@@ -24,7 +26,7 @@ public class Media {
 	private String titre;
 	@Column
 	private String auteur;
-	@Column
+	@Enumerated(EnumType.STRING)
 	private TypeMedia type;
 	
 	@OneToMany(mappedBy = "media")
@@ -88,6 +90,33 @@ public class Media {
 
 	public void setEmpruntEnCours(Emprunt empruntEnCours) {
 		this.empruntEnCours = empruntEnCours;
+	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj==null ||getClass()!=obj.getClass())
+			return false;
+		
+		else if(this.getTitre().equals(((Media) obj).getTitre()) 
+				&& this.getAuteur().equals(((Media)obj).getAuteur()) 
+						&& this.getType().equals(((Media)obj).getType())) return true;
+		
+		return false;
+	}
+
+	@Override
+	public int compareTo(Media o) {
+		// TODO Auto-generated method stub
+		return this.getTitre().compareToIgnoreCase(o.getTitre());
 	}
 
 	

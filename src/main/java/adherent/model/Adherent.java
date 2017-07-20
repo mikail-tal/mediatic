@@ -20,7 +20,7 @@ import emprunt.model.Emprunt;
 @Entity
 @Table (name="adherent")
 @SequenceGenerator(name="seq_adherent",sequenceName="seq_adherent",initialValue=1,allocationSize=1)
-public class Adherent {
+public class Adherent implements Comparable<Adherent>{
 
 	@Id
 	@GeneratedValue(generator = "seq_adherent")
@@ -161,8 +161,20 @@ public class Adherent {
 		
 		return Period.between(getDateNaissaince(), LocalDate.now()).getYears();
 	}
-	public boolean abonnementIsValide(Adherent a){
-		return LocalDate.now().compareTo(a.getDateFinAbonnement()) < 0;
+	
+	
+	public boolean abonnementIsValide(){
+		return LocalDate.now().compareTo(getDateFinAbonnement()) < 0;
+		
+	}
+	
+
+	@Override
+	public int compareTo(Adherent o) {
+		int result=this.getNom().compareToIgnoreCase(o.getNom());
+		if(result==0) return this.getPrenom().compareToIgnoreCase(o.getPrenom());
+		else return result;
+		
 		
 	}
 
