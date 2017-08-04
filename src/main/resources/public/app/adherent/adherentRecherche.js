@@ -1,7 +1,7 @@
-angular.module('myApp.adherent', [])
+angular.module('myApp')
 
 
-    .controller('adherentRechercheCtrl', ['$scope', function ($scope) {
+    .controller('AdherentRechercheCtrl', ['$scope', function ($scope) {
 
         $scope.hello="HELLO WORLD ADHRENT Recherche";
 
