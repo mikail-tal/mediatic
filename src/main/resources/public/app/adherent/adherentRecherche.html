@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		
+
 		<div id="critere" class="col-lg-3 sidenav" ng-if="checkBox">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><a>Recherche Adherent</a></li>
@@ -37,9 +37,9 @@
 					<input type="text" class="form-control " aria-label="...">
 					<span class="input-group-addon"><i
 						class="glyphicon glyphicon-search"></i></span>
-					
+
 				</div>
-				<div class="col-lg-offset-10"> 
+				<div class="col-lg-offset-10">
 					<input type="checkbox" name="checkBox" ng-model="checkBox">Plus de criteres
 				</div>
 				<!-- <a data-toggle="collapse" class="pull-right">+ plus de criteres</a> -->
@@ -58,7 +58,7 @@
 				</select> Adherents
 
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive" ng-if=" adherentsTab.length">
 					<table class="table table-hover table-bordered" data-toggle="table">
 						<thead>
 							<tr class="text-primary text-uppercase">
@@ -160,6 +160,18 @@
 								<td>ABC</td>
 								<td>ABC</td>
 								<td>ABC</td>
+
+							</tr>
+							<tr ng-repeat="adherent in adherentsTab">
+								<td>{{adherent.id}}</td>
+								<td>{{adherent.nom}}</td>
+								<td>{{adherent.prenom}}</td>
+								<td>{{adherent.date}}</td>
+								<td>{{adherent.email}}</td>
+								<td>{{adherent.adress}}</td>
+								<td>{{adherent.datep}}</td>
+								<td>{{adherent.montant}}</td>
+
 
 							</tr>
 

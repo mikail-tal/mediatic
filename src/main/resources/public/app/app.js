@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.view1',
   'myApp.view2',
+  'ngResource',
   'myApp.version'
 ]).
   config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
@@ -32,4 +33,11 @@ angular.module('myApp', [
 
 
       ).otherwise({ redirectTo: '/view1' });
-  }]);
+  }]).constant('config',{
+            apiUrl:'http://localhost:3000'
+        }).run(['$rootScope',function($rootScope) {
+      //  $rootScope.adherentsTab=[];
+}]);
+    
+  
+  
