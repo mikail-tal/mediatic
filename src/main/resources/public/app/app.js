@@ -36,6 +36,7 @@ angular.module('myApp', [
   }]).constant('config',{
             apiUrl:'http://localhost:3000'
         }).run(['$rootScope',function($rootScope) {
+           $rootScope.adherent;
       //  $rootScope.adherentsTab=[];
 }]);
     
