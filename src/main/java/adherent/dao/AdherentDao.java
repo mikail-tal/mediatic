@@ -61,6 +61,7 @@ public class AdherentDao extends DAO<Adherent>{
 			
 			 adherents = query.getResultList();		
 			DatabaseHelper.commitTxAndClose(em);
+			Collections.sort(adherents);
 			return adherents ;
 	}
 	
