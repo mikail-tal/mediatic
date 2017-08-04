@@ -11,7 +11,7 @@ public class DynamicAdherentComparator implements Comparator<Adherent> {
 	public static DynamicAdherentComparator getInstance(){
 		if(dynamicAdherentComparator==null){
 			dynamicAdherentComparator=new DynamicAdherentComparator();
-			compare=1;
+			compare=2;
 		}
 		return dynamicAdherentComparator;
 	}

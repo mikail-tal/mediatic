@@ -44,7 +44,7 @@ public class AdherentDao extends DAO<Adherent>{
 					Adherent a = query.getSingleResult();
 					System.out.println(query.getSingleResult().getNom());
 					DatabaseHelper.commitTxAndClose(em);
-					
+					Collections.sort(adherents);
 					
 					return a;
 	}
@@ -60,6 +60,7 @@ public class AdherentDao extends DAO<Adherent>{
 			query.setParameter("nom","%"+nom+"%");
 			
 			 adherents = query.getResultList();		
+			 Collections.sort(adherents);
 			DatabaseHelper.commitTxAndClose(em);
 			Collections.sort(adherents);
 			return adherents ;
