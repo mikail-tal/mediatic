@@ -24,94 +24,87 @@ angular.module('myApp')
         } else {
             $location.path('/adherentRecherche');
         }
-            /* 
-                Supprimer les doublons pour avoir un identifiant Unique 
-            */
+        /* 
+            Supprimer les doublons pour avoir un seul media si l adherent a emprunte le meme media plusieurs fois
+        */
 
-         function supprimerDoublons(tableau) {
-           var nouveau = [], obj = {};
-
-            angular.forEach(tableau,function(value,key){
-                
-                obj[value.media]=0;
+        function supprimerDoublons(tableau) {
+            var nouveau = [], obj = {};
+            angular.forEach(tableau, function (value, key) {
+                obj[value.media] = 0;
             });
-            angular.forEach(obj,function(value,key){
-                
+            angular.forEach(obj, function (value, key) {
                 nouveau.push(parseInt(key));
             });
-            
-            
             return nouveau;
-        } 
-       
-
-                /* 
-                        Recuperer la liste des emprunts pour un adherent
-                        Supprimmer les doublons et garder seulement les medias
-                        Recuperer les medias empruntes avec leurs details
-                
-                */
+        }
 
 
-         AdherentService.getEmpruntAdherent($rootScope.adherent.id).$promise.then(function(result){
-                $scope.emprunts=result;
-                
-                var tabIds=supprimerDoublons($scope.emprunts);
-                console.log(tabIds);
-                AdherentService.getMediaEmpruntee(tabIds).$promise.then(function(result){
-                    
-                    $scope.medias=result;
-
-                })
-
-        });
-
-         /* $scope.emprunts.$promise.then(function (result) {
-            
-            console.log('MEDIA');
-            console.log($scope.emprunts)
-
-
-
-
-
-            console.log('EMPRUNT')
-            console.log($scope.emprunts);
-            var tabIds=supprimerDoublons($scope.emprunts);
-            console.log('LES IDS')
-            console.log(tabIds);
-            
-            var request={id:tabIds};
-            
-            console.log('LA REQUETE')
-            console.log(request)
-
-                
-                $scope.MED={} 
-
-
-
-           
-        }); */
-           // var tabIds=supprimerDoublons($scope.emprunts);
-           /* var MED=AdherentService.getMediaEmpruntee();
-           MED.$promise.then(function(result){
-                
-                console.log(MED);
-                angular.forEach(MED,function(value,key){
-                    console.log(value);
-                        console.log(key);
-                    if(value.id===$scope.emprunts.media){
-                        console.log('EGAL EGAL')
-                        
-                        
-                        //$scope.media.push(value);
-                    }
-                })
-
-
-            }) ;
+        /* 
+                Recuperer la liste des emprunts pour un adherent
+                Supprimmer les doublons et garder seulement les medias
+                Recuperer les medias empruntes avec leurs details
+                S assurer qu on a un adherent
+        
         */
+
+
+        if ($rootScope.adherent) {
+            AdherentService.getEmpruntAdherent($rootScope.adherent.id).$promise.then(function (result) {
+                $scope.emprunts = result;
+                var tabIds = supprimerDoublons($scope.emprunts);
+                AdherentService.getMediaEmpruntee(tabIds).$promise.then(function (result) {
+                    $scope.medias = result;
+                })
+            });
+        }
+            //@WARNING A SUPPRIMER OU A UTILISER POUR UNE AUTRE FONCTIONNALITE
+        /* $scope.emprunts.$promise.then(function (result) {
+           
+           console.log('MEDIA');
+           console.log($scope.emprunts)
+
+
+
+
+
+           console.log('EMPRUNT')
+           console.log($scope.emprunts);
+           var tabIds=supprimerDoublons($scope.emprunts);
+           console.log('LES IDS')
+           console.log(tabIds);
+           
+           var request={id:tabIds};
+           
+           console.log('LA REQUETE')
+           console.log(request)
+
+               
+               $scope.MED={} 
+
+
+
+          
+       }); */
+        // var tabIds=supprimerDoublons($scope.emprunts);
+        /* var MED=AdherentService.getMediaEmpruntee();
+        MED.$promise.then(function(result){
+             
+             console.log(MED);
+             angular.forEach(MED,function(value,key){
+                 console.log(value);
+                     console.log(key);
+                 if(value.id===$scope.emprunts.media){
+                     console.log('EGAL EGAL')
+                     
+                     
+                     //$scope.media.push(value);
+                 }
+             })
+
+
+         }) ;
+     */
 
 
 
@@ -141,7 +134,7 @@ angular.module('myApp')
                 datep: $filter('date')($scope.datep, 'yyyy-MM-dd'),
                 montant: $scope.montant
             }
-
+            return ad;
         };
         /* 
             Iteration dans le nouveau et l ancien adherent pour enregistrer les changements
@@ -152,17 +145,25 @@ angular.module('myApp')
         */
 
         $scope.enregistrer = function () {
+            
             var oldAdherent = $rootScope.adherent;
+            
             var newAdherent = nouveau();
+            console.log(newAdherent);
             angular.forEach(oldAdherent, function (value, index) {
                 angular.forEach(newAdherent, function (value2, index2) {
+                    console.log(index + ' L INDEX DE L ADHERENT');
+                    console.log(index2+' L index du nouveau');
                     if (index === index2) {
-                        console.log(index)
+                        
                         if (value != value2) {
                             if (index === 'adress' || index === 'codeP' || index === 'ville') {
+                                
                                 if (value2 === undefined) {
+                                    
                                     oldAdherent[index] = "";
                                 } else {
+                                    console.log(value2);
                                     oldAdherent[index] = value2;
                                 }
                             } else if (index === 'montant') {
@@ -203,7 +204,6 @@ angular.module('myApp')
         $scope.$watch('daten', function () {
             if ($scope.daten) {
                 $rootScope.adherent.age = AdherentService.getAge($scope.daten);
-
             }
         }, true);
         /* 

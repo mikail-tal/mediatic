@@ -69,7 +69,7 @@ angular.module('myApp')
                 var mois = datePaiement.getMonth();
                 return new Date(annee, mois, jour);
             },
-
+                // CALCUL DE LA DATE DE RETOUR PREVUE D UN MEDIA 30 POUR LES LIVRE ET 15 POUR CD ET DVD
             getDateRetourPrevue:function(dateEmprunt,type){
                 var jour;
                 if(type ==='Livre'){
@@ -82,17 +82,19 @@ angular.module('myApp')
                 
                 return new Date(annee,mois,jour);
             },
+                // ENREGISTRER L EMPRUNT D UN ADHERENT
             postEmprunt: function (emprunt) {
                 return $resource(config.apiUrl + '/emprunt').save(emprunt);
 
             },
+                    //RECUPERER LES EMPRUNTS D UN ADHERENT 
             getEmpruntAdherent:function(id){
                 
                 var Emprunt = $resource(config.apiUrl + '/emprunt?adherent='+id);
                 return Emprunt.query();
 
-            }
-            ,
+            },
+                 // RECUPER LES MEDIAS EMPRUNTES AVEC UN FILTRE D IDS
             getMediaEmpruntee:function(ids){
                 var request='';
                 angular.forEach(ids,function(value,key){
@@ -100,19 +102,17 @@ angular.module('myApp')
                         request+=value;
                     }else{
                         request+='&&id='+value;
-                    }
-                        
-                        
+                    }          
                 });
-                
-                
-                console.log('DANS LA RESOURCE');
-                console.log(config.apiUrl+'/media?id='+request)
-               // console.log(ids);
                 return $resource(config.apiUrl+'/media?id='+request).query();
-
-
-
+            },
+            // RECUPERER LES IDS DES MEDIAS EMPRUNTES PAR UN ADHERENT
+            getNombreMedia:function(id){
+                 return $resource(config.apiUrl + '/emprunt?adherent='+id).query();    
+            },
+            // RECUPERER TOUS LES MEDIAS    
+            getEmprunts:function(){
+                return $resource(config.apiUrl+'/emprunt').query();
             }
             
         }

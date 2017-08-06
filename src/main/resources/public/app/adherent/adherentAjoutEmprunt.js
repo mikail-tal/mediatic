@@ -3,8 +3,9 @@ angular.module('myApp')
 
 
     .controller('AdherentAjoutEmpruntCtrl', ['$scope', '$location', 'AdherentService', '$rootScope', '$filter', function ($scope, $location, AdherentService, $rootScope, $filter) {
-        var idMedia = -1;
-        var typeMedia;
+        
+        var idMedia = -1; // INITIALISATION AVEC UN NBR NEGATIF SI LE MEDIA N EXISTE PAS
+        var typeMedia;  
 
         /* 
             Recuperation des medias pour l autocompletion du champ 
@@ -67,7 +68,7 @@ angular.module('myApp')
         }
 
         /* 
-        
+            Emprunter un Media avec calcul de la date retour prevue
         */
         $scope.emprunter = function () {
 
@@ -79,6 +80,7 @@ angular.module('myApp')
                 dateEf: null
             }
             AdherentService.postEmprunt(emprunt).$promise.then(function (result) {
+
                 $scope.redirect();
             })
 

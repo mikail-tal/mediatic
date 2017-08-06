@@ -73,19 +73,19 @@
 					<table class="table table-hover table-bordered" data-toggle="table">
 						<thead>
 							<tr class="text-primary text-uppercase">
-								<th class="container ">#<a href="#" class="pull-right">
+								<th class="container ">#<a ng-click="sortId()" class="pull-right">
 											<span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								<th class="container ">Nom<a href="#" class="pull-right">
+								<th class="container ">Nom<a ng-click="sortNom()" class="pull-right">
 											<span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								<th class="container ">Prenom<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+								<th class="container ">Prenom<a ng-click="sortPrenom()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								<th class="container ">Date de naisssance<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+								<th class="container ">Date de naisssance<a ng-click="sortDateNaissance()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								<th class="container ">A jour Contisation<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+								<th class="container ">A jour Contisation<a ng-click="sortAjourCotisation()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								<th class="container ">Nombre Medias<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+								<th class="container ">Nombre Medias<a ng-click="sortNombreMedia()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
 									</a></th>
 
 
@@ -139,7 +139,7 @@
 								<td>{{adherent.prenom}}</td>
 								<td>{{adherent.daten}}</td>
 								<td>{{adherent.ajour}}</td>
-								<td>{{adherent.nbrMedia}}</td>
+								<td>{{adherent.nbrMedias}}</td>
 
 
 
