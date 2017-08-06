@@ -1,41 +1,119 @@
+'use strict';
 angular.module('myApp')
-    .factory('AdherentService', ['config', '$resource', function (config, $resource) {
+    .factory('AdherentService', ['config', '$resource', '$location', function (config, $resource, $location) {
         return {
-
-
-
+                // ENREGISTRE UN ADHERENT
             postAdherent: function (adherent) {
-               return $resource(config.apiUrl + '/adherent').save(adherent);
+                return $resource(config.apiUrl + '/adherent').save(adherent);
 
             },
+                // RECUPERATION DES ADHERENTS
             getAdherents: function () {
-
                 return $resource(config.apiUrl + '/adherent').query();
             },
+                // RECUPERATION DES MEDIAS
+            getMedias: function () {
+                return $resource(config.apiUrl + '/media').query();
+            },
+                // MODIFICATION D UN ADHERENT EN UTILISANT LA METHODE PUT ET REDIRECTION VERS LA PAGE DE RECHERCHE
+            updateAdherent: function (adherent) {
+                var Adherent = $resource(config.apiUrl + '/adherent/:id/', { id: '@id' }, {
+                    update: {
+                        method: 'PUT'
+                    }
+                });
+                Adherent.get({ 'id': adherent.id }).$promise.then(function (res) {
+                    var adr = res;
+                    adr = adherent;
+                    Adherent.update(adr).$promise.then(function (result) {
+                        $location.path('/adherentRecherche');
+                    });
+
+                }, function (errResponse) {
+                    alert('ADHERENT INTROUVABLE');
+                });
+                /* 
+                @WARNING A VOIR COMMENT CA MARCHE
+                
+                adr=adherent;
+                adr.$save(); */
+                /* var adr = Adherent.get({ id: adherent.id }, function () {
+                    adr=adherent;
+                    adr.$save();
+
+
+                }); */
+
+
+            }, 
+                // @WARNING     A MODIFIER
             getAssignedAJour: function () {
                 var AssignedAJour = this.getAdherents();
-                //console.log(AssignedAJour[0].nom);
-
                 return AssignedAJour;
-            }, getAge: function (dateNaissance) {
+            },
+                // CALCUL DE L AGE A PARTIR DE LA DATE DE NAISSANCE
+            getAge: function (dateNaissance) {
                 var aujourdhui = new Date();
-                
+
                 var age = aujourdhui.getFullYear() - dateNaissance.getFullYear();
                 var m = aujourdhui.getMonth() - dateNaissance.getMonth();
                 if (m < 0 || (m === 0 && aujourdhui.getDate() < dateNaissance.getDate())) {
                     age--;
                 }
                 return age;
-            }, getDateFin:function (datePaiement){
-                var annee=datePaiement.getFullYear()+1;
-                var jour=datePaiement.getDate()+1;
-                var mois=datePaiement.getMonth();
-                
+            },
+                // CALCUL DE LA DATE DE FIN D ABONNEMENT AVEC 1AN ET 1 JOUR EN PLUS
+            getDateFin: function (datePaiement) {
+                var annee = datePaiement.getFullYear() + 1;
+                var jour = datePaiement.getDate() + 1;
+                var mois = datePaiement.getMonth();
+                return new Date(annee, mois, jour);
+            },
 
+            getDateRetourPrevue:function(dateEmprunt,type){
+                var jour;
+                if(type ==='Livre'){
+                    jour=dateEmprunt.getDate()+30;
+                }else{
+                    jour=dateEmprunt.getDate()+15;
+                }
+                var mois=dateEmprunt.getMonth();
+                var annee=dateEmprunt.getFullYear();
                 
                 return new Date(annee,mois,jour);
+            },
+            postEmprunt: function (emprunt) {
+                return $resource(config.apiUrl + '/emprunt').save(emprunt);
+
+            },
+            getEmpruntAdherent:function(id){
+                
+                var Emprunt = $resource(config.apiUrl + '/emprunt?adherent='+id);
+                return Emprunt.query();
+
             }
+            ,
+            getMediaEmpruntee:function(ids){
+                var request='';
+                angular.forEach(ids,function(value,key){
+                    if(key===0){
+                        request+=value;
+                    }else{
+                        request+='&&id='+value;
+                    }
+                        
+                        
+                });
+                
+                
+                console.log('DANS LA RESOURCE');
+                console.log(config.apiUrl+'/media?id='+request)
+               // console.log(ids);
+                return $resource(config.apiUrl+'/media?id='+request).query();
 
 
+
+            }
+            
         }
     }]);

@@ -1,97 +1,90 @@
 <div class="container">
 	<div class="panel panel-primary">
 		<div class="panel panel-heading">Description Adherent</div>
-		<form class="form-horizontal" action="#">
+		<form class="form-horizontal" name="formDetail" novalidate>
 
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="nom">Nom :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="nom" id="nom" name="nom" disabled="disabled">
+					<input type="text" class="form-control" ng-model="nom" id="nom" name="nom" ng-disabled="disabled" required>
 
 				</div>
 				<div class="col-sm-2 col-xs-4">
-					<button type="submit"
-						class="btn  btn-primary col-sm-12 col-xs-12">
+					<button type="submit" class="btn  btn-primary col-sm-12 col-xs-12" ng-click="ajouterEmprunt()">
 						Emprunter</button>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="prenom">Prenom :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="prenom" id="prenom"
-								name="prenom" disabled="disabled">
+					<input type="text" class="form-control" ng-model="prenom" id="prenom" name="prenom" ng-disabled="disabled" required>
 				</div>
 				<div class="col-sm-2 col-xs-4">
-					<button type="submit"
-						class="btn btn-primary  col-sm-12 col-xs-12">
+					<button type="submit" class="btn btn-primary  col-sm-12 col-xs-12" ng-disabled="!disabled" ng-click="disabled=false">
 						Modifier</button>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="daten">Date Naissance :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="date" class="form-control" ng-model="daten" id="daten"
-								name="daten" disabled="disabled">
+					<input type="date" class="form-control" ng-model="daten" id="daten" name="daten" ng-disabled="disabled" required>
 				</div>
 
 			</div>
-					<div class="form-group">
+			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="email">Email :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="email" id="email"
-								name="email" disabled="disabled">
+					<input type="text" class="form-control" ng-model="email" id="email" name="email" ng-disabled="disabled" required>
 				</div>
 
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="adress">Adresse :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="adress" id="adress"
-								name="adresse" disabled="disabled">
+					<input type="text" class="form-control" ng-model="adress" id="adress" name="adresse" ng-disabled="disabled">
 				</div>
 
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="codeP">Code Postal :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="codeP" id="codeP"
-								name="codeP" disabled="disabled">
+					<input type="text" class="form-control" ng-model="codeP" id="codeP" name="codeP" ng-disabled="disabled">
 				</div>
 
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="ville">Ville :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="text" class="form-control" ng-model="ville" id="ville"
-								name="ville" disabled="disabled">
+					<input type="text" class="form-control" ng-model="ville" id="ville" name="ville" ng-disabled="disabled">
 				</div>
 
 			</div>
-			
+
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="datep">Date de Paiement de la Cotisation :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="date" class="form-control" ng-model="datep" id="datep"
-								name="datep" disabled="disabled">
+					<input type="date" class="form-control" ng-model="datep" id="datep" name="datep" ng-disabled="disabled">
 				</div>
 
 			</div>
-			
+
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="montant">Montant de Cotisation :</label>
 				<div class="col-sm-8 col-xs-6">
-					<input type="number" class="form-control" ng-model="montant" id="montant"
-								name="montp" disabled="disabled">
+					<input type="number" class="form-control" ng-model="montant" id="montant" name="montp" ng-disabled="disabled">
 				</div>
-<div class="col-sm-2 col-xs-4">
-					<button type="submit"
-						class="btn btn-primary disabled col-sm-12 col-xs-12">
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit" class="btn btn-primary  col-sm-12 col-xs-12" ng-disabled="disabled || formDetail.$invalid" ng-click="enregistrer()">
 						Enregistrer</button>
 				</div>
-			
+
 			</div>
-				
-				
+
+			<!--  <pre>
+			{{formDetail|json}}
+			</pre>  -->
+
+
 			<table class="table table-hover" data-toggle="table">
 				<thead>
 					<tr>
@@ -101,60 +94,70 @@
 						<th>Media</th>
 					</tr>
 				</thead>
-				<tbody> 
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				<tr>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				<td>ABC</td>
-				</tr>
-				
-				 </tbody>
+				<tbody>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+						<td>ABC</td>
+					</tr>
+					<tr ng-repeat="media in medias track by $index" >
+								<td>{{media.id}}</td>
+								<td>{{media.title}}</td>
+								<td>{{media.author}}</td>
+								<td>{{media.type}}</td>
+								
+
+
+
+							</tr>
+
+				</tbody>
 			</table>
-			
+
 		</form>
-				</div>
-
-
-
-
-
-
 	</div>
+
+
+
+
+
+
+</div>

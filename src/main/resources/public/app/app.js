@@ -32,7 +32,10 @@ angular.module('myApp', [
     }
 
 
-      ).otherwise({ redirectTo: '/view1' });
+      ).when('/adherentAjoutEmprunt',{
+        templateUrl:'adherent/adherentAjoutEmprunt.html',
+        controller:'AdherentAjoutEmpruntCtrl'
+      }).otherwise({ redirectTo: '/view1' });
   }]).constant('config',{
             apiUrl:'http://localhost:3000'
         }).run(['$rootScope',function($rootScope) {

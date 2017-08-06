@@ -39,15 +39,19 @@
 						class="glyphicon glyphicon-search"></i></span>
 
 				</div>
-				<div class="col-lg-offset-10">
-					<input type="checkbox" name="checkBox" ng-model="checkBox">Plus de criteres
-				</div>
+
 				<!-- <a data-toggle="collapse" class="pull-right">+ plus de criteres</a> -->
 
 			</div>
-			<pre >
+			<div>
+				<div class="col-xs-offset-10">
+				<input type="checkbox" name="checkBox" ng-model="checkBox">Plus de criteres
+			</div>
+			</div>
+			
+			<!-- <pre >
 							{{adherentsTab|json}}
-							</pre>
+							</pre> -->
 
 
 
@@ -62,10 +66,11 @@
 
 				</div>
 				<div class="panel panel-primary" ng-if=" adherentsTab.length">
-					<div class="panel-heading"> <h3 class="text-center">ADHERENTS</h3>
-						
+					<div class="panel-heading">
+						<h3 class="text-center">ADHERENTS</h3>
+
 					</div>
-					<table class="table table-hover table-bordered" data-toggle="table" >
+					<table class="table table-hover table-bordered" data-toggle="table">
 						<thead>
 							<tr class="text-primary text-uppercase">
 								<th class="container ">#<a href="#" class="pull-right">
@@ -82,7 +87,7 @@
 									</a></th>
 								<th class="container ">Nombre Medias<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
 									</a></th>
-								
+
 
 							</tr>
 						</thead>
@@ -94,7 +99,7 @@
 								<td>ABC</td>
 								<td>ABC</td>
 								<td>ABC</td>
-								
+
 
 							</tr>
 							<tr>
@@ -104,7 +109,7 @@
 								<td>ABC</td>
 								<td>ABC</td>
 								<td>ABC</td>
-								
+
 
 							</tr>
 							<tr>
@@ -114,7 +119,7 @@
 								<td>ABC</td>
 								<td>ABC</td>
 								<td>ABC</td>
-								
+
 
 							</tr>
 							<tr>
@@ -124,18 +129,18 @@
 								<td>ABC</td>
 								<td>ABC</td>
 								<td>ABC</td>
-								
+
 
 							</tr>
 							<tr ng-repeat="adherent in adherentsTab" ng-click="afficherDetails($index)">
-							
+
 								<td>{{adherent.id}}</td>
 								<td>{{adherent.nom}}</td>
 								<td>{{adherent.prenom}}</td>
 								<td>{{adherent.daten}}</td>
 								<td>{{adherent.ajour}}</td>
 								<td>{{adherent.nbrMedia}}</td>
-								
+
 
 
 							</tr>
