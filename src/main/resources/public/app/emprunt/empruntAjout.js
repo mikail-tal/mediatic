@@ -1,14 +1,25 @@
 'use strict';
 
-angular.module('myApp.emprunt', ['ngRoute'])
+angular.module('myApp')
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/empruntAjout', {
-    templateUrl: 'emprunt/empruntAjout.html',
-    controller: 'EmpruntAjoutCtrl'
-  });
-}])
+.controller('EmpruntAjoutCtrl', ['$scope', function($scope) {
 
-.controller('EmpruntAjoutCtrl', [function() {
+  $scope.nom = '';
+  $scope.date = '';
+  $scope.list = [];
 
+  
+  $scope.npm = function($scope){
+      if($scope.nom && $scope.date)
+        {
+          $scope.list.push(
+            {
+              nom: $scope.nom,
+              date: $scope.date
+
+            }
+          )
+        }
+  }
+      
 }]);
