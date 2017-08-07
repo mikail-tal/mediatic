@@ -10,17 +10,12 @@ angular.module('myApp')
             Redirection vers la page de recherche si l adherent n existe pas
             @WARNING A voir pour completer ou modifier
         */
-        if ($rootScope.adherent) {
 
-            $scope.nom = $rootScope.adherent.nom;
-            $scope.prenom = $rootScope.adherent.prenom;
-            $scope.daten = new Date($rootScope.adherent.daten);
-            $scope.email = $rootScope.adherent.email;
-            $scope.adress = $rootScope.adherent.adress;
-            $scope.codeP = $rootScope.adherent.codeP;
-            $scope.ville = $rootScope.adherent.ville;
-            $scope.datep = new Date($rootScope.adherent.datep);
-            $scope.montant = $rootScope.adherent.montant;
+        if ($rootScope.adherent) {
+            $scope.adherent = $rootScope.adherent
+            $scope.adherent.daten = new Date($rootScope.adherent.daten);
+            $scope.adherent.datep = new Date($rootScope.adherent.datep);
+
         } else {
             $location.path('/adherentRecherche');
         }
@@ -58,7 +53,7 @@ angular.module('myApp')
                 })
             });
         }
-            //@WARNING A SUPPRIMER OU A UTILISER POUR UNE AUTRE FONCTIONNALITE
+        //@WARNING A SUPPRIMER OU A UTILISER POUR UNE AUTRE FONCTIONNALITE
         /* $scope.emprunts.$promise.then(function (result) {
            
            console.log('MEDIA');
@@ -145,44 +140,45 @@ angular.module('myApp')
         */
 
         $scope.enregistrer = function () {
-            
-            var oldAdherent = $rootScope.adherent;
-            
-            var newAdherent = nouveau();
-            console.log(newAdherent);
-            angular.forEach(oldAdherent, function (value, index) {
-                angular.forEach(newAdherent, function (value2, index2) {
-                    console.log(index + ' L INDEX DE L ADHERENT');
-                    console.log(index2+' L index du nouveau');
-                    if (index === index2) {
-                        
-                        if (value != value2) {
-                            if (index === 'adress' || index === 'codeP' || index === 'ville') {
-                                
-                                if (value2 === undefined) {
-                                    
-                                    oldAdherent[index] = "";
-                                } else {
-                                    console.log(value2);
-                                    oldAdherent[index] = value2;
-                                }
-                            } else if (index === 'montant') {
-                                if (value2 === undefined) {
-                                    oldAdherent[index] = 0;
-                                } else {
-                                    oldAdherent[index] = value2;
-                                }
-                            } else {
-                                oldAdherent[index] = value2;
-                            }
 
-                        }
-                    }
 
-                });
 
-            });
-            AdherentService.updateAdherent(oldAdherent);
+
+            /* var newAdherent = nouveau();
+            console.log(newAdherent); */
+            /*    angular.forEach(oldAdherent, function (value, index) {
+                   angular.forEach(newAdherent, function (value2, index2) {
+                       console.log(index + ' L INDEX DE L ADHERENT');
+                       console.log(index2+' L index du nouveau');
+                       if (index === index2) {
+                           
+                           if (value != value2) {
+                               if (index === 'adress' || index === 'codeP' || index === 'ville') {
+                                   
+                                   if (value2 === undefined) {
+                                       
+                                       oldAdherent[index] = "";
+                                   } else {
+                                       console.log(value2);
+                                       oldAdherent[index] = value2;
+                                   }
+                               } else if (index === 'montant') {
+                                   if (value2 === undefined) {
+                                       oldAdherent[index] = 0;
+                                   } else {
+                                       oldAdherent[index] = value2;
+                                   }
+                               } else {
+                                   oldAdherent[index] = value2;
+                               }
+   
+                           }
+                       }
+   
+                   });
+   
+               }); */
+            AdherentService.updateAdherent($scope.adherent);
         }
 
         /* 

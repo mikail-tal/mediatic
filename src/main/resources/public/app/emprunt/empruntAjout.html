@@ -1,54 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Ajout Media</title>
-<title>Fiche Media</title>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript" src="bootstrap/js/jquery.js">
-	</script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
-	</script>
-</head>
-<body>
-<div class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="navbar-header col-sm-3">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand col-sm-10 text-center" href="rechercheMedia.html">Mediatic</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Media<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="ajoutMedia.html">Ajouter</a></li>
-								<li><a href="rechercheMedia.html">Visualiser</a></li>
 
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Adherent<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="ajoutAdherent.html">Ajouter</a></li>
-								<li><a href="rechercheAdherent.html">Visualiser</a></li>
-
-							</ul></li>
-						
-						<li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span>
-								Se deconnecter</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<div class="container">
+<div class="container" name="empruntForm">
 	<div class="panel panel-primary" style="margin-top: 40px;">
 	<div class="panel panel-heading">Enregistrer Emprunt</div>
 
@@ -58,14 +9,14 @@
 				<label class="control-label hidden-xs col-sm-2" for="nom">Nom :</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="nom"
-						placeholder="Enter Nom " name="nom">
+						placeholder="Enter Nom " name="nom" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="date">Date :</label>
 				<div class="col-sm-10">
 					<input type="date" class="form-control " id="auteur"
-						 name="auteur">
+						 name="auteur" required>
 				</div>
 			</div>
 			
@@ -75,7 +26,7 @@
 			<div class="form-group ">
 				<div class="col-sm-12 ">
 					
-					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3">Enregistrer</button>
+					<input type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3" ng-click="ajoutEmprunt()" ng-disabled="empruntForm.$invalid">Enregistrer</button>
 					
 				</div>
 			</div>
@@ -84,5 +35,3 @@
 		
 	</div>
 	</div>
-</body>
-</html>
