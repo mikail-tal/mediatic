@@ -6,7 +6,8 @@ angular.module('myApp', [
   'myApp.view1',
   'myApp.view2',
   'ngResource',
-  'myApp.version'
+  'myApp.version',
+  'ngStorage'
 ]).
   config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -47,6 +48,10 @@ angular.module('myApp', [
     }).when('/adherentAjoutEmprunt', {
         templateUrl: 'adherent/adherentAjoutEmprunt.html',
         controller: 'AdherentAjoutEmpruntCtrl'
+
+     }).when('/login', {
+        templateUrl: 'login/login.html',
+        controller: 'LoginCtrl'
 
     }).otherwise({ redirectTo: '/view1' });
 
