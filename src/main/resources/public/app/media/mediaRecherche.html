@@ -88,15 +88,14 @@
                             </tr>
                         </thead>
                         <tbody class="text-primary">
-                            <tr ng-repeat="response in dataMedia track by $index" >
+                            <tr ng-repeat="response in dataMedia track by $index" ng-click="afficherMediaDetail($index)" >
                                 <td > {{response.id }}</td>
                                 <td > {{response.title |uppercase }}</td>
                                 <td > {{response.author}}</td>
                                 <td > {{response.type}}</td>
                                 <td > {{response.adherent}}</td>
                                 <td > {{response.date}}</td>
-                                <td > <input type="button"  value="suprimer" ng-click="supprimerMedia()"></input></td>
-                                <td > <input type="button"  value="detail"   ng-click="afficherMediaDetail()"></input></td>
+                  
 
                                  
                             </tr>

@@ -54,6 +54,7 @@ angular.module('myApp', [
         apiUrl: 'http://localhost:3000'
       }).run(['$rootScope', function ($rootScope) {
         $rootScope.adherent;
+        $rootScope.media ;
         //  $rootScope.adherentsTab=[];
       }]);
 

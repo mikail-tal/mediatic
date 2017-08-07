@@ -10,7 +10,7 @@ angular.module('myApp')
             title: $scope.titre ,
             type: $scope.selected
             }
-          MediaService. postMedia(media)  ;
+          MediaService. postMedia(media);
         }
         
        
