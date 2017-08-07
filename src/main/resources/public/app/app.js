@@ -42,7 +42,7 @@ angular.module('myApp', [
 
     }).when('/mediaRecherche', {
         templateUrl: 'media/mediaRecherche.html',
-        controller: ' MediaRechercheCtrl'
+        controller: 'MediaRechercheCtrl'
 
     }).when('/adherentAjoutEmprunt', {
         templateUrl: 'adherent/adherentAjoutEmprunt.html',

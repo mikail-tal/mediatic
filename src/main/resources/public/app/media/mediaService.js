@@ -8,7 +8,13 @@ angular.module('myApp')
         }
        
         this.getMediaViaResource = function () {
-            return $resource(config.apiUrl).query();
+            return $resource(config.apiUrl+'/media').query();
+        }
+        this.postMedia = function(media){
+           return $resource(config.apiUrl+'/media').save(media);
+        }
+        this.removeMedia= function(id){
+            return $resource(config.apiUrl+'/media').remove(id)
         }
 
     }])

@@ -37,7 +37,7 @@
         </div>
 
         <div class="container">
-            <img src="images/logo_med2.png" class="img-responsive center-block" />
+            <img src="img/logo_med2.png" class="img-responsive center-block" />
             <div class="container-fluid">
                 <div class="input-group">
                     <input type="text" class="form-control " aria-label="...">
@@ -88,13 +88,17 @@
                             </tr>
                         </thead>
                         <tbody class="text-primary">
-                            <tr ng-repeat="response in dataMedia" class="success">
-                                <td class="warning">{{response.id }}</td>
-                                <td class="success">{{response.title |uppercase }}</td>
-                                <td class="warning">{{response.author}}</td>
-                                <td class="success">{{response.type}}</td>
+                            <tr ng-repeat="response in dataMedia track by $index" >
+                                <td > {{response.id }}</td>
+                                <td > {{response.title |uppercase }}</td>
+                                <td > {{response.author}}</td>
+                                <td > {{response.type}}</td>
+                                <td > {{response.adherent}}</td>
+                                <td > {{response.date}}</td>
+                                <td > <input type="button"  value="suprimer" ng-click="supprimerMedia()"></input></td>
+                                <td > <input type="button"  value="detail"   ng-click="afficherMediaDetail()"></input></td>
 
-
+                                 
                             </tr>
 
 

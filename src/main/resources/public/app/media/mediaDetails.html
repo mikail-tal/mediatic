@@ -1,7 +1,7 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel panel-heading">Description Media</div>
-        <form class="form-horizontal" action="#">
+        <form class="form-horizontal" >
 
             <div class="form-group">
                 <label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
@@ -10,7 +10,7 @@
 
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <a href="ajoutEmprunt.html" class="btn  btn-primary col-sm-12 col-xs-12" role="button"> Emprunter</a>
+                    <a href="ajoutEmprunt.html" class="btn  btn-primary col-sm-12 col-xs-12" role="button" ng-click=""> Emprunter</a>
                 </div>
             </div>
             <div class="form-group">
@@ -19,14 +19,14 @@
                     <input type="text" class="form-control" id="auteur" placeholder="Enter Auteur" name="auteur" disabled="disabled">
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-primary  col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-primary  col-sm-12 col-xs-12" ng-click="modifierMedia()">
 						Modifier</button>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label hidden-xs col-sm-2" for="media">Media :</label>
                 <div class="col-sm-8 col-xs-6">
-                    <select class="form-control" disabled="disabled">
+                    <select class="form-control" disabled="disabled"ng-model="type">
 						<option>LIVRE</option>
 						<option>CD</option>
 						<option>DVD</option>
@@ -35,7 +35,7 @@
 
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-primary disabled col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-primary disabled col-sm-12 col-xs-12" ng-click="modifierMedia()">
 						Enregistrer</button>
                 </div>
             </div>
