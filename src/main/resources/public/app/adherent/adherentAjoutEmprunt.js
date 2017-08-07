@@ -33,7 +33,7 @@ angular.module('myApp')
             var count = 0;
             angular.forEach($scope.toutMedias, function (value, index) {
                 if ($scope.recherche !== undefined) {
-                    if (value.title.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 2) {
+                    if (value.title.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 3) {
                         $scope.rechercheMedia[index] = value;
                         count++
                     }

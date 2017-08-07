@@ -3,7 +3,7 @@ angular.module('myApp')
 
 
     .controller('AdherentAjoutCtrl', ['$scope', 'AdherentService', '$rootScope', '$location', '$filter', function ($scope, AdherentService, $rootScope, $location, $filter) {
-
+        $scope.adherent={}
         $scope.montant=0;
         /* 
             Verifier que les champs addresse,codePostal,ville et montant ne sont pas undefined 
@@ -29,9 +29,11 @@ angular.module('myApp')
             Redirection vers la page de recherche apres la resolution de la promesse
         */
         $scope.ajouterAdherent = function () {
-            verifUndefined();
+           // verifUndefined();
 
-            var adherent = {
+            /*  $scope.adherent = 
+            
+            {
                 nom: $scope.nom,
                 prenom: $scope.prenom,
                 daten: $filter('date')($scope.daten, 'yyyy-MM-dd'),
@@ -44,7 +46,7 @@ angular.module('myApp')
                 datef: $filter('date')($scope.datef, 'yyyy-MM-dd'),
                 montant: $scope.montant
 
-            }
+            } */
             AdherentService.postAdherent(adherent).$promise.then(function(result){
                 $scope.redirect();
             })
@@ -61,13 +63,13 @@ angular.module('myApp')
             Modification de l age et de la date de fin d abonnement
         */
 
-        $scope.$watch('daten', function () {
+        $scope.$watch('adherent.daten', function () {
             if ($scope.daten) {
                 $scope.age = AdherentService.getAge($scope.daten);
 
             }
         }, true);
-        $scope.$watch('datep',function(){
+        $scope.$watch('adherent.datep',function(){
             if($scope.datep){
                 $scope.datef=AdherentService.getDateFin($scope.datep);
             }

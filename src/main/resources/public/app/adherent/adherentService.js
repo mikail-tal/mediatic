@@ -115,5 +115,6 @@ angular.module('myApp')
                 return $resource(config.apiUrl+'/emprunt').query();
             }
             
+            
         }
     }]);
