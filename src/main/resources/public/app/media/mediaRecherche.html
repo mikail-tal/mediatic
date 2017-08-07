@@ -1,0 +1,143 @@
+<div class="container-fluid">
+    <div class="row ">
+        <div id="critere" class="collapse col-lg-3 sidenav">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#section1">Recherche  Media</a></li>
+                <li>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Nom du titre">
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="msg" type="text" class="form-control " name="msg" placeholder="Nom de l'auteur">
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
+                        <select class="form-control">
+							<option>Livre</option>
+							<option>CD</option>
+							<option>DVD</option>
+							</select>
+                    </div>
+                </li>
+                <li>
+
+
+                    <button type="button" class="btn btn-primary btn-lg pull-right"> Rechercher </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="container">
+            <img src="images/logo_med2.png" class="img-responsive center-block" />
+            <div class="container-fluid">
+                <div class="input-group">
+                    <input type="text" class="form-control " aria-label="...">
+                    <span class="input-group-addon"><i
+						class="glyphicon glyphicon-search"></i></span>
+
+                </div>
+                <a href="#critere" data-toggle="collapse" class="pull-right">+ plus de criteres</a>
+
+            </div>
+            <div class="container-fluid  well">
+                <div class="well-sm h6">Afficher :
+                    <select>
+				<option>10</option>
+				<option>25</option>
+				<option>50</option>
+				<option>100</option>
+				</select> Adherents
+
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" data-toggle="table">
+                        <thead>
+                            <tr class="text-primary text-uppercase">
+                                <th class="container "># <a href="#" class="pull-right">
+										<span class="glyphicon glyphicon-sort"></span>
+								</a></th>
+                                <th class="container">Titre <a href="#" class="pull-right">
+										<span class="glyphicon glyphicon-sort"></span>
+								</a>
+                                </th>
+                                <th class="container">Auteur<a href="#" class="pull-right">
+										<span class="glyphicon glyphicon-sort"></span>
+								</a></th>
+
+                                <th class="container">Type de Media<a href="#" class="pull-right">
+										<span class="glyphicon glyphicon-sort"></span>
+								</a></th>
+                                <th class="container">Emprunte Par<a href="#" class="pull-right">
+										<span class="glyphicon glyphicon-sort"></span>
+								</a></th>
+                                <th class="container">Date Retour Prevue<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+								</a></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody class="text-primary">
+                            <tr ng-repeat="response in dataMedia" class="success">
+                                <td class="warning">{{response.id }}</td>
+                                <td class="success">{{response.title |uppercase }}</td>
+                                <td class="warning">{{response.author}}</td>
+                                <td class="success">{{response.type}}</td>
+
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+            <div class="text-center">
+                <nav aria-label="Page navigation">
+
+                    <ul class="pagination-lg pager">
+                        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedent</a></li>
+                        <li class="next"><a href="#">Suivant <span aria-hidden="true">&rarr;</span></a></li>
+                        <li>
+                            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+      </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#" class="hidden-xs">3</a></li>
+                        <li><a href="#" class="hidden-xs">4</a></li>
+                        <li><a href="#" class="hidden-xs">5</a></li>
+
+                        <li>
+                            <a href="#" aria-label="Next">
+                 <span aria-hidden="true">&raquo;</span>
+      </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<pre>{{list.titre | json}}</pre>

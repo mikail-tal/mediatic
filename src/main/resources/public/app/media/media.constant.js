@@ -1,3 +1,2 @@
-'use strict';
-angular.module('myApp.media')
-    .constant('config', { apiUrl: 'http://jsonplaceholder.typicode.com/posts' })
+angular.module('myApp')
+.constant('config',{apiUrl:'http://localhost:3000/media'}); 

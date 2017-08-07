@@ -1,1 +1,58 @@
-<p> media </p>
+<div class="container">
+	<div class="panel panel-primary" style="margin-top: 40px;">
+		<div class="panel panel-heading">Ajout Media</div>
+
+		<form class="form-horizontal" novalidate ng-submit="ajoutMedia()">
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
+				<div class=" col-sm-10">
+					<input type="text" class="form-control" id="titre"
+						placeholder="Enter Titre" ng-model="titre" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="auteur">Auteur :</label>
+				<div class=" col-sm-10">
+				
+					<input type="text" class="form-control" id="auteur"
+						placeholder="Enter Auteur" ng-model="auteur" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="auteur">Media :</label>
+				<div class=" col-sm-10">
+					<select class="form-control" ng-model="selected">
+						<option >LIVRE</option>
+						<option >CD</option>
+						<option >DVD</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group ">
+				<div class="col-sm-12 ">
+					
+					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3" >Enregistrer</button>
+					
+				</div>
+			</div>
+		</form>
+		
+		</div>
+    </div>
+    
+    <div class="container">
+    <table class="table" name="commande">
+        <tr class="danger">
+        </tr>
+        <tbody>
+            <tr ng-repeat=" l in list " class="warning col-sm-12">
+                <td class="success col-sm-2">{{l.selected }}</td>
+                <td class="success col-sm-5">{{l.titre }}</td>
+                <td class="success col-sm-3">{{l.auteur | uppercase }}</td>
+                <td><button type="submit" ng-click="supprimerMedia($index)"ng-model="panier" class="btn btn-danger">Supprimer le livre </button> </td>
+            </tr>
+        </tbody>
+      
+    </table>
+
+</div>

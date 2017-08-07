@@ -1,21 +1,23 @@
-'use strict';
-angular.module('myApp.media', ['ngRoute'])
-    .controller('MediaAjoutCtrl', ['$scope', '$resouce', '$config', '$q', function ($scope, $resouce, config, $q) {
+angular.module('myApp')
 
-        $scope.data1 = MediaService.getMediaViaResouce();
-        // console.log($scope.data1)
-        $scope.data1.$promise.then(function () {
-            // console.log($scope.data1)
-        });
-        var defer = $q.defer();
-        console.log(defer)
-        defer.promise.then(function (val) {
-            console.log(val)
-        }, function (error) {
-            console.log(error)
-        })
+    .controller('MediaAjoutCtrl', ['$scope', function ($scope) {
 
+        $scope.media = "bienvenue dans media ";
+        $scope.titre = '';
+        $scope.auteur = '';
+        $scope.selected = '';
+        $scope.list = [];
 
+        $scope.ajoutMedia = function () {
+            console.log('dans la fonction ajout media');
+            if ($scope.titre && $scope.auteur && $scope.selected) {
+                console.log('on as passe le if');
+                
+            }
+    }
+        $scope.supprimerMedia = function (index) {
+            console.log('je suis dans la function supprimer');
+            $scope.list.splice(index, 1);
+        };
 
-
-    }])
+    }]);
