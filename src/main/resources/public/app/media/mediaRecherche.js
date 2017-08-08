@@ -5,22 +5,23 @@ angular.module('myApp')
 
             // recupurer les données  // 
             $scope.dataMedia = MediaService.getMediaViaResource();
-            console.log($scope.dataMedia);
+           // console.log($scope.dataMedia);
             $scope.dataMedia.$promise.then(function () {
-                console.log($scope.dataMedia);
-                $scope.propertyName = 'titre';
-                $scope.reverse = true;
+               // console.log($scope.dataMedia);
+                $scope.propertyName = '';
+                $scope.reverse = false;
                 $scope.dataMedia = orderBy($scope.dataMedia, $scope.propertyName, $scope.reverse);
             });
             /// supprimer un media ///
+            /*
             $scope.supprimerMedia = function (index) {
 
-                console.log('je suis dans la function supprimer');
+               // console.log('je suis dans la function supprimer');
                 MediaService.removeMedia(index);
             };
-
+            */
             $scope.afficherMediaDetail = function (index) {
-                console.log('dans la function afficher')
+              //  console.log('dans la function afficher')
                 angular.forEach($scope.dataMedia, function (value, key) {
                     if (key === index) {
                         $rootScope.media = value;
@@ -36,7 +37,7 @@ angular.module('myApp')
 
 
             $scope.sortBy = function (propertyName) {
-                console.log(propertyName)
+              //  console.log(propertyName)
                 $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName) ? !$scope.reverse : false;
                 $scope.propertyName = propertyName;
                 $scope.dataMedia = orderBy($scope.dataMedia, $scope.propertyName, $scope.reverse);

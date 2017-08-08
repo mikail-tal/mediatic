@@ -2,6 +2,8 @@ angular.module('myApp')
 
     .controller('MediaDetailsCtrl', ['$scope', '$rootScope', '$location', 'MediaService',
         function ($scope, $rootScope, $location, MediaService) {
+            
+            
             if($rootScope.media){
                $scope.media = $rootScope.media;
                $scope.check=true;

@@ -4,7 +4,7 @@ angular.module('myApp')
         
         
         this.logConfig = function () {
-            console.log(config.apiUrl);
+           // console.log(config.apiUrl);
         }
        
         this.getMediaViaResource = function () {

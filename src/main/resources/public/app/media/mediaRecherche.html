@@ -28,7 +28,7 @@
                 <li>
 
 
-                    <button  class="btn btn-primary btn-lg pull-right" > Rechercher </button>
+                    <button class="btn btn-primary btn-lg pull-right"> Rechercher </button>
 
                 </li>
 
@@ -41,7 +41,7 @@
             <div class="container-fluid">
                 <div class="input-group">
                     <input type="text" class="form-control " aria-label="..." ng-model="search">
-                <span class="input-group-addon"> <i class="glyphicon glyphicon-search"></i></span>
+                    <span class="input-group-addon"> <i class="glyphicon glyphicon-search"></i></span>
 
                 </div>
                 <div class="col-xs-offset-10">
@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <div class="container-fluid  well">
+            <div class="container-fluid ">
                 <div class="well-sm h6">Afficher :
                     <select>
 				<option>10</option>
@@ -61,9 +61,15 @@
                 </div>
 
 
-                <div class="table-responsive">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="text-center">MEDIA</h3>
+
+                    </div>
+
                     <table class="table table-hover table-bordered " data-toggle="table">
-                       
+
                         <thead>
                             <tr class="text-primary text-uppercase">
                                 <th class="container ">#Id<a ng-click="sortBy('id')" class="pull-right">
@@ -91,7 +97,7 @@
                         </thead>
                         {{propertyName }}
                         <tbody class="text-primary">
-                            <tr ng-repeat="response in dataMedia | filter:search track by $index " ng-click="afficherMediaDetail($index)">
+                            <tr ng-repeat="response in dataMedia |filter track by $index " ng-click="afficherMediaDetail($index)">
                                 <td> {{response.id }}</td>
                                 <td> {{response.title |uppercase }}</td>
                                 <td> {{response.author}}</td>
@@ -140,4 +146,3 @@
     </div>
 
 </div>
-
