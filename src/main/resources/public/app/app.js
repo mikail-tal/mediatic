@@ -53,6 +53,10 @@ angular.module('myApp', [
         templateUrl: 'login/login.html',
         controller: 'LoginCtrl'
 
+    }).when('/mediaAjoutEmprunt', {
+        templateUrl: 'media/mediaAjoutEmprunt.html',
+        controller: 'EmpruntAjoutCtrl'
+
     }).otherwise({ redirectTo: '/view1' });
 
       }]).constant('config', {
