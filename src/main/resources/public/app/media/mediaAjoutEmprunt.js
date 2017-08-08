@@ -109,3 +109,7 @@ angular.module('myApp')
         }*/
         
         
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 795edca05eac7baa82bc5271bc087d230db57820
