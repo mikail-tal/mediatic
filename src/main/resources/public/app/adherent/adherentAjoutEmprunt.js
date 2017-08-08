@@ -6,6 +6,7 @@ angular.module('myApp')
         
         var idMedia = -1; // INITIALISATION AVEC UN NBR NEGATIF SI LE MEDIA N EXISTE PAS
         var typeMedia;  
+        
 
         /* 
             Recuperation des medias pour l autocompletion du champ 
@@ -29,7 +30,7 @@ angular.module('myApp')
             Affecter la nouvelle liste de choix d autocompletion
         */
         function rechercher() {
-            $scope.rechercheMedia = []
+            var rechercheMedia = []
             var count = 0;
             angular.forEach($scope.toutMedias, function (value, index) {
                 if ($scope.recherche !== undefined) {
@@ -40,7 +41,7 @@ angular.module('myApp')
                 }
 
             })
-            return $scope.rechercheMedia;
+            return rechercheMedia;
         }
 
         /* 
@@ -75,8 +76,8 @@ angular.module('myApp')
             var emprunt = {
                 media: idMedia,
                 adherent: $rootScope.adherent.id,
-                dateE: $filter('date')($scope.dateE, 'yyyy-MM-dd'),
-                dateR: $filter('date')(AdherentService.getDateRetourPrevue($scope.dateE, typeMedia), 'yyyy-MM-dd'),
+                dateE: $scope.dateE,
+                dateR: AdherentService.getDateRetourPrevue($scope.dateE, typeMedia),
                 dateEf: null
             }
             AdherentService.postEmprunt(emprunt).$promise.then(function (result) {
