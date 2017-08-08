@@ -1,27 +1,39 @@
+
 'use strict';
 
 angular.module('myApp')
 
-.controller('EmpruntAjoutCtrl', ['$scope', 'MediaService', function($scope, MediaService) {
+.controller('EmpruntAjoutCtrl', ['$scope', 'AdherentService','$rootScope','$location', function($scope,AdherentService,$rootScope,$location) {
 
     
         var idAdherent = -1; 
-        MediaService.getMediaViaResource().$promise.then(function (result)
+        var typeMedia=$rootScope.media.typeMedia;
+        AdherentService.getAdherents().$promise.then(function (result)
       {
         $scope.adherents = result;
-
-      
+        console.log(result)
+        $scope.$watch('recherche', function () {
+          console.log('ABC')
+                $scope.adherents = recherche();
+                idAdherent = rechercherTitreComplet();
+            }, true);
 
       });
-
+      AdherentService.getAdherents().$promise.then(function (result) {
+            $scope.toutAdherents = result;
+        })
 
       function recherche(){
         $scope.rechercheAdherent = [];
         var count= 0;
-
-        angular.forEach($scope.adherents, function (value, index){
+        
+        angular.forEach($scope.toutAdherents, function (value, index){
+          console.log(value);
           if($scope.recherche !== undefined){
+            console.log(value.nom)
             if (value.nom.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 3){
+              console.log('====')
+              console.log('ABC')
               $scope.rechercheAdherent[index]=value;
               count++;
             }
@@ -30,15 +42,36 @@ angular.module('myApp')
                     return $scope.rechercheAdherent;
       }
 
+
+
+         function rechercherTitreComplet() {
+
+            var found = false;
+            angular.forEach($scope.adherents, function (value, index) {
+                if (found === false) {
+                    if (value.nom === $scope.recherche) {
+                        idAdherent = value.id;
+                      
+                        found = true;
+                    }
+                }
+
+            })
+            if (found === false) {
+                $scope.formEmprunt.$invalid = true;
+                idAdherent = -1;
+            }
+            return idAdherent;
+        }
       
 
-       $scope.emprunter = function () {
+          $scope.emprunter = function () {
 
             var emprunt = {
                 media: $rootScope.media.id,
                 adherent: idAdherent,
                 dateE: $scope.dateE,
-                dateR:MediaService.getDateRetourPrevue(),
+                dateR: AdherentService.getDateRetourPrevue($scope.dateE, typeMedia),
                 dateEf: null
             }
             AdherentService.postEmprunt(emprunt).$promise.then(function (result) {
@@ -48,7 +81,7 @@ angular.module('myApp')
 
         }
         $scope.redirect = function () {
-            $location.path('/adherentRecherche');
+            $location.path('/mediaRecherche');
         }
 
     }]);
@@ -76,5 +109,3 @@ angular.module('myApp')
         }*/
         
         
-      
-}]);

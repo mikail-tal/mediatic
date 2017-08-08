@@ -4,16 +4,19 @@
     angular
         .module('myApp')
         .factory('LoginService', LoginService)
-        .run(function (LoginService) {
+        .run(function (LoginService, $rootScope) {
             LoginService.addAuthorization();
+            $rootScope.logout = LoginService.logout;
+
         });
 
-    LoginService.$inject = ['$localStorage', '$rootScope', '$http'];
-    function LoginService($localStorage, $rootScope, $http) {
+    LoginService.$inject = ['$localStorage', '$rootScope', '$http', '$location'];
+    function LoginService($localStorage, $rootScope, $http, $location) {
 
         var service = {
             storeUser: storeUser,
-            addAuthorization: addAuthorization
+            addAuthorization: addAuthorization,
+            logout: logout
         };
 
         return service;
@@ -32,6 +35,14 @@
                 var token = btoa($rootScope.login + ':' + password);
                 $http.defaults.headers.common.Authorization = 'Basic ' + token
             }
+        }
+
+        function logout()
+        {
+            $localStorage.$reset();
+            $location.path('/login');
+
+         //   $rootScope.login = null;
         }
     }
 })();

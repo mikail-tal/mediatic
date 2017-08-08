@@ -57,13 +57,18 @@ angular.module('myApp', [
         templateUrl: 'media/mediaAjoutEmprunt.html',
         controller: 'EmpruntAjoutCtrl'
 
-    }).otherwise({ redirectTo: '/view1' });
+    }).otherwise({ redirectTo: '/login' });
 
       }]).constant('config', {
         apiUrl: 'http://localhost:3000'
-      }).run(['$rootScope', function ($rootScope) {
+      }).run(['$rootScope', function ($rootScope,$location) {
         $rootScope.adherent;
-        $rootScope.media ;
+        $rootScope.media;
+        $rootScope.login;
+       if($rootScope.login){
+          $location.path('/login');
+       }
+        
         //  $rootScope.adherentsTab=[];
       }]);
 
