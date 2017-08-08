@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row ">
-        <div id="critere" class="collapse col-lg-3 sidenav">
+        <div id="critere" class="col-lg-3 sidenav" ng-if="checkBox">
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#section1">Recherche  Media</a></li>
                 <li>
@@ -28,7 +28,7 @@
                 <li>
 
 
-                    <button type="button" class="btn btn-primary btn-lg pull-right"> Rechercher </button>
+                    <button  class="btn btn-primary btn-lg pull-right" > Rechercher </button>
 
                 </li>
 
@@ -40,12 +40,13 @@
             <img src="img/logo_med2.png" class="img-responsive center-block" />
             <div class="container-fluid">
                 <div class="input-group">
-                    <input type="text" class="form-control " aria-label="...">
-                    <span class="input-group-addon"><i
-						class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" class="form-control " aria-label="..." ng-model="search">
+                <span class="input-group-addon"> <i class="glyphicon glyphicon-search"></i></span>
 
                 </div>
-                <a href="#critere" data-toggle="collapse" class="pull-right">+ plus de criteres</a>
+                <div class="col-xs-offset-10">
+                    <input type="checkbox" name="checkBox" ng-model="checkBox">Plus de criteres
+                </div>
 
             </div>
             <div class="container-fluid  well">
@@ -61,46 +62,43 @@
 
 
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered" data-toggle="table">
+                    <table class="table table-hover table-bordered " data-toggle="table">
+                       
                         <thead>
                             <tr class="text-primary text-uppercase">
-                                <th class="container "># <a href="#" class="pull-right">
-										<span class="glyphicon glyphicon-sort"></span>
+                                <th class="container ">#Id<a ng-click="sortBy('id')" class="pull-right">
+										<span  class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}" ></span>
 								</a></th>
-                                <th class="container">Titre <a href="#" class="pull-right">
-										<span class="glyphicon glyphicon-sort"></span>
+                                <th class="container">Titre <a ng-click="sortBy('title')" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ></span>
 								</a>
                                 </th>
-                                <th class="container">Auteur<a href="#" class="pull-right">
-										<span class="glyphicon glyphicon-sort"></span>
+                                <th class="container">Auteur<a ng-click="sortBy('author')" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
 								</a></th>
 
-                                <th class="container">Type de Media<a href="#" class="pull-right">
-										<span class="glyphicon glyphicon-sort"></span>
+                                <th class="container">Type de Media<a ng-click="sortBy('type')" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
 								</a></th>
-                                <th class="container">Emprunte Par<a href="#" class="pull-right">
-										<span class="glyphicon glyphicon-sort"></span>
+                                <th class="container">Emprunte Par<a ng-click="sortBy('adherent')" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
 								</a></th>
-                                <th class="container">Date Retour Prevue<a href="#" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+                                <th class="container">Date Retour Prevue<a ng-click="sortBy('date')" class="pull-right">
+                                     <span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
 								</a></th>
-
 
                             </tr>
                         </thead>
+                        {{propertyName }}
                         <tbody class="text-primary">
-                            <tr ng-repeat="response in dataMedia track by $index" ng-click="afficherMediaDetail($index)" >
-                                <td > {{response.id }}</td>
-                                <td > {{response.title |uppercase }}</td>
-                                <td > {{response.author}}</td>
-                                <td > {{response.type}}</td>
-                                <td > {{response.adherent}}</td>
-                                <td > {{response.date}}</td>
-                  
-
-                                 
+                            <tr ng-repeat="response in dataMedia | filter:search track by $index " ng-click="afficherMediaDetail($index)">
+                                <td> {{response.id }}</td>
+                                <td> {{response.title |uppercase }}</td>
+                                <td> {{response.author}}</td>
+                                <td> {{response.type}}</td>
+                                <td> {{response.adherent}}</td>
+                                <td> {{response.date}}</td>
                             </tr>
-
-
                         </tbody>
                     </table>
 
@@ -143,4 +141,3 @@
 
 </div>
 
-<pre>{{list.titre | json}}</pre>

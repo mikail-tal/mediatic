@@ -1,61 +1,56 @@
 'use strict';
+
 angular.module('myApp')
 
+.controller('EmpruntAjoutCtrl', ['$scope', 'AdherentService','$rootScope','$location', function($scope,AdherentService,$rootScope,$location) {
 
-    .controller('AdherentAjoutEmpruntCtrl', ['$scope', '$location', 'AdherentService', '$rootScope', '$filter', function ($scope, $location, AdherentService, $rootScope, $filter) {
-        
-        var idMedia = -1; // INITIALISATION AVEC UN NBR NEGATIF SI LE MEDIA N EXISTE PAS
-        var typeMedia;  
-        
-
-        /* 
-            Recuperation des medias pour l autocompletion du champ 
-            Capture des evenement clavier sur le champ pour la recherche
-        */
-        AdherentService.getMedias().$promise.then(function (result) {
-            $scope.medias = result;
-            $scope.$watch('recherche', function () {
-                $scope.medias = rechercher();
-                idMedia = rechercherTitreComplet();
+    
+        var idAdherent = -1; 
+        var typeMedia=$rootScope.media.typeMedia;
+        AdherentService.getAdherents().$promise.then(function (result)
+      {
+        $scope.adherents = result;
+        console.log(result)
+        $scope.$watch('recherche', function () {
+          console.log('ABC')
+                $scope.adherents = recherche();
+                idAdherent = rechercherTitreComplet();
             }, true);
-        });
-        /* 
-            Recuperation de tous les medias pour faire une recherche globale
-         */
-        AdherentService.getMedias().$promise.then(function (result) {
-            $scope.toutMedias = result;
+
+      });
+      AdherentService.getAdherents().$promise.then(function (result) {
+            $scope.toutAdherents = result;
         })
-        /* 
-            La recherche des medias pour afficher 2 suggestions sur les resultats
-            Affecter la nouvelle liste de choix d autocompletion
-        */
-        function rechercher() {
-            var rechercheMedia = []
-            var count = 0;
-            angular.forEach($scope.toutMedias, function (value, index) {
-                if ($scope.recherche !== undefined) {
-                    if (value.title.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 3) {
-                        $scope.rechercheMedia[index] = value;
-                        count++
-                    }
-                }
 
-            })
-            return rechercheMedia;
-        }
+      function recherche(){
+        $scope.rechercheAdherent = [];
+        var count= 0;
+        
+        angular.forEach($scope.toutAdherents, function (value, index){
+          console.log(value);
+          if($scope.recherche !== undefined){
+            console.log(value.nom)
+            if (value.nom.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 3){
+              console.log('====')
+              console.log('ABC')
+              $scope.rechercheAdherent[index]=value;
+              count++;
+            }
+          }
+        })
+                    return $scope.rechercheAdherent;
+      }
 
-        /* 
-            Invalider le formulair si le media n existe pas pour l emprunt
-            Enregistrer l identifiant et le type du media si trouvee 
-        */
-        function rechercherTitreComplet() {
+
+
+         function rechercherTitreComplet() {
 
             var found = false;
-            angular.forEach($scope.toutMedias, function (value, index) {
+            angular.forEach($scope.adherents, function (value, index) {
                 if (found === false) {
-                    if (value.title === $scope.recherche) {
-                        idMedia = value.id;
-                        typeMedia = value.type;
+                    if (value.nom === $scope.recherche) {
+                        idAdherent = value.id;
+                      
                         found = true;
                     }
                 }
@@ -63,19 +58,17 @@ angular.module('myApp')
             })
             if (found === false) {
                 $scope.formEmprunt.$invalid = true;
-                idMedia = -1;
+                idAdherent = -1;
             }
-            return idMedia;
+            return idAdherent;
         }
+      
 
-        /* 
-            Emprunter un Media avec calcul de la date retour prevue
-        */
-        $scope.emprunter = function () {
+          $scope.emprunter = function () {
 
             var emprunt = {
-                media: idMedia,
-                adherent: $rootScope.adherent.id,
+                media: $rootScope.media.id,
+                adherent: idAdherent,
                 dateE: $scope.dateE,
                 dateR: AdherentService.getDateRetourPrevue($scope.dateE, typeMedia),
                 dateEf: null
@@ -91,3 +84,9 @@ angular.module('myApp')
         }
 
     }]);
+
+        
+        
+        
+        
+        
