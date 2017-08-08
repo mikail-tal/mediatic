@@ -42,7 +42,7 @@
             $localStorage.$reset();
             $location.path('/login');
 
-         //   $rootScope.login = null;
+           $rootScope.login = null;
         }
     }
 })();

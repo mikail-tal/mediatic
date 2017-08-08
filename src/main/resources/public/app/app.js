@@ -61,7 +61,20 @@ angular.module('myApp', [
 
       }]).constant('config', {
         apiUrl: 'http://localhost:3000'
-      }).run(['$rootScope', function ($rootScope,$location) {
+      }).run(['$rootScope','$location', function ($rootScope,$location) {
+         $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+           console.log($rootScope.login)
+                  if(!$rootScope.login){
+                    
+                    if($location.path()!== '/login'){
+                      $location.path('/login')
+//console.log(event , next , current)
+                    }
+                    
+                  }   else{
+                    
+                  }
+    });
         $rootScope.adherent;
         $rootScope.media;
         $rootScope.login;
