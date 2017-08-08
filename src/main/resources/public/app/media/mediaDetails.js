@@ -19,7 +19,7 @@ angular.module('myApp')
                 MediaService.updateMedia($scope.media);
                
             }
-
+        
             $scope.emprunter = function () {
                 $location.path('/mediaAjoutEmprunt');
             }
