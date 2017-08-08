@@ -6,10 +6,16 @@ angular.module('myApp')
 .controller('EmpruntAjoutCtrl', ['$scope', 'AdherentService','$rootScope','$location', function($scope,AdherentService,$rootScope,$location) {
 
     
+
+
+            if($rootScope.media)
+              {
+                
         var idAdherent = -1; 
         var typeMedia=$rootScope.media.typeMedia;
-        AdherentService.getAdherents().$promise.then(function (result)
-      {
+
+                AdherentService.getAdherents().$promise.then(function (result)
+              {
         $scope.adherents = result;
         console.log(result)
         $scope.$watch('recherche', function () {
@@ -22,6 +28,12 @@ angular.module('myApp')
       AdherentService.getAdherents().$promise.then(function (result) {
             $scope.toutAdherents = result;
         })
+               
+            }else{
+                 $location.path('/mediaRecherche');
+            }
+        
+      
 
       function recherche(){
         $scope.rechercheAdherent = [];
