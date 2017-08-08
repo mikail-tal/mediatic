@@ -2,7 +2,7 @@
 	<div class="panel panel-primary" style="margin-top: 40px;">
 		<div class="panel panel-heading">Ajout Media</div>
 
-		<form class="form-horizontal" novalidate ng-submit="ajoutMedia()">
+		<form class="form-horizontal" name="formAjout" novalidate ng-submit="ajoutMedia()">
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
 				<div class=" col-sm-10">
@@ -21,17 +21,17 @@
 			<div class="form-group">
 				<label class="control-label hidden-xs col-sm-2" for="auteur">Media :</label>
 				<div class=" col-sm-10">
-					<select class="form-control" ng-model="selected">
-						<option >LIVRE</option>
-						<option >CD</option>
-						<option >DVD</option>
+					<select class="form-control" ng-model="selected" required>
+						<option> LIVRE </option>
+						<option> CD    </option>
+						<option> DVD   </option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group ">
 				<div class="col-sm-12 ">
 					
-					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3" >Enregistrer</button>
+					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3" ng-disabled="formAjout.$invalid" >Enregistrer</button>
 					
 				</div>
 			</div>

@@ -1,58 +1,57 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel panel-heading">Description Media</div>
-        <form class="form-horizontal" action="#">
+        <form class="form-horizontal" name="formDetail" novalidate >
 
             <div class="form-group">
                 <label class="control-label hidden-xs col-sm-2" for="titre">Titre :</label>
                 <div class="col-sm-8 col-xs-6">
-                    <input type="text" class="form-control" id="titre" placeholder="Enter Titre" name="titre" disabled="disabled">
+                    <input type="text" class="form-control" id="titre" placeholder="Enter Titre" name="titre"ng-model="media.title" ng-disabled="check" required>
 
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <a href="ajoutEmprunt.html" class="btn  btn-primary col-sm-12 col-xs-12" role="button"> Emprunter</a>
+                    <a href="ajoutEmprunt.html" class="btn  btn-primary col-sm-12 col-xs-12" role="button" ng-click=""> Emprunter</a>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label hidden-xs col-sm-2" for="auteur">Auteur :</label>
                 <div class="col-sm-8 col-xs-6">
-                    <input type="text" class="form-control" id="auteur" placeholder="Enter Auteur" name="auteur" disabled="disabled">
+                    <input type="text" class="form-control" id="auteur" placeholder="Enter Auteur" name="auteur" ng-model="media.author" ng-disabled="check" required>
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-primary  col-sm-12 col-xs-12">
+                    <button class="btn btn-primary  col-sm-12 col-xs-12" ng-click="modifierMedia()"ng-disabled="!check">
 						Modifier</button>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label hidden-xs col-sm-2" for="media">Media :</label>
                 <div class="col-sm-8 col-xs-6">
-                    <select class="form-control" disabled="disabled">
-						<option>LIVRE</option>
-						<option>CD</option>
-						<option>DVD</option>
-
+                    <select class="form-control" ng-disabled="check" ng-selected="media.type"  ng-model ="media.type" ng-disabled="check" required>
+						<option> LIVRE </option>
+						<option> CD    </option>
+						<option> DVD   </option>
 					</select>
 
                 </div>
                 <div class="col-sm-2 col-xs-4">
-                    <button type="submit" class="btn btn-primary disabled col-sm-12 col-xs-12">
+                    <button class="btn btn-primary col-sm-12 col-xs-12" ng-click="enregistrerMedia()"  ng-disabled="formDetail.$pristine">
 						Enregistrer</button>
                 </div>
             </div>
-
+                   <pre> {{formDetail | json}}</pre>
             <table class="table table-hover" data-toggle="table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>titre</th>
+                        <th>auteur</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>ABC</td>
-                        <td>ABC</td>
-                        <td>ABC</td>
+                        <td>{{media.title}}</td>
+                        <td>{{media.author}}</td>
+                        <td>{{media.type}}</td>
                     </tr>
                    
                 </tbody>

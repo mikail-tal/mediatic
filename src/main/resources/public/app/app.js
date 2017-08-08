@@ -43,7 +43,7 @@ angular.module('myApp', [
 
     }).when('/mediaRecherche', {
         templateUrl: 'media/mediaRecherche.html',
-        controller: ' MediaRechercheCtrl'
+        controller: 'MediaRechercheCtrl'
 
     }).when('/adherentAjoutEmprunt', {
         templateUrl: 'adherent/adherentAjoutEmprunt.html',
@@ -59,6 +59,7 @@ angular.module('myApp', [
         apiUrl: 'http://localhost:3000'
       }).run(['$rootScope', function ($rootScope) {
         $rootScope.adherent;
+        $rootScope.media ;
         //  $rootScope.adherentsTab=[];
       }]);
 

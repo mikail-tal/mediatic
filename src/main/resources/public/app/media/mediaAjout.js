@@ -1,23 +1,18 @@
 angular.module('myApp')
 
-    .controller('MediaAjoutCtrl', ['$scope', function ($scope) {
+    .controller('MediaAjoutCtrl', ['$scope','MediaService', function ($scope,MediaService) {
 
-        $scope.media = "bienvenue dans media ";
-        $scope.titre = '';
-        $scope.auteur = '';
-        $scope.selected = '';
-        $scope.list = [];
-
+            //ajouter un media  
         $scope.ajoutMedia = function () {
             console.log('dans la fonction ajout media');
-            if ($scope.titre && $scope.auteur && $scope.selected) {
-                console.log('on as passe le if');
-                
+          var media= {
+            author: $scope.auteur ,
+            title: $scope.titre ,
+            type: $scope.selected
             }
-    }
-        $scope.supprimerMedia = function (index) {
-            console.log('je suis dans la function supprimer');
-            $scope.list.splice(index, 1);
-        };
+          MediaService. postMedia(media);
+        }
+        
+       
 
     }]);
