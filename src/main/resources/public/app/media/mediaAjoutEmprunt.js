@@ -10,8 +10,6 @@ angular.module('myApp')
       {
         $scope.adherents = result;
 
-      
-
       });
 
 
@@ -77,4 +75,3 @@ angular.module('myApp')
         
         
       
-}]);
