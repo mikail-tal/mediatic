@@ -17,7 +17,7 @@ angular.module('myApp')
                  $scope.check=false;
             }
             $scope.enregistrerMedia = function () {
-                 console.log('enregistre');
+                // console.log('enregistre');
                 MediaService.updateMedia($scope.media);
                
             }

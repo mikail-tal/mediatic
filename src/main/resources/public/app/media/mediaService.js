@@ -3,9 +3,7 @@ angular.module('myApp')
     .service('MediaService', [ 'config','$resource','$location', function (config, $resource,$location) {
         
         
-        this.logConfig = function () {
-           // console.log(config.apiUrl);
-        }
+     
        
         this.getMediaViaResource = function () {
             return $resource(config.apiUrl+'/media').query();

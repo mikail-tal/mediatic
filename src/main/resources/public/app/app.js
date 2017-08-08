@@ -33,57 +33,57 @@ angular.module('myApp', [
       controller: 'AdherentDetailsCtrl'
 
     }).when('/mediaAjout', {
-        templateUrl: 'media/mediaAjout.html',
-        controller: 'MediaAjoutCtrl'
+      templateUrl: 'media/mediaAjout.html',
+      controller: 'MediaAjoutCtrl'
 
 
     }).when('/mediaDetail', {
-        templateUrl: 'media/mediaDetails.html',
-        controller: 'MediaDetailsCtrl'
+      templateUrl: 'media/mediaDetails.html',
+      controller: 'MediaDetailsCtrl'
 
     }).when('/mediaRecherche', {
-        templateUrl: 'media/mediaRecherche.html',
-        controller: 'MediaRechercheCtrl'
+      templateUrl: 'media/mediaRecherche.html',
+      controller: 'MediaRechercheCtrl'
 
     }).when('/adherentAjoutEmprunt', {
-        templateUrl: 'adherent/adherentAjoutEmprunt.html',
-        controller: 'AdherentAjoutEmpruntCtrl'
+      templateUrl: 'adherent/adherentAjoutEmprunt.html',
+      controller: 'AdherentAjoutEmpruntCtrl'
 
-     }).when('/login', {
-        templateUrl: 'login/login.html',
-        controller: 'LoginCtrl'
+    }).when('/login', {
+      templateUrl: 'login/login.html',
+      controller: 'LoginCtrl'
 
     }).when('/mediaAjoutEmprunt', {
-        templateUrl: 'media/mediaAjoutEmprunt.html',
-        controller: 'EmpruntAjoutCtrl'
+      templateUrl: 'media/mediaAjoutEmprunt.html',
+      controller: 'EmpruntAjoutCtrl'
 
     }).otherwise({ redirectTo: '/login' });
 
-      }]).constant('config', {
-        apiUrl: 'http://localhost:3000'
-      }).run(['$rootScope','$location', function ($rootScope,$location) {
-         $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-           console.log($rootScope.login)
-                  if(!$rootScope.login){
-                    
-                    if($location.path()!== '/login'){
-                      $location.path('/login')
-//console.log(event , next , current)
-                    }
-                    
-                  }   else{
-                    
-                  }
+  }]).constant('config', {
+    apiUrl: 'http://localhost:3000'
+  }).run(['$rootScope', '$location', function ($rootScope, $location) {
+    $rootScope.$on("$locationChangeStart", function (event, next, current) {
+      //console.log($rootScope.login)
+      if (!$rootScope.login) {
+
+        if ($location.path() !== '/login') {
+          $location.path('/login')
+          //console.log(event , next , current)
+        }
+
+      } else {
+
+      }
     });
-        $rootScope.adherent;
-        $rootScope.media;
-        $rootScope.login;
-       if($rootScope.login){
-          $location.path('/login');
-       }
-        
-        //  $rootScope.adherentsTab=[];
-      }]);
+    $rootScope.adherent;
+    $rootScope.media;
+    $rootScope.login;
+    if ($rootScope.login) {
+      $location.path('/login');
+    }
+
+    //  $rootScope.adherentsTab=[];
+  }]);
 
 
 

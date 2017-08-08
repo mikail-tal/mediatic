@@ -17,9 +17,9 @@ angular.module('myApp')
                 AdherentService.getAdherents().$promise.then(function (result)
               {
         $scope.adherents = result;
-        console.log(result)
+       // console.log(result)
         $scope.$watch('recherche', function () {
-          console.log('ABC')
+         // console.log('ABC')
                 $scope.adherents = recherche();
                 idAdherent = rechercherTitreComplet();
             }, true);
@@ -40,12 +40,12 @@ angular.module('myApp')
         var count= 0;
         
         angular.forEach($scope.toutAdherents, function (value, index){
-          console.log(value);
+         // console.log(value);
           if($scope.recherche !== undefined){
-            console.log(value.nom)
+            // console.log(value.nom)
             if (value.nom.toLowerCase().search($scope.recherche.toLowerCase()) > -1 && count < 3){
-              console.log('====')
-              console.log('ABC')
+              //console.log('====')
+             // console.log('ABC')
               $scope.rechercheAdherent[index]=value;
               count++;
             }

@@ -95,9 +95,8 @@
 
                             </tr>
                         </thead>
-                        {{propertyName }}
                         <tbody class="text-primary">
-                            <tr ng-repeat="response in dataMedia |filter track by $index " ng-click="afficherMediaDetail($index)">
+                            <tr ng-repeat="response in dataMedia |filter :search track by $index " ng-click="afficherMediaDetail($index)">
                                 <td> {{response.id }}</td>
                                 <td> {{response.title |uppercase }}</td>
                                 <td> {{response.author}}</td>
