@@ -20,7 +20,11 @@ angular.module('myApp')
                
             }
 
+            $scope.emprunter = function () {
+                $location.path('/mediaAjoutEmprunt');
+            }
 
 
 
         }]);
+

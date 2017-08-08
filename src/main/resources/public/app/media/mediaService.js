@@ -33,5 +33,20 @@ angular.module('myApp')
                     alert('Media INTROUVABLE');
                 });}
 
+                this.getDateRetourPrevue = function(dateEmprunt,type){
+                var jour;
+                if(type ==='Livre'){
+                    jour=dateEmprunt.getDate()+30;
+                }else{
+                    jour=dateEmprunt.getDate()+15;
+                }
+                var mois=dateEmprunt.getMonth();
+                var annee=dateEmprunt.getFullYear();
+                
+                return new Date(annee,mois,jour);
+            };
+
+                
+
     }])
 
