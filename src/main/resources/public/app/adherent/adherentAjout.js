@@ -4,7 +4,7 @@ angular.module('myApp')
 
     .controller('AdherentAjoutCtrl', ['$scope', 'AdherentService', '$rootScope', '$location', '$filter', function ($scope, AdherentService, $rootScope, $location, $filter) {
         $scope.adherent={}
-        $scope.montant=0;
+        $scope.adherent.montant=0;
         /* 
             Verifier que les champs addresse,codePostal,ville et montant ne sont pas undefined 
             Attribuer une valeur par defaut 
@@ -47,7 +47,7 @@ angular.module('myApp')
                 montant: $scope.montant
 
             } */
-            AdherentService.postAdherent(adherent).$promise.then(function(result){
+            AdherentService.postAdherent($scope.adherent).$promise.then(function(result){
                 $scope.redirect();
             })
         }
@@ -64,14 +64,14 @@ angular.module('myApp')
         */
 
         $scope.$watch('adherent.daten', function () {
-            if ($scope.daten) {
-                $scope.age = AdherentService.getAge($scope.daten);
+            if ($scope.adherent.daten) {
+                $scope.adherent.age = AdherentService.getAge($scope.adherent.daten);
 
             }
         }, true);
         $scope.$watch('adherent.datep',function(){
-            if($scope.datep){
-                $scope.datef=AdherentService.getDateFin($scope.datep);
+            if($scope.adherent.datep){
+                $scope.adherent.datef=AdherentService.adherent.getDateFin($scope.adherent.datep);
             }
         },true);
 
