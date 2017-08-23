@@ -1,0 +1,179 @@
+<div class="container-fluid">
+	<div class="row">
+
+		<div id="critere" class="col-lg-3 sidenav" ng-if="checkBox">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a>Recherche Adherent</a></li>
+				<li>
+					<div class="input-group">
+						<span class="input-group-addon"><i
+								class="glyphicon glyphicon-book"></i></span> <input id="msg" type="text" class="form-control" name="idAdherent"
+						 placeholder="id adherent">
+					</div>
+				</li>
+				<li>
+					<div class="input-group">
+						<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input id="msg" type="text" class="form-control " name="nomAdherent"
+						 placeholder="Nom de l'Adherent">
+					</div>
+				</li>
+
+				<li>
+			</ul>
+
+			<button class="btn btn-primary btn-lg pull-right">Rechercher</button>
+		</div>
+		<div class="container">
+
+			<img src="img/logo_med2.png" class="img-responsive center-block" />
+
+			<div class="container-fluid">
+				<div class="input-group">
+
+
+
+
+					<input type="text" class="form-control " aria-label="...">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-search"></i></span>
+
+				</div>
+
+				<!-- <a data-toggle="collapse" class="pull-right">+ plus de criteres</a> -->
+
+			</div>
+			<div>
+				<div class="col-xs-offset-10">
+				<input type="checkbox" name="checkBox" ng-model="checkBox">Plus de criteres
+			</div>
+			</div>
+			
+			<!-- <pre >
+							{{adherentsTab|json}}
+							</pre> -->
+
+
+
+			<div class="container-fluid  ">
+				<div class="well-sm h6">Afficher :
+					<select>
+				<option>10</option>
+				<option>25</option>
+				<option>50</option>
+				<option>100</option>
+				</select> Adherents
+
+				</div>
+				<div class="panel panel-primary" ng-if=" adherentsTab.length">
+					<div class="panel-heading">
+						<h3 class="text-center">ADHERENTS</h3>
+
+					</div>
+					<table class="table table-hover table-bordered" data-toggle="table">
+						<thead>
+							<tr class="text-primary text-uppercase">
+								<th class="container ">#<a ng-click="sortId()" class="pull-right">
+											<span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+								<th class="container ">Nom<a ng-click="sortNom()" class="pull-right">
+											<span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+								<th class="container ">Prenom<a ng-click="sortPrenom()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+								<th class="container ">Date de naisssance<a ng-click="sortDateNaissance()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+								<th class="container ">A jour Contisation<a ng-click="sortAjourCotisation()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+								<th class="container ">Nombre Medias<a ng-click="sortNombreMedia()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+
+
+							</tr>
+						</thead>
+						<tbody class="text-primary">
+							<tr>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+
+
+							</tr>
+							<tr>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+
+
+							</tr>
+							<tr>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+
+
+							</tr>
+							<tr>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+								<td>ABC</td>
+
+
+							</tr>
+							<tr ng-repeat="adherent in adherentsTab" ng-click="afficherDetails($index)">
+
+								<td>{{adherent.id}}</td>
+								<td>{{adherent.nom}}</td>
+								<td>{{adherent.prenom}}</td>
+								<td>{{adherent.dateNaissance | date:'yyyy-MM-dd'}}</td>
+								<td>{{adherent.ajour}}</td>
+								<td>{{adherent.nbrMedia}}</td>
+
+
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="text-center">
+				<nav aria-label="Page navigation">
+
+					<ul class="pagination-lg pager">
+						<li class="previous"><a href="#"><span
+									aria-hidden="true">&larr;</span> Precedent</a></li>
+						<li class="next"><a href="#">Suivant <span
+									aria-hidden="true">&rarr;</span></a></li>
+						<li><a href="#" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span>
+							</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#" class="hidden-xs">4</a></li>
+						<li><a href="#" class="hidden-xs">5</a></li>
+
+						<li><a href="#" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+					</ul>
+				</nav>
+
+			</div>
+
+		</div>
+	</div>
+</div>

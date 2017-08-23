@@ -1,0 +1,116 @@
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel panel-heading">Description Adherent</div>
+		<form class="form-horizontal" name="formDetail" novalidate>
+
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="nom">Nom :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.nom" id="nom" name="nom" ng-disabled="disabled" required>
+
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit" class="btn  btn-primary col-sm-12 col-xs-12" ng-click="ajouterEmprunt()">
+						Emprunter</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="prenom">Prenom :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.prenom" id="prenom" name="prenom" ng-disabled="disabled" required>
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit" class="btn btn-primary  col-sm-12 col-xs-12" ng-disabled="!disabled" ng-click="disabled=false">
+						Modifier</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="daten">Date Naissance :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="date" class="form-control" ng-model="adherent.dateNaissance" id="date_naissaince" name="daten" ng-disabled="disabled" required>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="email">Email :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.email" id="email" name="email" ng-disabled="disabled" required>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="adresse">Adresse :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.adresse" id="adress" name="adresse" ng-disabled="disabled">
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="codeP">Code Postal :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.cp" id="codeP" name="codeP" ng-disabled="disabled">
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="ville">Ville :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" ng-model="adherent.ville" id="ville" name="ville" ng-disabled="disabled">
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="datep">Date de Paiement de la Cotisation :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="date" class="form-control" ng-model="adherent.cotisation.datePaiement" id="datep" name="datep" ng-disabled="disabled">
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="montant">Montant de Cotisation :</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="number" class="form-control" ng-model="adherent.cotisation.montant" id="montant" name="montp" ng-disabled="disabled">
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button type="submit" class="btn btn-primary  col-sm-12 col-xs-12" ng-disabled="disabled || formDetail.$invalid || formDetail.$pristine" ng-click="enregistrer()">
+						Enregistrer</button>
+				</div>
+
+			</div>
+
+			<!--   <pre>
+			{{formDetail|json}}
+			</pre>   -->
+
+
+			<table class="table table-hover" data-toggle="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Titre</th>
+						<th>Auteur</th>
+						<th>Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="empr in adherent.emprunt track by $index">
+						<td>{{empr.media.id }}</td>
+						<td>{{empr.media.titre}}</td>
+						<td>{{empr.media.auteur}}</td>
+						<td>{{empr.media.type}}</td>
+						
+					</tr>
+				</tbody>
+			</table>
+
+		</form>
+	</div>
+
+
+
+
+
+
+</div>

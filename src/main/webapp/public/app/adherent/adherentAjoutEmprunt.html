@@ -1,0 +1,34 @@
+<div class="container">
+ 	<div class="panel panel-primary" style="margin-top: 40px;">
+ 		<div class="panel panel-heading">Enregistrer Emprunt</div>
+ 
+ 
+ 		<form class="form-horizontal" name="formEmprunt" novalidate>
+ 			<div class="form-group">
+ 				<label class="control-label hidden-xs col-sm-2" for="media">Media :</label>
+ 				<div class="col-sm-10">
+ 					<input name="media" id="media" ng-model="recherche" list="medias" placeholder="enter un media" autocomplete="off" class="form-control" required>
+ 					<datalist id="medias">
+ 						<option ng-repeat="media in medias track by $index" value="{{media.titre}}"></option>
+ 					</datalist>
+ 				</div>
+ 			</div>
+ 			<div class="form-group">
+ 				<label class="control-label hidden-xs col-sm-2" for="date">Date :</label>
+ 				<div class="col-sm-10">
+ 					<input type="date" ng-model="dateE" class="form-control " id="dateE" name="dateE" required>
+ 				</div>
+			</div>
+
+			<div class="form-group ">
+				<div class="col-sm-12 ">
+ 
+ 					<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-3" ng-click="emprunter()" ng-disabled="formEmprunt.$invalid">Enregistrer</button>
+ 
+ 				</div>
+ 			</div>
+ 		</form>
+ 
+ 
+ 	</div>
+ </div> 
