@@ -20,8 +20,8 @@ public class HelloController {
 	@RequestMapping("/mediatic")
 	@ResponseBody
 	String home() {
-		adherentGenerator.saveAll();
-		mediaGenerator.saveAll();
+		//adherentGenerator.saveAll();
+		//mediaGenerator.saveAll();
 		
 		return "HELLO WORLD";
 	}
