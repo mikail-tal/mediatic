@@ -1,4 +1,4 @@
-package com.dta.mediatic.user.utilAuthentification;
+package com.dta.mediatic.authentification.utilAuthentification;
 
 import java.io.IOException;
 

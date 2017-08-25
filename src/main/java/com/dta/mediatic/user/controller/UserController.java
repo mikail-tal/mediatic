@@ -36,6 +36,7 @@ public class UserController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
+	
     @ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody @Valid User resource) {
 		userService.create(resource);

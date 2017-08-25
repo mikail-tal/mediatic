@@ -1,6 +1,6 @@
 package com.dta.mediatic.mediatic;
 
-<<<<<<< HEAD
+
 import java.time.LocalDate;
 
 import com.dta.mediatic.adherent.model.Adherent;
@@ -14,8 +14,7 @@ import com.dta.mediatic.media.model.Media;
 import com.dta.mediatic.media.model.TypeMedia;
 import com.dta.mediatic.media.service.MediaService;
 
-=======
->>>>>>> branch 'SPRING_BOOT' of https://github.com/mikail-tal/mediatic.git
+
 public class Main {
 	
 	public static void main(String[] args) {/*

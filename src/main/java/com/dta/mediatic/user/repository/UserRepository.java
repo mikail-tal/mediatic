@@ -11,5 +11,6 @@ import com.dta.mediatic.user.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findOneByLogin(String login);
+	
 
 }

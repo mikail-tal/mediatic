@@ -1,4 +1,4 @@
-package com.dta.mediatic.user.utilAuthentification;
+package com.dta.mediatic.authentification.utilAuthentification;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,13 +34,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().and().authorizeRequests()
 
-				.antMatchers("/public/**").permitAll()
+				.antMatchers("/public/app/*").permitAll()
 
-				.anyRequest().authenticated().and().exceptionHandling()
+				.anyRequest().permitAll()
+				
+				.and().exceptionHandling()
 				.authenticationEntryPoint(restAuthenticationEntryPoint).accessDeniedHandler(restAccessDeniedHandler)
-				.and().formLogin().loginProcessingUrl("/authenticate").successHandler(restAuthenticationSuccessHandler)
-				.failureHandler(restAuthenticationFailureHandler).usernameParameter("username")
-				.passwordParameter("password").permitAll().and().logout().logoutUrl("/logout")
+				.and().formLogin()
+					.loginProcessingUrl("/authenticate")
+					.successHandler(restAuthenticationSuccessHandler)
+					.failureHandler(restAuthenticationFailureHandler)
+					.usernameParameter("username")
+					.passwordParameter("password").permitAll()
+					.successForwardUrl("/public/app/index.html")
+				.and().logout().logoutUrl("/logout")
 				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 				.permitAll()
 				.and().httpBasic().and().csrf().disable();

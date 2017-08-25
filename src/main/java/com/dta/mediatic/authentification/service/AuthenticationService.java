@@ -26,6 +26,7 @@ public class AuthenticationService implements UserDetailsService {
 		Optional<User> result = userRepository.findOneByLogin(username);
 		if (result.isPresent()) {
 			User user = result.get();
+			System.out.println(user.getName());
 			List<GrantedAuthority> rules = this.getGrantedAuthorities(user);
 			return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), rules);
 		}
