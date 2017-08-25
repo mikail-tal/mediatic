@@ -1,18 +1,5 @@
 package com.dta.mediatic.mediatic;
 
-import java.time.LocalDate;
-
-import com.dta.mediatic.adherent.model.Adherent;
-import com.dta.mediatic.adherent.service.AdherentService;
-import com.dta.mediatic.cotisation.model.Cotisation;
-import com.dta.mediatic.cotisation.service.CotisationService;
-import com.dta.mediatic.emprunt.model.Emprunt;
-import com.dta.mediatic.emprunt.service.EmpruntService;
-import com.dta.mediatic.media.dao.MediaDao;
-import com.dta.mediatic.media.model.Media;
-import com.dta.mediatic.media.model.TypeMedia;
-import com.dta.mediatic.media.service.MediaService;
-
 public class Main {
 	
 	public static void main(String[] args) {/*
