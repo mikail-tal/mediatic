@@ -47,6 +47,7 @@ angular.module('myApp')
                 montant: $scope.montant
 
             } */
+        	
             AdherentService.postAdherent($scope.adherent).$promise.then(function(result){
                 $scope.redirect();
             })
@@ -72,9 +73,15 @@ angular.module('myApp')
         $scope.$watch('adherent.cotisation.datePaiement',function(){
        // 	console.log($scope.adherent.cotisation.datePaiement)
             if($scope.adherent.cotisation.datePaiement){
-                $scope.adherent.datef=AdherentService.getDateFin($scope.adherent.cotisation.datePaiement);
+                $scope.adherent.cotisation.dateFinAbonnement=AdherentService.getDateFin($scope.adherent.cotisation.datePaiement);
             }
         },true);
+        /*$scope.$watch('adherent.id',function(){
+            // 	console.log($scope.adherent.cotisation.datePaiement)
+                 if($scope.adherent.id){
+                     $scope.adherent.idChar=$scope.adherent.id;
+                 }
+             },true);*/
 
 
 

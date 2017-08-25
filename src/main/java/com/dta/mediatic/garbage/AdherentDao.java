@@ -1,4 +1,4 @@
-package com.dta.mediatic.adherent.dao;
+package com.dta.mediatic.garbage;
 
 
 import java.util.Collections;

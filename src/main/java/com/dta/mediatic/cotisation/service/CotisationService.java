@@ -1,6 +1,8 @@
 package com.dta.mediatic.cotisation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dta.mediatic.cotisation.dao.CotisationRepository;
@@ -65,6 +67,9 @@ public class CotisationService implements MediaticService<Cotisation>{
 	public <S extends Cotisation> Iterable<S> save(Iterable<S> arg0) {
 		return cotisationRepository.save(arg0);
 	}
+
+	
+
 	
 	
 	/*

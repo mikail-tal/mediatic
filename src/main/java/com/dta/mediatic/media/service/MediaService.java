@@ -1,13 +1,21 @@
 package com.dta.mediatic.media.service;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dta.mediatic.media.dao.MediaRepository;
 import com.dta.mediatic.media.model.Media;
+import com.dta.mediatic.media.model.TypeMedia;
 import com.dta.mediatic.service.MediaticService;
 @Service
-public class MediaService implements MediaticService<Media>{
+public class MediaService implements MediaticService<Media>,IMediaService{
 	@Autowired
 	MediaRepository mediaRepository;
 
@@ -65,6 +73,168 @@ public class MediaService implements MediaticService<Media>{
 	public <S extends Media> Iterable<S> save(Iterable<S> arg0) {
 		return mediaRepository.save(arg0);
 	}
+
+	
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingOrderByTitreAsc(String titre, Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingOrderByTitreAsc(titre, pageable);
+	}
+
+	@Override
+	public Page<Media> findByTypeOrderByTitreAsc(TypeMedia type, Pageable pageable) {
+		return mediaRepository.findByTypeOrderByTitreAsc(type, pageable);
+	}
+
+	@Override
+	public Page<Media> findByAuteurIgnoreCaseContainingOrderByTitreAsc(String auteur, Pageable pageable) {
+		return mediaRepository.findByAuteurIgnoreCaseContainingOrderByTitreAsc(auteur, pageable);
+	}
+
+	@Override
+	public Page<Media> orderBy(String field, String order, Pageable pageable) {
+
+		Comparator<Media> comparatorDateRetourPrevue = ((e1, e2) -> e1.getEmpruntEnCours()
+				.getDateRetourPrevue()
+				.compareTo
+				(e2.getEmpruntEnCours()
+						.getDateRetourPrevue()));
+		Comparator<Media> comparatorEmprunteePar = ((e1, e2) -> e1.getEmpruntEnCours()
+				.getAdherent().getNom()
+				.compareTo
+				(e2.getEmpruntEnCours().getAdherent().getNom()));
+		Comparator<Media> comparator=comparatorEmprunteePar.
+				thenComparing
+				((e1,e2)->e1.getEmpruntEnCours()
+						.getAdherent().getPrenom()
+						.compareTo
+						(e2.getEmpruntEnCours().getAdherent().getPrenom()));
+		
+
+		switch (field) {
+		case "id":
+			switch (order) {
+			case "asc":
+				return mediaRepository.findAllByOrderByIdAsc(pageable);
+			case "desc":
+				return mediaRepository.findAllByOrderByIdDesc(pageable);
+			}
+
+		case "titre":
+			switch (order) {
+			case "asc":
+				return mediaRepository.findAllByOrderByTitreAsc(pageable);
+			case "desc":
+				return mediaRepository.findAllByOrderByTitreDesc(pageable);
+			}
+		case "auteur":
+			switch (order) {
+			case "asc":
+				return mediaRepository.findAllByOrderByAuteurAsc(pageable);
+			case "desc":
+				return mediaRepository.findAllByOrderByAuteurDesc(pageable);
+			}
+		case "emprunteepar":
+			switch (order) {
+			case "asc":
+				return convert(comparator, pageable);//mediaRepository.findAllByOrderBy(pageable);
+			case "desc":
+				return convertReverse(comparator.reversed(), pageable);//mediaRepository.findAllByOrderByIdDesc(pageable);
+			}
+		case "dateretourprevue":
+			switch (order) {
+			case "asc": {
+				return convert(comparatorDateRetourPrevue, pageable);
+			}
+			case "desc": {
+				
+				return convertReverse(comparatorDateRetourPrevue.reversed(), pageable);
+			}
+			}
+		
+		}
+
+		return findAllByOrderByTitreAsc(pageable);
+	
+		
+		
+		
+		
+	}
+	
+	
+	public Page<Media> convert(Comparator<Media> comparator,Pageable pageable){
+		Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
+		int total=source.getTotalPages();
+	
+		List<Media> list=source.getContent().stream().collect(Collectors.toList());
+		List<Media>listNotNull=list.stream().filter(m->m.getEmpruntEnCours()!=null)
+		.collect(Collectors.toList());
+		listNotNull.sort(comparator);
+		List<Media>listNull=list.stream().filter(m->m.getEmpruntEnCours()==null).collect(Collectors.toList());
+		listNull.sort((m1,m2)->m1.getTitre().compareTo(m2.getTitre()));
+		
+		listNotNull.addAll(listNull);
+		
+		return new PageImpl<>(listNotNull, pageable, total);
+	}
+	public Page<Media> convertReverse(Comparator<Media> comparator,Pageable pageable){
+		Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
+		int total=source.getTotalPages();
+	
+		List<Media> list=source.getContent().stream().collect(Collectors.toList());
+		List<Media>listNotNull=list.stream().filter(m->m.getEmpruntEnCours()!=null)
+		.collect(Collectors.toList());
+		listNotNull.sort(comparator);
+		List<Media>listNull=list.stream().filter(m->m.getEmpruntEnCours()==null).collect(Collectors.toList());
+		listNull.sort((m1,m2)->m1.getTitre().compareTo(m2.getTitre()));
+		
+		listNull.addAll(listNotNull);
+		
+		return new PageImpl<>(listNull, pageable, total);
+	}
+
+	@Override
+	public Page<Media> findAllByOrderByTitreAsc(Pageable pageable) {
+		return mediaRepository.findAllByOrderByTitreAsc(pageable);
+	}
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingAndAuteurIgnoreCaseContainingAndTypeOrderByTitreAsc(
+			String titre, String auteur, TypeMedia type, Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingAndAuteurIgnoreCaseContainingAndTypeOrderByTitreAsc(titre, auteur, type, pageable);
+	}
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingAndTypeOrderByTitreAsc(String titre,
+			TypeMedia type, Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingAndTypeOrderByTitreAsc(titre, type, pageable);
+	}
+
+	@Override
+	public Page<Media> findByAuteurIgnoreCaseContainingAndTypeOrderByTitreAsc(String auteur,
+			TypeMedia type, Pageable pageable) {
+		return mediaRepository.findByAuteurIgnoreCaseContainingAndTypeOrderByTitreAsc(auteur, type, pageable);
+	}
+
+	@Override
+	public Page<Media> findByAuteurIgnoreCaseContainingAndTitreIgnoreCaseContainingOrderByTitreAsc(String auteur,
+			String titre, Pageable pageable) {
+		return mediaRepository.findByAuteurIgnoreCaseContainingAndTitreIgnoreCaseContainingOrderByTitreAsc(auteur, titre, pageable);
+	}
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingOrAuteurIgnoreCaseContainingOrderByTitreAsc(
+			String titre,String auteur, Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingOrAuteurIgnoreCaseContainingOrderByTitreAsc(titre,auteur, pageable);
+	}
+
+	
+
+	
+	
+	
+
 	
 	
 	

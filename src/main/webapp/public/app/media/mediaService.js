@@ -8,7 +8,8 @@ angular.module('myApp')
         }
        
         this.getMediaViaResource = function () {
-            return $resource(config.apiUrl+'/media').query();
+            var resource= $resource(config.apiUrl+'/media');
+            return resource.get();
         }
         this.postMedia = function(media){
             $resource(config.apiUrl+'/media').save(media).$promise.then(function (result)
@@ -17,6 +18,24 @@ angular.module('myApp')
                 $location.path('/mediaRecherche');
             	
                     });
+        }
+        this.getByPage=function(page,size){
+        	var resource=$resource(config.apiUrl+'/media?page='+page+'&size='+size);
+        	return resource.get();
+        }
+        this.getMediaBy=function(titre,auteur,type){
+        	var resource=$resource(config.apiUrl+'/media?titre='+titre+'&auteur='+auteur+'&type='+type);
+        	return resource.get();
+        }
+        
+        this.search=function(keyword){
+        	console.log('ABCD')
+        	var resource=$resource(config.apiUrl+'/media/search?keyword='+keyword);
+        	return resource.get();
+        }
+        this.filter=function(field,order){
+        	var resource=$resource(config.apiUrl+'/media/filter?field='+field+'&order='+order);
+        	return resource.get();
         }
         this.removeMedia= function(id){
             return $resource(config.apiUrl+'/media').remove(id);

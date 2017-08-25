@@ -11,8 +11,11 @@ public class MediaEmpruntConverter extends StdConverter<List<Emprunt>, List<Empr
 
 	@Override
 	public List<Emprunt> convert(List<Emprunt> value) {
-		
+		if(value.isEmpty()) {
+			return new ArrayList<>();
+		}
 		List<Emprunt> emprunts=new ArrayList<>();
+		
 		for (Emprunt emprunt : value) {
 			System.out.println("DANS LA LISTE");
 			Adherent adherent=new Adherent(emprunt.getAdherent().getId()

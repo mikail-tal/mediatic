@@ -1,6 +1,7 @@
 
 package com.dta.mediatic.adherent.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -34,11 +35,21 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Entity
 @Table (name="adherent")
 @SequenceGenerator(name="seq_adherent",sequenceName="seq_adherent",initialValue=1,allocationSize=1)
-public class Adherent implements Comparable<Adherent>{
+public class Adherent implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(generator = "seq_adherent")
 	private Long id;
+	
+
+	@Column(name="id_char")
+	private String idchar;
 	
 
 	@Column
@@ -70,8 +81,11 @@ public class Adherent implements Comparable<Adherent>{
 	@Transient
 	@JsonView(AdherentViews.AdherentView.class)
 	private long nbrMedia;
+	
 	@Transient
 	private String ajour;
+	
+	
 	
 	
 
@@ -122,6 +136,13 @@ public class Adherent implements Comparable<Adherent>{
 		this.id = id;
 	}
 
+	public String getIdChar() {
+		return idchar;
+	}
+
+	public void setIdchar(String idChar) {
+		this.idchar = idChar;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -212,14 +233,7 @@ public class Adherent implements Comparable<Adherent>{
 	}*/
 	
 
-	@Override
-	public int compareTo(Adherent o) {
-		int result=this.getNom().compareToIgnoreCase(o.getNom());
-		if(result==0) return this.getPrenom().compareToIgnoreCase(o.getPrenom());
-		else return result;
-		
-		
-	}
+	
 
 	public long getNbrMedia() {
 		return this.emprunt.stream().filter(distinctByKey(e->e.getMedia().getTitre())).count();
@@ -232,12 +246,18 @@ public class Adherent implements Comparable<Adherent>{
 		this.nbrMedia = nbrMedia;
 	}
 	public String getAjour() {
+		if(cotisation.getDatePaiement()==null) {
+			return "NON";
+		}
+		
 		return cotisation.getDateFinAbonnement().isBefore(LocalDate.now())?"NON":"OUI";
 	}
 
 	public void setAjour(String ajour) {
 		this.ajour = ajour;
 	}
+
+	
 
 }
 

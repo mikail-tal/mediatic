@@ -76,6 +76,7 @@ public class EmpruntService implements MediaticService<Emprunt>{
 	public <S extends Emprunt> Iterable<S> save(Iterable<S> arg0) {
 		return empruntRepository.save(arg0);
 	}
+
 	
 	
 	

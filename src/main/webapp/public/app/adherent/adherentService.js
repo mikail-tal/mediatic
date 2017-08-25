@@ -4,18 +4,40 @@ angular.module('myApp')
         return {
                 // ENREGISTRE UN ADHERENT
             postAdherent: function (adherent) {
+            		var annee = adherent.dateNaissance.getFullYear() ;
+                var jour = adherent.dateNaissance.getDate() + 1;
+                var mois = adherent.dateNaissance.getMonth();
+                adherent.dateNaissance=new Date(annee,jour,mois)
                 return $resource(config.apiUrl + '/adherent').save(adherent);
 
             },
                 // RECUPERATION DES ADHERENTS
             getAdherents: function () {
-                return $resource(config.apiUrl + '/adherent').query();
+                var resource= $resource(config.apiUrl + '/adherent/');
+                return resource.get();
             },
             getAdr:function(id){
             	
             	var Adherent=$resource(config.apiUrl + '/adherent/'+id);
             return 	Adherent.get();
             	
+            },
+            getAdrBy:function(id,nom){
+            	var resource=$resource(config.apiUrl+'/adherent?id='+id+'&nom='+nom);
+            	return resource.get();
+            },
+            pageChange:function(page,size){
+            	var resource=$resource(config.apiUrl+'/adherent?page='+page+'&size='+size);
+            	return resource.get();
+            }
+            ,
+            search:function(keyword){
+            	var resource=$resource(config.apiUrl+'/adherent/search?keyword='+keyword);
+            	return resource.get();
+            },
+            filter:function(field,order,size){
+            	var resource=$resource(config.apiUrl+'/adherent/filter?field='+field+'&order='+order+'&size='+size);
+            	return resource.get();
             }
             ,
                 // RECUPERATION DES MEDIAS

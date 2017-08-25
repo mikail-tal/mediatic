@@ -1,5 +1,12 @@
 package com.dta.mediatic.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.dta.mediatic.adherent.model.Adherent;
+
 public interface MediaticService <T>{
 	
 	public long count() ;
@@ -30,5 +37,9 @@ public interface MediaticService <T>{
 	public <S extends T> S save(S arg0) ;
 	
 	public <S extends T> Iterable<S> save(Iterable<S> arg0) ;
+	
+    
+   // public Page<T> findByTypeIgnoreCaseContaining(String type,Pageable pageable);
+
 
 }

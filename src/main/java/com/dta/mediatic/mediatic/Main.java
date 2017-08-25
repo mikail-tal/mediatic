@@ -8,7 +8,7 @@ import com.dta.mediatic.cotisation.model.Cotisation;
 import com.dta.mediatic.cotisation.service.CotisationService;
 import com.dta.mediatic.emprunt.model.Emprunt;
 import com.dta.mediatic.emprunt.service.EmpruntService;
-import com.dta.mediatic.media.dao.MediaDao;
+import com.dta.mediatic.garbage.MediaDao;
 import com.dta.mediatic.media.model.Media;
 import com.dta.mediatic.media.model.TypeMedia;
 import com.dta.mediatic.media.service.MediaService;

@@ -3,9 +3,10 @@ angular.module('myApp')
     .controller('MediaDetailsCtrl', ['$scope', '$rootScope', '$location', 'MediaService','$routeParams',
         function ($scope, $rootScope, $location, MediaService,$routeParams) {
     	
-    	$scope.media={};
-    	$scope.adherents={};
-    	$scope.disabled=true;
+   
+	
+	
+	
     //	console.log($routeParams.id);
             
             MediaService.getMedia($routeParams.id).$promise.then(function (result) {
@@ -49,6 +50,9 @@ angular.module('myApp')
                 MediaService.updateMedia($scope.media);
                
             }
+            
+            
+            
             
         
           

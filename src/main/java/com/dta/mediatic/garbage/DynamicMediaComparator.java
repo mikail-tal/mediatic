@@ -1,10 +1,10 @@
-package com.dta.mediatic.media.service;
+package com.dta.mediatic.garbage;
 
 import java.util.Comparator;
 
 import com.dta.mediatic.media.model.Media;
 
-public class DynamicMediaComparator implements Comparator<Media> {
+public class DynamicMediaComparator {/*
 	private static int compare;
 	private static DynamicMediaComparator dynamicMediaComparator;
 	
@@ -55,4 +55,4 @@ public class DynamicMediaComparator implements Comparator<Media> {
 		return 0;
 	}
 
-}
+*/}

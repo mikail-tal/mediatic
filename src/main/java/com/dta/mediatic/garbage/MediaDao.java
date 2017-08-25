@@ -1,4 +1,4 @@
-package com.dta.mediatic.media.dao;
+package com.dta.mediatic.garbage;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,11 +8,10 @@ import javax.persistence.TypedQuery;
 
 import com.dta.mediatic.media.model.Media;
 import com.dta.mediatic.media.model.TypeMedia;
-import com.dta.mediatic.media.service.DynamicMediaComparator;
 import com.dta.mediatic.mediatic.dao.DAO;
 import com.dta.mediatic.mediatic.dao.DatabaseHelper;
 
-public class MediaDao extends DAO<Media> {
+public class MediaDao {/*
 	private  List<Media>medias;
 	private static MediaDao mediaDao;
 	
@@ -121,7 +120,7 @@ public class MediaDao extends DAO<Media> {
 		//medias.forEach(media->System.out.println("TEST"+media.getTitre()));
 		return medias;
 	}
-	/*public List<Media> sortMediaByAuteur(String set){
+	public List<Media> sortMediaByAuteur(String set){
 		if(set=="ASC"){
 			medias.sort((Media m1,Media m2)->m1.getAuteur().compareToIgnoreCase(m2.getAuteur()));
 
@@ -156,7 +155,7 @@ public class MediaDao extends DAO<Media> {
 		}
 		return medias;
 	}
-	*/
+	
 	
 
-}
+*/}

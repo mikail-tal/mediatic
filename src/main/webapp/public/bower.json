@@ -15,6 +15,10 @@
     "angular-messages": "^1.6.5",
     "angular-resource": "^1.6.5",
     "jquery": "^3.2.1",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "angular-ui-grid": "^4.0.6"
+  },
+  "resolutions": {
+    "angular": "1.6.5"
   }
 }

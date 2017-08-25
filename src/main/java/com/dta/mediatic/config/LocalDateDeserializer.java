@@ -38,19 +38,30 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
     	System.out.println("DATE");*/
     //	System.out.println(jp.getCurrentValue()+ " CURRENT VALUE");
    // 	System.out.println(jp.readValueAs(String.class) +" READ VALUE AS");
-    	String s=jp.readValueAs(String.class);
-    	Instant instant=Instant.parse(s);
-    	System.out.println(instant);
-    	LocalDateTime result=LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
-    	System.out.println(result);
+    
+   // 	System.out.println(instant);
+    
 
-    	System.out.println(result.toLocalDate().plusDays(1));
+   // 	System.out.println(result.toLocalDate().plusDays(1));
    // 	String date=s.substring(0, s.indexOf('T'));
    // 	System.out.println();
    // 	localdateti
     			
    // 	System.out.println(LocalDateTime.parse(jp.readValueAs(String.class),DateTimeFormatter.ofPattern("yyyy-MM-dd"))+ "  UNE DATE");
-        return result.toLocalDate().plusDays(1);
+  
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	String s=jp.readValueAs(String.class);
+    	Instant instant=Instant.parse(s);
+    	LocalDateTime result=LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
+  
+    	
+    	return result.toLocalDate();
     }
 
 }

@@ -41,7 +41,7 @@ angular.module('myApp')
 
         $scope.$watch('$scope.adherent.cotisation.datePaiement', function () {
             if ($scope.adherent.cotisation.datePaiement) {
-                $scope.adherent.datef = AdherentService.getDateFin($scope.adherent.cotisation.datePaiement);
+                $scope.adherent.cotisation.dateFinAbonnement = AdherentService.getDateFin($scope.adherent.cotisation.dateFinAbonnement);
             }
         })
         })

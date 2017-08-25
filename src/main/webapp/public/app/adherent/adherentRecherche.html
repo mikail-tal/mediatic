@@ -7,22 +7,24 @@
 				<li>
 					<div class="input-group">
 						<span class="input-group-addon"><i
-								class="glyphicon glyphicon-book"></i></span> <input id="msg" type="text" class="form-control" name="idAdherent"
-						 placeholder="id adherent">
+								class="glyphicon glyphicon-book"></i></span> 
+								<input id="msg" type="text" class="form-control" name="idAdherent"
+						 placeholder="id adherent" ng-model="search.id">
 					</div>
 				</li>
 				<li>
 					<div class="input-group">
 						<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input id="msg" type="text" class="form-control " name="nomAdherent"
-						 placeholder="Nom de l'Adherent">
+								class="glyphicon glyphicon-user"></i></span>
+								 <input id="msg" type="text" class="form-control " name="nomAdherent"
+						 placeholder="Nom de l'Adherent" ng-model="search.nom">
 					</div>
 				</li>
 
 				<li>
 			</ul>
 
-			<button class="btn btn-primary btn-lg pull-right">Rechercher</button>
+			<button class="btn btn-primary btn-lg pull-right" ng-click="searchBy()">Rechercher</button>
 		</div>
 		<div class="container">
 
@@ -34,8 +36,8 @@
 
 
 
-					<input type="text" class="form-control " aria-label="...">
-					<span class="input-group-addon"><i
+					<input type="text" class="form-control " aria-label="..."  ng-model="search.keyword">
+					<span class="input-group-addon" ng-click="searchAll()"><i
 						class="glyphicon glyphicon-search"></i></span>
 
 				</div>
@@ -57,7 +59,7 @@
 
 			<div class="container-fluid  ">
 				<div class="well-sm h6">Afficher :
-					<select>
+					<select ng-model="infosPage.size" >
 				<option>10</option>
 				<option>25</option>
 				<option>50</option>
@@ -92,46 +94,6 @@
 							</tr>
 						</thead>
 						<tbody class="text-primary">
-							<tr>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-
-
-							</tr>
-							<tr>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-
-
-							</tr>
-							<tr>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-
-
-							</tr>
-							<tr>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-								<td>ABC</td>
-
-
-							</tr>
 							<tr ng-repeat="adherent in adherentsTab" ng-click="afficherDetails($index)">
 
 								<td>{{adherent.id}}</td>
@@ -160,11 +122,11 @@
 						<li><a href="#" aria-label="Previous"> <span
 									aria-hidden="true">&laquo;</span>
 							</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
+						<li><a ng-click="change($index)" ng-repeat="(x,y) in infosPage.range track by $index">{{$index+1}}</a></li>
+						<!-- <li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#" class="hidden-xs">4</a></li>
-						<li><a href="#" class="hidden-xs">5</a></li>
+						<li><a href="#" class="hidden-xs">5</a></li> -->
 
 						<li><a href="#" aria-label="Next"> <span
 									aria-hidden="true">&raquo;</span>

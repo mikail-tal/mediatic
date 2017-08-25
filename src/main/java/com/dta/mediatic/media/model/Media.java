@@ -2,8 +2,8 @@ package com.dta.mediatic.media.model;
 
 import java.util.List;
 
-
 import javax.persistence.Column;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import com.dta.mediatic.emprunt.model.Emprunt;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -34,6 +31,7 @@ public class Media implements Comparable<Media>{
 	private String auteur;
 	@Enumerated(EnumType.STRING)
 	@JsonDeserialize(using=EnumDeserializer.class)
+	//@Column(name="type",unique=true)
 	private TypeMedia type;
 	
 	@OneToMany(mappedBy = "media")

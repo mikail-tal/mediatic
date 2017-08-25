@@ -4,100 +4,87 @@ angular.module('myApp')
 
     .controller('AdherentRechercheCtrl', ['$scope', 'AdherentService', '$rootScope', '$location', function ($scope, AdherentService, $rootScope, $location) {
 
-        // INITIALISATION POUR LA FONCTIONNALITE
-        var idSort = false, nomSort = false, prenomSort = false,
-            dateNaissanceSort = false, AjourCotisationSort = false, nombreMediaSort = false;
+    	
+    	$scope.search={}
+    		$scope.search.id='';
+    		$scope.search.nom='';
+    		$scope.search.keyword='';
+    		// INITIALISATION POUR LA FONCTIONNALITE
+            var idSort = false, nomSort = false, prenomSort = false,
+                dateNaissanceSort = false, AjourCotisationSort = false, nombreMediaSort = false;
 
-        /* 
-        Recuperation des adherent dans le serveur
-    */
-        
-        //var emprunts = AdherentService.getEmprunts();
-
-
-        /* 
-            Completer A jour sur les cotisations 
-            Completer les nombre de medias empruntes
-        */
-        AdherentService.getAdherents().$promise.then(function (result) {
-      /*      result.forEach(function (element) {
-                if (new Date(element.datef) < new Date()) {
-                    element.ajour = "NON";
-                } else {
-                    element.ajour = "OUI";
-                }
-                var tabMedia = []
-                
-                AdherentService.getNombreMedia(element.id).$promise.then(function (result2) {
-                    result2.forEach(function (element2) {
-                        if (tabMedia.includes(element2.media) === false) {
-                            tabMedia.push(element2.media);
-                        }
-                    })
-                    element.nbrMedias = tabMedia.length;
+    		var page=0;
+    		var size=10;
+    		var totalPages;
+    		
+    		$scope.infosPage={}
+    		$scope.infosPage.page=0;
+    		$scope.infosPage.size='10'
+    		$scope.infosPage.totalPages=0;
+    		$scope.infosPage.range=[1,2,3,4,5]
+    		$scope.isFirst=true;
+    		$scope.isLast=false;
+    		
+    		
+    		 var getDatas=function(page,size){
+    			AdherentService.pageChange(page,size).$promise.then(function (result) {
+                	$scope.infosPage.totalPages=result.totalPages;
+                	$scope.infosPage.page=result.number;
+                	$scope.isLast=result.last;
+                	$scope.isFirst=result.first;
+                	 fillArray();
+                	$scope.adherentsTab =result.content;
+                		
+                		console.log($scope.infosPage.range.length);
+                		console.log(result)
                 });
-            })*/
-        	
-        		$scope.adherentsTab =result;
-        		console.log(result);
+    		}
+    		
+            getDatas($scope.infosPage.page,$scope.infosPage.size);
+    		
+    		
+    		
+    		$scope.change=function(index){
+    			getDatas(index,$scope.infosPage.size)
+    		}
+    		
+    		
+    		$scope.$watch('infosPage.size',function(){
+    			
+    		getDatas($scope.infosPage.page,$scope.infosPage.size);
+    		                
+    		            
+    		        },true);
+    		
+    		
+    		
+    		
+    		function fillArray(){
+    			var tab=[]
+    			
+    			for(var i=0;i<$scope.infosPage.totalPages;i++){
+           		 tab[i]=i+1;
+           	 }
+    			$scope.infosPage.range=tab;
+    			
+    		}
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+        
+     
+
         		
-        		/*angular.forEach($scope.adherentsTab,function(value,key){
-        			//console.log(key + "  " + value.dateNaissaince);
-        			console.log(value.dateNaissaince);
-        			//	console.log(value.dateNaissaince);
-        				//.log(key)
-        			
-        				//$scope.adherentsTab[key].dateNaissaince=new Date(value.dateNaissaince.year,value.dateNaissaince.monthValue,value.dateNaissaince.dayOfMonth);
-        				
-        			
-        		});*/
-        		//$scope.adherentsTab.daten=new Date(dateNaissaince[0],dateNaissaince[1],dateNaissaince[2]);
-          //  $scope.adherentsTab.datep=new Date(dateFinAbonnement[0],dateFinAbonnement[1],dateFinAbonnement[2]);
-           // console.log(result);
-        });
-
-        //@INFOS A UTILISER SI BESOIN MEME FONCTION QUE LA PRECEDENTE POUR RECUPERER LE NOMBRE DE MEDIA
-        /* emprunts.$promise.then(function (emps) {
-            $scope.adherentsTab.$promise.then(function (adrs) {
-                console.log(emps);
-                console.log(adrs);
-                adrs.forEach(function (element) {
-                    element.nbrMedias = getLenght(emps, element.id);
-                    console.log(element.nbrMedias);
-                })
-
-
-            })
-        }) */
-
-
-        //@INFOS FONCTION POUR RECUPERER LE NOMBRE LA LARGEUR D UN TABLEAU D EMPRUNT AVEC UN ID ADHERENT
-       /*  function getLenght(emprunt, id) {
-            var len;
-            var nouveauTab = [];
-            emprunt.forEach(function (element) {
-                if (element.adherent === id) {
-                    if (nouveauTab.includes(element.media) === false) {
-                        nouveauTab.push(element.media);
-                    }
-                }
-
-            });
-            len = nouveauTab.length;
-            return len;
-
-        } */
 
 
 
 
-
-
-        /* 
-            Afficher les details de l adherent quand on click sur une ligne du tableau
-            Redirection vers la page des details de l adherent
-        */
-
+       
         $scope.afficherDetails = function (index) {
          	var id=0;
             angular.forEach($scope.adherentsTab, function (value, key) {
@@ -120,18 +107,48 @@ angular.module('myApp')
         angular.forEach($scope.adherentsTab, function (value, key) {
 
         })
+        
+        $scope.searchBy=function(){
+        	AdherentService.getAdrBy($scope.search.id,$scope.search.nom).$promise.then(function (result) {
+        		console.log(result);
+        		$scope.adherentsTab=result.content;
+        	})
+        }
+        $scope.searchAll=function(){
+        	AdherentService.search($scope.search.keyword).$promise.then(function(result){
+        		console.log("abcs")
+        		$scope.adherentsTab=result.content;
+        	})
+        
+        }
+        
+        
+        
+        
+        
+        
             /* 
                 LES FONCTIONS DE TRI A UTILISER DANS LE SERVICE POUR TRIER A PARTIR DE LA BASE DE DONNEES
             
             */
             // TRI PAR ID
+        
+        
+        
+        
+        
+        
         $scope.sortId = function () {
             idSort = (!idSort);
-            nomSort = (!nomSort);
+            //nomSort = (!nomSort);
             if (idSort === true) {
-                console.log("ASC")
+            	$scope.adherentsTab= AdherentService.filter('id','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('id','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
 
         };
@@ -139,9 +156,13 @@ angular.module('myApp')
         $scope.sortNom = function () {
             nomSort = (!nomSort);
             if (nomSort === true) {
-                console.log("ASC")
+            	$scope.adherentsTab= AdherentService.filter('nom','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('nom','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
 
 
@@ -150,9 +171,13 @@ angular.module('myApp')
         $scope.sortPrenom = function () {
             prenomSort = (!prenomSort);
             if (prenomSort === true) {
-                console.log("ASC")
+            	$scope.adherentsTab= AdherentService.filter('prenom','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('prenom','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
 
         };
@@ -160,18 +185,27 @@ angular.module('myApp')
         $scope.sortDateNaissance = function () {
             dateNaissanceSort = (!dateNaissanceSort);
             if (dateNaissanceSort === true) {
-                console.log("ASC")
+            
+            	$scope.adherentsTab= AdherentService.filter('datenaissance','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('datenaissance','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
         };
             //TRI PAR LES ADHERENT QUI SONT A JOUR DANS LEUR COTISATIONS OU PAS
         $scope.sortAjourCotisation = function () {
             AjourCotisationSort = (!AjourCotisationSort);
             if (AjourCotisationSort === true) {
-                console.log("ASC")
+            	$scope.adherentsTab= AdherentService.filter('ajour','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('ajour','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
         };
 
@@ -179,9 +213,13 @@ angular.module('myApp')
         $scope.sortNombreMedia = function () {
             nombreMediaSort = (!nombreMediaSort);
             if (nombreMediaSort === true) {
-                console.log("ASC")
+            	$scope.adherentsTab= AdherentService.filter('nbrMedia','asc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             } else {
-                console.log("DESC")
+            	$scope.adherentsTab= AdherentService.filter('nbrMedia','desc',$scope.infosPage.size).$promise.then(function(result){
+            		$scope.adherentsTab=result.content;
+            	})
             }
         }
     }]);

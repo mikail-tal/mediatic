@@ -6,20 +6,20 @@
                 <li>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Nom du titre">
+                        <input id="msg" type="text" class="form-control" ng-model="search.titre" name="msg" placeholder="Nom du titre">
                     </div>
                 </li>
                 <li>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="msg" type="text" class="form-control " name="msg" placeholder="Nom de l'auteur">
+                        <input id="msg" type="text" class="form-control " ng-model="search.auteur" name="msg" placeholder="Nom de l'auteur">
                     </div>
                 </li>
                 <li>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
-                        <select class="form-control">
-							<option>Livre</option>
+                        <select class="form-control" ng-model="selected">
+							<option>LIVRE</option>
 							<option>CD</option>
 							<option>DVD</option>
 							</select>
@@ -28,7 +28,7 @@
                 <li>
 
 
-                    <button class="btn btn-primary btn-lg pull-right"> Rechercher </button>
+                    <button class="btn btn-primary btn-lg pull-right" ng-click="searchBy()"> Rechercher </button>
 
                 </li>
 
@@ -40,8 +40,8 @@
             <img src="img/logo_med2.png" class="img-responsive center-block" />
             <div class="container-fluid">
                 <div class="input-group">
-                    <input type="text" class="form-control " aria-label="..." ng-model="search">
-                    <span class="input-group-addon"> <i class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" class="form-control " aria-label="..." ng-model="search.keyword">
+                    <span class="input-group-addon" ng-click="searchAll()"> <i class="glyphicon glyphicon-search"></i></span>
 
                 </div>
                 <div class="col-xs-offset-10">
@@ -72,30 +72,30 @@
 
                         <thead>
                             <tr class="text-primary text-uppercase">
-                                <th class="container ">#Id<a ng-click="sortBy('id')" class="pull-right">
-										<span  class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}" ></span>
+                                <th class="container ">#Id<a ng-click="sortId()" class="pull-right">
+										<span  class="glyphicon glyphicon-sort"></span>
 								</a></th>
-                                <th class="container">Titre <a ng-click="sortBy('title')" class="pull-right">
+                                <th class="container">Titre <a ng-click="sortTitre()" class="pull-right">
 										<span class="glyphicon glyphicon-sort"  ></span>
 								</a>
                                 </th>
-                                <th class="container">Auteur<a ng-click="sortBy('author')" class="pull-right">
-										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
+                                <th class="container">Auteur<a ng-click="sortAuteur()" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ></span>
 								</a></th>
 
-                                <th class="container">Type de Media<a ng-click="sortBy('type')" class="pull-right">
-										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
+                                <th class="container">Type de Media<a ng-click="sortType()" class="pull-right">
+										<span class="glyphicon glyphicon-sort"  ></span>
 								</a></th>
-                                <th class="container">Emprunte Par<a ng-click="sortBy('adherent')" class="pull-right">
-										<span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
+                                <th class="container">Emprunte Par<a ng-click="sortEmpruntePar()" class="pull-right">
+										<span class="glyphicon glyphicon-sort" ></span>
 								</a></th>
-                                <th class="container">Date Retour Prevue<a ng-click="sortBy('date')" class="pull-right">
-                                     <span class="glyphicon glyphicon-sort"  ng-class="{reverse: reverse}"></span>
+                                <th class="container">Date Retour Prevue<a ng-click="sortDateRetourPrevue()" class="pull-right">
+                                     <span class="glyphicon glyphicon-sort" ></span>
 								</a></th>
 
                             </tr>
                         </thead>
-                        {{propertyName }}
+                       
                         <tbody class="text-primary">
                             <tr ng-repeat="response in dataMedia |filter track by $index " ng-click="afficherMediaDetail($index)">
                                 <td> {{response.id }}</td>
@@ -123,12 +123,12 @@
               <span aria-hidden="true">&laquo;</span>
       </a>
                         </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+						<li><a ng-click="change($index)" ng-repeat="(x,y) in range track by $index">{{$index+1}}</a></li>
+                      <!--   <li><a href="#">2</a></li>
                         <li><a href="#" class="hidden-xs">3</a></li>
                         <li><a href="#" class="hidden-xs">4</a></li>
                         <li><a href="#" class="hidden-xs">5</a></li>
-
+ -->
                         <li>
                             <a href="#" aria-label="Next">
                  <span aria-hidden="true">&raquo;</span>
