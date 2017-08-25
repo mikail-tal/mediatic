@@ -11,15 +11,50 @@
         });
 
     LoginService.$inject = ['$localStorage', '$rootScope', '$http', '$location'];
+
+    
+    
+    
     function LoginService($localStorage, $rootScope, $http, $location) {
 
         var service = {
             storeUser: storeUser,
             addAuthorization: addAuthorization,
-            logout: logout
+            logout: logout,
+            login:login
         };
 
         return service;
+        
+        function login(user){
+        	
+        	
+        	$http({
+        		method: 'POST',
+        		url:'/authenticate',
+        		headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        		transformRequest: function(obj){
+        			var str=[]
+        			for(var p in obj)
+        				str.push(encodeURIComponent(p)+'='+encodeURIComponent(obj[p]));
+        			return str.join("&");
+        		},
+        		data:{username : user.login,password: user.password}
+        		
+        		
+        		
+        		
+        	}).then(function successCallback(response){
+        	console.log('success')	
+        	},function errorCallBack(response){
+        		console.log('error');
+        	}
+        	)
+        	
+        	
+        	
+        	
+        }
 
         function storeUser(user) {
             $localStorage.$reset();

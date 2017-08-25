@@ -1,9 +1,8 @@
 
 package com.dta.mediatic.adherent.model;
 
-import java.io.Serializable;
+
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,7 +26,6 @@ import com.dta.mediatic.config.LocalDateDeserializer;
 import com.dta.mediatic.config.LocalDateSerializer;
 import com.dta.mediatic.cotisation.model.Cotisation;
 import com.dta.mediatic.emprunt.model.Emprunt;
-import com.dta.mediatic.garbage.AdherentListEmpruntDeserializer;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,13 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Entity
 @Table (name="adherent")
 @SequenceGenerator(name="seq_adherent",sequenceName="seq_adherent",initialValue=1,allocationSize=1)
-public class Adherent implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class Adherent implements Comparable<Adherent>{
 
 	@Id
 	@GeneratedValue(generator = "seq_adherent")
@@ -255,6 +247,12 @@ public class Adherent implements Serializable{
 
 	public void setAjour(String ajour) {
 		this.ajour = ajour;
+	}
+
+	@Override
+	public int compareTo(Adherent o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

@@ -31,6 +31,7 @@ extends SimpleUrlAuthenticationSuccessHandler {
   User user = null;
 try {
 	user = userService.findByLogin(authentication.getName());
+	System.out.println("ABCD");
 } catch (NotFoundException e) {
 	
 	e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.dta.mediatic.cotisation.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -18,8 +19,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Entity
 @Table (name="cotisation")
 @SequenceGenerator(name="seq_cotisation",sequenceName="seq_cotisation",initialValue=1,allocationSize=1)
-public class Cotisation {
-    @Id
+public class Cotisation implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(generator="seq_cotisation")
 	private Long id;
     @Column

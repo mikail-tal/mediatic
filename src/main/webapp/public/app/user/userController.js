@@ -5,6 +5,7 @@ angular.module('myApp')
     
     $scope.user = {};
     
+    
     $scope.enregistrer = function () {
       LoginService.storeUser($scope.user);
       $location.path('/login');

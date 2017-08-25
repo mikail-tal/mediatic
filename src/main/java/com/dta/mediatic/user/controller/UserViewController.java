@@ -28,6 +28,7 @@ public class UserViewController {
 	public ModelAndView display() {
 		User user = new User();
 		ModelAndView mv = new ModelAndView("user");
+		System.out.println("DANS LA VUE");
 		mv.addObject("user", user);
 		return mv;
 	}

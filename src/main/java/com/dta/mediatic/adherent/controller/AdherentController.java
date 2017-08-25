@@ -1,5 +1,7 @@
 package com.dta.mediatic.adherent.controller;
 
+
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dta.mediatic.adherent.model.Adherent;
 import com.dta.mediatic.adherent.model.AdherentViews;
 import com.dta.mediatic.adherent.service.AdherentService;
-import com.dta.mediatic.garbage.AdherentMapper;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 
@@ -27,7 +29,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RestController
 @RequestMapping("/mediatic/adherent")
 
-public class AdherentController {
+public class AdherentController{
+	/**
+	 * 
+	 */
+	
 	@Autowired
 	private AdherentService adherentService;
 
