@@ -8,6 +8,7 @@ target/
 .settings
 .springBeans
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -21,3 +22,5 @@ nbbuild/
 nbdist/
 .nb-gradle/
 /bin/
+.project
+.DS_Store
