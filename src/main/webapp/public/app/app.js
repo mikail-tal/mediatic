@@ -76,7 +76,8 @@ angular.module('myApp', [
       }).run(['$rootScope','$location', function ($rootScope,$location) {
          $rootScope.$on("$locationChangeStart", function(event, next, current) { 
               
-
+          console.log('OOOOONNNNNN')
+              //$rootScope.user = JSON.parse(localStorage.getItem('userData'));
 
 
 
@@ -88,7 +89,7 @@ angular.module('myApp', [
                     
                     if($location.path()!== '/login'){
                       $location.path('/login')
-//console.log(event , next , current)
+                    console.log(event , next , current)
                     }
                     
                   }   else{

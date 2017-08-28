@@ -5,6 +5,7 @@
         .module('myApp')
         .factory('LoginService', LoginService)
         .run(function (LoginService, $rootScope) {
+            console.log('RUUUUUUUN')
             LoginService.addAuthorization();
             $rootScope.logout = LoginService.logout;
 
@@ -79,9 +80,10 @@
         }
 
         function storeUser(user) {
+            console.log('ABCCCCC')
             $localStorage.$reset();
-            $localStorage.$default(user);
-            $rootScope.login = $localStorage.$default().login;
+            $localStorage.setItem('Login Details', JSON.stringify(user)); 
+           // $rootScope.login = $localStorage.$default().login;
             console.log('HEEEEEEERE')
             console.log($localStorage.$default())
            // $rootScope.hasRole=($ruser.credentials.includes("ADMIN"))
@@ -91,12 +93,15 @@
         }
 
         function addAuthorization() {
-            $rootScope.login = $localStorage.$default().login;
-            var password = $localStorage.$default().password;
-            if ($rootScope.login && password) {
-                var token = btoa($rootScope.login + ':' + password);
-                $http.defaults.headers.common.Authorization = 'Basic ' + token
-            }
+            console.log('ABCCCCC')
+           // $localStorage.$default();
+            $rootScope.user= JSON.parse($localStorage.$default());
+           // $rootScope.login = $localStorage.$default().login;
+           // var password = $localStorage.$default().password;
+            // if ($rootScope.login && password) {
+            //     var token = btoa($rootScope.login + ':' + password);
+            //     $http.defaults.headers.common.Authorization = 'Basic ' + token
+            // }
         }
 
         function logout()
