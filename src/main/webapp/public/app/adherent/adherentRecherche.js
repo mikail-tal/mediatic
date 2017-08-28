@@ -28,7 +28,6 @@ angular.module('myApp')
     		$scope.infosPage.range=[1,2,3,4,5]
     		$scope.isFirst=true;
 			$scope.isLast=false;
-			//$scope.index=0;
 			
     		
     		
@@ -39,6 +38,7 @@ angular.module('myApp')
     					,size)
     					.$promise
     					.then(function (result) {
+							console.log(result)
                 	$scope.infosPage.totalPages=result.totalPages;
                 	$scope.infosPage.page=result.number;
                 //	$scope.infosPage.size=result.numberOfElements
@@ -47,8 +47,7 @@ angular.module('myApp')
                 	 fillArray();
                 	$scope.adherentsTab =result.content;
                 		
-                		console.log($scope.infosPage.range.length);
-                		console.log(result)
+                		
                 });
     		}
     		
@@ -64,7 +63,7 @@ angular.module('myApp')
     		
     		$scope.change=function(index){
 
-				console.log(index)
+				
 				//$scope.index=++index;
 					
 					if($scope.search.keyword){
@@ -74,7 +73,7 @@ angular.module('myApp')
 						$scope.seachBy(index);
 						
 					}else{
-						console.log("NO KEYWODRS")
+						
 						getDatas($scope.search.by
 								,$scope.search.direction
 								,index
@@ -139,15 +138,11 @@ angular.module('myApp')
        
         $scope.afficherDetails = function (index) {
          	var id=0;
-            angular.forEach($scope.adherentsTab, function (value, key) {
-           
-            //	console.log(value)
+            angular.forEach($scope.adherentsTab, function (value, key) {            
                 if (key === index) {
-                   // $rootScope.adherent = value;
                 	id=value.id
                 }
             });
-           // console.log(id)
             $scope.redirect(id);
         };
         $scope.redirect = function (id) {
@@ -169,7 +164,7 @@ angular.module('myApp')
         		page=index;
         	}
         	AdherentService.getAdrBy($scope.search.id,$scope.search.nom,page,$scope.infosPage.size).$promise.then(function (result) {
-        		console.log(result);
+        		
         		$scope.adherentsTab=result.content;
         	})
         }
@@ -183,7 +178,7 @@ angular.module('myApp')
         		$scope.search.nom='';
         	}
         	AdherentService.search($scope.search.keyword,page,$scope.infosPage.size).$promise.then(function(result){
-        		console.log("abcs")
+        		
         			$scope.infosPage.totalPages=result.totalPages;
                 	$scope.infosPage.page=result.number;
                 //	$scope.infosPage.size=result.numberOfElements

@@ -36,7 +36,7 @@
 
 
 
-					<input type="text" class="form-control " aria-label="..."  ng-model="search.keyword">
+					<input type="text" class="form-control " aria-label="..."  ng-model="search.keyword" ng-keyup="$event.keyCode == 13 && searchAll()">
 					<span class="input-group-addon" ng-click="searchAll()"><i
 						class="glyphicon glyphicon-search"></i></span>
 

@@ -40,7 +40,7 @@
             <img src="img/logo_med2.png" class="img-responsive center-block" />
             <div class="container-fluid">
                 <div class="input-group">
-                    <input type="text" class="form-control " aria-label="..." ng-model="search.keyword">
+                    <input type="text" class="form-control " ng-keyup="$event.keyCode == 13 && searchAll()" aria-label="..." ng-model="search.keyword">
                     <span class="input-group-addon" ng-click="searchAll()"> <i class="glyphicon glyphicon-search"></i></span>
 
                 </div>

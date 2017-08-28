@@ -14,7 +14,7 @@ angular.module('myApp')
         AdherentService.getAdr($routeParams.id).$promise.then(function (result) {
         	$scope.adherent=result;
         
-        	console.log($scope.adherent);
+        	console.log(result);
        // 	console.log($scope.adherent.cotisation.montant)
         //	console.log($scope.adherent.dateNaissaince)
         	$scope.adherent.dateNaissance = new Date($scope.adherent.dateNaissance);
@@ -43,7 +43,7 @@ angular.module('myApp')
         	 
             if ($scope.adherent.cotisation.datePaiement) {
                 $scope.adherent.cotisation.dateFinAbonnement = AdherentService.getDateFin($scope.adherent.cotisation.datePaiement);
-                console.log($scope.adherent.cotisation.dateFinAbonnement)
+                
             }
         })
         })
@@ -240,7 +240,7 @@ angular.module('myApp')
                    });
    
                }); */
-        	console.log($scope.adherent)
+        	
             AdherentService.updateAdherent($scope.adherent);
         }
 

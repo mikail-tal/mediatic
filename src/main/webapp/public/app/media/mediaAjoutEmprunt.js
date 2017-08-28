@@ -23,10 +23,12 @@ angular.module('myApp')
       
       $scope.$watch('recherche', function () {
     	  
-    	  AdherentService.getAdrBy(id,$scope.recherche,page,size).$promise.then(function (result)
+    	  AdherentService.getAdrByName($scope.recherche,page,size).$promise.then(function (result)
                   {
+                      console.log(result)
             if($scope.recherche){
             	if(result.numberOfElements){
+                    
             		$scope.adherents = result.content;
                     $scope.adherent=$scope.adherents[0];
             	}else{
@@ -43,7 +45,7 @@ angular.module('myApp')
     	  
     	  
     	  
-          console.log('ABC')
+          
               //  $scope.adherents = recherche();
              //   idAdherent = rechercherTitreComplet();
             }, true);
@@ -107,8 +109,7 @@ angular.module('myApp')
                 dateRetourPrevue: AdherentService.getDateRetourPrevue($scope.dateE, $routeParams.typeMedia),
                 dateRetourEffectif: null
             }
-            console.log(emprunt)
-        	  console.log($scope.adherent)
+            
             AdherentService.postEmprunt(emprunt).$promise.then(function (result) {
 
                 $scope.redirect();

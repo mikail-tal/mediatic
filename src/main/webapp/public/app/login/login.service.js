@@ -11,12 +11,13 @@
 
         });
 
-    LoginService.$inject = ['$localStorage', '$rootScope', '$http', '$location','$resource','config'];
+    LoginService.$inject = ['$localStorage', '$rootScope', '$http'
+    , '$location','$resource','config','$route'];
 
     
     
     
-    function LoginService($localStorage, $rootScope, $http, $location,$resource,config) {
+    function LoginService($localStorage, $rootScope, $http, $location,$resource,config,$route) {
 
         var service = {
             storeUser: storeUser,
@@ -49,8 +50,18 @@
 
                 var User=$resource(config.apiUrl + '/api/users?login='+user.login);
                 User.get().$promise.then(function (result) {
-                    $rootScope.user=result
+                    var custumUser={
+                        "login":result.login,
+                         "name":result.name,
+                         "hasRole":result.credentials.includes('ADMIN')//JSON.stringify(result.credentials)
+                    }
+                    $rootScope.user=custumUser;
                     console.log($rootScope.user)
+                  //  $rootScope.user.hasRole=$rootScope.user.credentials.includes('ADMIN');
+                 //   console.log($rootScope.hasRole)
+                    storeUser(custumUser);
+
+                 
                     $location.path('/adherentRecherche');
 
 
@@ -82,14 +93,19 @@
             $localStorage.$reset();
             $localStorage.$default(user);
             $rootScope.login = $localStorage.$default().login;
+            $rootScope.name = $localStorage.$default().name;
+            $rootScope.hasRole=$localStorage.$default().hasRole;
+           // $rootScope.role=$
             addAuthorization();
         }
 
         function addAuthorization() {
             $rootScope.login = $localStorage.$default().login;
-            var password = $localStorage.$default().password;
-            if ($rootScope.login && password) {
-                var token = btoa($rootScope.login + ':' + password);
+            $rootScope.name = $localStorage.$default().name;
+            $rootScope.hasRole=$localStorage.$default().hasRole;
+            //var password = $localStorage.$default().password;
+            if ($rootScope.login) {
+                var token = btoa($rootScope.login + ':' );
                 $http.defaults.headers.common.Authorization = 'Basic ' + token
             }
         }
@@ -97,9 +113,19 @@
         function logout()
         {
             $localStorage.$reset();
+            $rootScope.login = null;
+            // $scope.reload = function() { // To Reload anypage
+            //     $templateCache.removeAll();     
+            //     $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+            // };
+          //  $state.go("/login",null,{reload: true})
+            //$rootScope.name=null;
+           // $rootScope.hasRole=null;
             $location.path('/login');
+           // $route.reload();
 
-           $rootScope.login = null;
+           
+
         }
     }
 })();

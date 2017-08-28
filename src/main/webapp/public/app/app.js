@@ -76,7 +76,6 @@ angular.module('myApp', [
   }).run(['$rootScope', '$location', function ($rootScope, $location) {
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
 
-      console.log($rootScope.login)
       if (!$rootScope.login) {
 
         if ($location.path() !== '/login') {
@@ -86,13 +85,16 @@ angular.module('myApp', [
 
       } else {
 
+        console.log($rootScope.hasRole)
+
       }
     });
-    $rootScope.adherent;
-    $rootScope.media;
-    $rootScope.login;
+    //$rootScope.adherent;
+   // $rootScope.media;
+    //$rootScope.login;
     if ($rootScope.login) {
       $location.path('/login');
+        //$route.reload();
     }
 
 

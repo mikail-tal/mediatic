@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.dta.mediatic.adherent.model.Adherent;
 import com.dta.mediatic.emprunt.model.Emprunt;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.util.StdConverter;
 
 public class MediaEmpruntConverter extends StdConverter<List<Emprunt>, List<Emprunt>> {
 
 	@Override
+	@JsonView(MediaViews.MediaView.class)
 	public List<Emprunt> convert(List<Emprunt> value) {
 		if(value.isEmpty()) {
 			return new ArrayList<>();

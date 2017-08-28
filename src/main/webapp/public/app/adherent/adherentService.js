@@ -11,6 +11,14 @@ angular.module('myApp')
                 return $resource(config.apiUrl + '/adherent').save(adherent);
 
             },
+            getAdrByName : function(nom,page,size){
+                var resource=$resource(config.apiUrl+'/adherent/emprunt?nom='+nom+'&page='+page+'&size='+size)
+                return resource.get();
+
+            }
+            
+            
+            ,
                 // RECUPERATION DES ADHERENTS
             getAdherents: function () {
                 var resource= $resource(config.apiUrl + '/adherent/name');

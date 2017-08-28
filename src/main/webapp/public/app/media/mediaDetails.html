@@ -12,7 +12,7 @@
 						ng-disabled="disabled" required>
 
 				</div>
-				<div class="col-sm-2 col-xs-4">
+				<div class="col-sm-2 col-xs-4" ng-show="hasRole">
 					<button class="btn  btn-primary col-sm-12 col-xs-12"
 						ng-click="emprunter()" ng-disabled="!autorisee">Emprunter</button>
 				</div>
@@ -25,9 +25,9 @@
 						placeholder="Enter Auteur" name="auteur" ng-model="media.auteur"
 						ng-disabled="disabled" required>
 				</div>
-				<div class="col-sm-2 col-xs-4">
+				<div class="col-sm-2 col-xs-4" ng-show="hasRole">
 					<button class="btn btn-primary  col-sm-12 col-xs-12"
-						ng-click="disabled=false">Modifier</button>
+						ng-click="disabled=false" ng-disabled="!disabled">Modifier</button>
 				</div>
 			</div>
 			<div class="form-group">
@@ -43,7 +43,7 @@
 					</select>
 
 				</div>
-				<div class="col-sm-2 col-xs-4">
+				<div class="col-sm-2 col-xs-4" ng-show="hasRole">
 					<button class="btn btn-primary col-sm-12 col-xs-12"
 						ng-click="enregistrerMedia()"
 						ng-disabled="disabled || formDetail.$invalid || formDetail.$pristine">

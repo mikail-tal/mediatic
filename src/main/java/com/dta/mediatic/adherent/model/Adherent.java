@@ -47,33 +47,52 @@ public class Adherent implements Comparable<Adherent>{
 
 	@Column
 	private String nom;
+	
+	
+	
+	
 	@Column
 	private String prenom;
+	
+	
+	
+	
 	@Column(name="date_naissance")
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class) 
 	private LocalDate dateNaissance;
 
 	@Column
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private String email;
+	
+	
+	
 	@Column
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private String adresse;
+	
+	
 	@Column
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private String cp;
+	
+	
 	@Column
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private String ville;
 
 	@OneToOne
 	@Cascade(CascadeType.ALL)
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private Cotisation cotisation;
 	
 	@OneToMany(mappedBy="adherent")
 	@JsonSerialize(converter=AdherentEmpruntConverter.class)
-	//@Column(name="emprunt")
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	private List<Emprunt> emprunt;
 
 
-	@JsonView(AdherentViews.AdherentView.class)
 	@Column
 	private long nbrMedia;
 	

@@ -3,7 +3,6 @@ package com.dta.mediatic.media.model;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,39 +14,37 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.dta.mediatic.emprunt.model.Emprunt;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "media")
 @SequenceGenerator(name = "seq_media", sequenceName = "seq_media", initialValue = 1, allocationSize = 1)
-public class Media implements Comparable<Media>{
+public class Media implements Comparable<Media> {
+
 	@Id
 	@GeneratedValue(generator = "seq_media")
 	private Long id;
+
 	@Column
 	private String titre;
+
 	@Column
 	private String auteur;
-	@Enumerated(EnumType.STRING)
-	@JsonDeserialize(using=EnumDeserializer.class)
-	//@Column(name="type",unique=true)
-	private TypeMedia type;
-	
-	@OneToMany(mappedBy = "media")
-	@JsonSerialize(converter=MediaEmpruntConverter.class)
-	private List<Emprunt> emprunt;
-	@OneToOne
-	//@Column(name="emprunt_en_cours_id")
-	@JsonSerialize(using=EmpruntSerializerMedia.class)
-	private Emprunt empruntEnCours;
 
-	
-	
-	
-	
-	
-	
+	@Enumerated(EnumType.STRING)
+	@JsonDeserialize(using = EnumDeserializer.class)
+	private TypeMedia type;
+
+	@OneToMany(mappedBy = "media")
+	@JsonSerialize(converter = MediaEmpruntConverter.class)
+	@JsonView(MediaViews.MediaView.class)
+	private List<Emprunt> emprunt;
+
+	@OneToOne
+	@JsonSerialize(using = EmpruntSerializerMedia.class)
+	private Emprunt empruntEnCours;
 
 	public Media(Long id, String titre, String auteur, TypeMedia type) {
 		super();
@@ -65,6 +62,7 @@ public class Media implements Comparable<Media>{
 		super();
 		this.id = Long.valueOf(id);
 	}
+
 	public void setType(TypeMedia type) {
 		this.type = type;
 	}
@@ -102,6 +100,7 @@ public class Media implements Comparable<Media>{
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
+
 	public List<Emprunt> getEmprunt() {
 		return emprunt;
 	}
@@ -117,8 +116,6 @@ public class Media implements Comparable<Media>{
 	public void setEmpruntEnCours(Emprunt empruntEnCours) {
 		this.empruntEnCours = empruntEnCours;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -128,14 +125,14 @@ public class Media implements Comparable<Media>{
 
 	@Override
 	public boolean equals(Object obj) {
-		
-		if(obj==null ||getClass()!=obj.getClass())
+
+		if (obj == null || getClass() != obj.getClass())
 			return false;
-		
-		else if(this.getTitre().equals(((Media) obj).getTitre()) 
-				&& this.getAuteur().equals(((Media)obj).getAuteur()) 
-						&& this.getType().equals(((Media)obj).getType())) return true;
-		
+
+		else if (this.getTitre().equals(((Media) obj).getTitre()) && this.getAuteur().equals(((Media) obj).getAuteur())
+				&& this.getType().equals(((Media) obj).getType()))
+			return true;
+
 		return false;
 	}
 
@@ -145,5 +142,4 @@ public class Media implements Comparable<Media>{
 		return this.getTitre().compareToIgnoreCase(o.getTitre());
 	}
 
-	
 }

@@ -42,19 +42,35 @@ public class AdherentController{
 	
 	//@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	@JsonView(AdherentViews.AdherentViewDetails.class)
 	public Adherent findById(@PathVariable Long id){
         return adherentService.findOne(id);
     }
+	
+	
+	
+	
+	
 	@RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody @Valid Adherent resource) {	
 		//System.out.println(resource.getDateNaissance());
 		adherentService.save(resource);
 	}
+	
+	
+	
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Adherent update(@PathVariable Long id, @RequestBody @Valid Adherent resource) {
 		return adherentService.save(resource);
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@JsonView(AdherentViews.AdherentView.class)
 	@RequestMapping(method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -72,6 +88,34 @@ public class AdherentController{
 		return adherentService.findAllOrderByNomAndPrenomAsc(new PageRequest(page, size));
         
     }
+	
+	
+	
+	
+	
+	
+	
+	@JsonView(AdherentViews.AdherentViewBase.class)
+	@RequestMapping(value="/emprunt",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public Page<Adherent> findAllByNameEmprunt(
+									 @RequestParam(value="nom", required =false) String nom,
+									 @RequestParam(value="page",defaultValue="0" ,required=false) int page,
+									 @RequestParam(value="size",defaultValue="10",required=false) int size) {
+		
+		return adherentService.findByNomIgnoreCaseContaining(nom, new PageRequest(page, size));
+        
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@JsonView(AdherentViews.AdherentView.class)
 	@RequestMapping(value="/search" ,method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Page<Adherent> findByIdOrName(
@@ -86,6 +130,8 @@ public class AdherentController{
 		}
 		return adherentService.findAllOrderByNomAndPrenomAsc(new PageRequest(page, size));
 	}
+	
+	
 	
 	@JsonView(AdherentViews.AdherentView.class)
 	@RequestMapping(value="/filter" ,method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
