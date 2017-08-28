@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,9 +41,12 @@ public class UserController {
         return userService.findById(id);
     }
 		
-	@RequestMapping(method = RequestMethod.GET)
-	public List<User> findAll() {
-        return userService.findAll();
+	@RequestMapping(value="/all",method = RequestMethod.GET)
+	
+	public Page<User> findAll(
+			@RequestParam(value="page",defaultValue="0" ,required=false) int page,
+			@RequestParam(value="size",defaultValue="10",required=false) int size) {
+        return userService.findAllByOrderByLogin(new PageRequest(page, size));
     }
 	
 	@RequestMapping(method = RequestMethod.POST)

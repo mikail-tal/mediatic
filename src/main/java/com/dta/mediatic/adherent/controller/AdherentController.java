@@ -40,7 +40,7 @@ public class AdherentController{
 	private AdherentService adherentService;
 	
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Adherent findById(@PathVariable Long id){
         return adherentService.findOne(id);

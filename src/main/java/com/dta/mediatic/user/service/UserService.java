@@ -53,8 +53,8 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public Page<User> findAllByOrderByLogin(Pageable pageable) {
+		return userRepository.findAllByOrderByLogin(pageable);
 	}
 	public Page<User> findAllByOrderByNameAsc(Pageable pageable){
 		return userRepository.findAllByOrderByNameAsc(pageable);

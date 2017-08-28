@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel panel-heading">Description User</div>
+		<form class="form-horizontal" name="formDetail" novalidate>
+
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="titre">Titre
+					:</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" id="titre"
+						placeholder="Enter Titre" name="titre" ng-model="user.login"
+						ng-disabled="disabled" required>
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="name">Nom
+					:</label>
+				<div class="col-sm-8 col-xs-6">
+					<input type="text" class="form-control" id="name"
+						placeholder="Enter name" name="name" ng-model="user.name"
+						ng-disabled="disabled" required>
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button class="btn btn-primary  col-sm-12 col-xs-12"
+						ng-click="disabled=false" ng-disabled="!disabled">Modifier</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label hidden-xs col-sm-2" for="user">Role
+					:</label>
+				<div class="col-sm-8 col-xs-6">
+					<select class="form-control" ng-model="user.credentials"
+						ng-disabled="disabled" required multiple>
+						<option>ADMIN</option>
+						<option>STAGIAIRE</option>
+						<option>DEFAULT</option>
+
+					</select>
+
+				</div>
+				<div class="col-sm-2 col-xs-4">
+					<button class="btn btn-primary col-sm-12 col-xs-12"
+						ng-click="enregistrerUser()"
+						ng-disabled="disabled || formDetail.$invalid || formDetail.$pristine">
+						Enregistrer</button>
+				</div>
+			</div>
+
+		</form>
+
+
+
+	</div>
+</div>

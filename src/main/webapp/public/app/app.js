@@ -33,33 +33,33 @@ angular.module('myApp', [
       controller: 'AdherentDetailsCtrl'
 
     }).when('/mediaAjout', {
-        templateUrl: 'media/mediaAjout.html',
-        controller: 'MediaAjoutCtrl'
+      templateUrl: 'media/mediaAjout.html',
+      controller: 'MediaAjoutCtrl'
 
 
     }).when('/mediaDetail/:id', {
-        templateUrl: 'media/mediaDetails.html',
-        controller: 'MediaDetailsCtrl'
+      templateUrl: 'media/mediaDetails.html',
+      controller: 'MediaDetailsCtrl'
 
     }).when('/mediaRecherche', {
-        templateUrl: 'media/mediaRecherche.html',
-        controller: 'MediaRechercheCtrl'
+      templateUrl: 'media/mediaRecherche.html',
+      controller: 'MediaRechercheCtrl'
 
     }).when('/adherentAjoutEmprunt/:id', {
-        templateUrl: 'adherent/adherentAjoutEmprunt.html',
-        controller: 'AdherentAjoutEmpruntCtrl'
+      templateUrl: 'adherent/adherentAjoutEmprunt.html',
+      controller: 'AdherentAjoutEmpruntCtrl'
 
-     }).when('/login', {
-        templateUrl: 'login/login.html',
-        controller: 'LoginCtrl'
+    }).when('/login', {
+      templateUrl: 'login/login.html',
+      controller: 'LoginCtrl'
 
     }).when('/mediaAjoutEmprunt/:id/:typeMedia', {
-        templateUrl: 'media/mediaAjoutEmprunt.html',
-        controller: 'EmpruntAjoutCtrl'
+      templateUrl: 'media/mediaAjoutEmprunt.html',
+      controller: 'EmpruntAjoutCtrl'
 
     }).when('/userAjout', {
-        templateUrl: 'user/AjoutUser.html',
-        controller: 'UserCtrl'
+      templateUrl: 'user/AjoutUser.html',
+      controller: 'UserCtrl'
 
     }).when('/userRecherche', {
       templateUrl: 'user/UserRecherche.html',
@@ -71,40 +71,33 @@ angular.module('myApp', [
 
     }).otherwise({ redirectTo: '/login' });
 
-      }]).constant('config', {
-        apiUrl: '/mediatic'
-      }).run(['$rootScope','$location', function ($rootScope,$location) {
-         $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-              
-          console.log('OOOOONNNNNN')
-              //$rootScope.user = JSON.parse(localStorage.getItem('userData'));
+  }]).constant('config', {
+    apiUrl: '/mediatic'
+  }).run(['$rootScope', '$location', function ($rootScope, $location) {
+    $rootScope.$on("$locationChangeStart", function (event, next, current) {
 
+      console.log($rootScope.login)
+      if (!$rootScope.login) {
 
+        if ($location.path() !== '/login') {
+          $location.path('/login')
+          //console.log(event , next , current)
+        }
 
+      } else {
 
-         //  $rootScope.hasRole=($rootScope.user.credentials.includes("ADMIN"))
-        //   console.log($rootScope.user.credentials)
-          // console.log($rootScope.login)
-                  if(!$rootScope.login){
-                    
-                    if($location.path()!== '/login'){
-                      $location.path('/login')
-                    console.log(event , next , current)
-                    }
-                    
-                  }   else{
-                    
-                  }
+      }
     });
-      //  $rootScope.adherent;
-       // $rootScope.media;
-     //   $rootScope.login;
-       if($rootScope.login){
-          $location.path('/login');
-       }
-        
-        //  $rootScope.adherentsTab=[];
-      }]);
+    $rootScope.adherent;
+    $rootScope.media;
+    $rootScope.login;
+    if ($rootScope.login) {
+      $location.path('/login');
+    }
+
+
+    //  $rootScope.adherentsTab=[];
+  }]);
 
 
 

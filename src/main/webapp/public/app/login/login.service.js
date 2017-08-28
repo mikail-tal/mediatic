@@ -5,7 +5,7 @@
         .module('myApp')
         .factory('LoginService', LoginService)
         .run(function (LoginService, $rootScope) {
-            console.log('RUUUUUUUN')
+           // console.log('RUUUUUUUN')
             LoginService.addAuthorization();
             $rootScope.logout = LoginService.logout;
 
@@ -51,7 +51,6 @@
                 User.get().$promise.then(function (result) {
                     $rootScope.user=result
                     console.log($rootScope.user)
-                    storeUser($rootScope.user)
                     $location.path('/adherentRecherche');
 
 
@@ -80,28 +79,19 @@
         }
 
         function storeUser(user) {
-            console.log('ABCCCCC')
             $localStorage.$reset();
-            $localStorage.setItem('Login Details', JSON.stringify(user)); 
-           // $rootScope.login = $localStorage.$default().login;
-            console.log('HEEEEEEERE')
-            console.log($localStorage.$default())
-           // $rootScope.hasRole=($ruser.credentials.includes("ADMIN"))
-        
-           // $rootScope.roles=user.
+            $localStorage.$default(user);
+            $rootScope.login = $localStorage.$default().login;
             addAuthorization();
         }
 
         function addAuthorization() {
-            console.log('ABCCCCC')
-           // $localStorage.$default();
-            $rootScope.user= JSON.parse($localStorage.$default());
-           // $rootScope.login = $localStorage.$default().login;
-           // var password = $localStorage.$default().password;
-            // if ($rootScope.login && password) {
-            //     var token = btoa($rootScope.login + ':' + password);
-            //     $http.defaults.headers.common.Authorization = 'Basic ' + token
-            // }
+            $rootScope.login = $localStorage.$default().login;
+            var password = $localStorage.$default().password;
+            if ($rootScope.login && password) {
+                var token = btoa($rootScope.login + ':' + password);
+                $http.defaults.headers.common.Authorization = 'Basic ' + token
+            }
         }
 
         function logout()

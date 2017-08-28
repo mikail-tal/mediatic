@@ -9,7 +9,8 @@ angular.module('myApp')
         LoginService.login($scope.user);
         
     	
-      //LoginService.storeUser($scope.user);
+      LoginService.storeUser($scope.user);
+      console.log($scope.user)
      
       
     }

@@ -1,0 +1,106 @@
+<div class="container">
+
+	<img src="img/logo_med2.png" class="img-responsive center-block" />
+
+	<div class="container-fluid">
+		<div class="input-group">
+
+
+
+
+			<input type="text" class="form-control " aria-label="..." ng-model="search.keyword">
+			<span class="input-group-addon" ng-click="searchAll()"><i
+						class="glyphicon glyphicon-search"></i></span>
+
+		</div>
+
+		<!-- <a data-toggle="collapse" class="pull-right">+ plus de criteres</a> -->
+
+	</div>
+
+
+	<!-- <pre >
+							{{usersTab|json}}
+							</pre> -->
+
+
+
+	<div class="container-fluid  ">
+		<div class="well-sm h6">Afficher :
+			<select ng-model="infosPage.size">
+				<option>10</option>
+				<option>25</option>
+				<option>50</option>
+				<option>100</option>
+				</select> users
+
+		</div>
+		<div class="panel panel-primary" ng-if=" userTab.length">
+			<div class="panel-heading">
+				<h3 class="text-center">Utilisateurs</h3>
+
+			</div>
+			<table class="table table-hover table-bordered" data-toggle="table">
+				<thead>
+					<tr class="text-primary text-uppercase">
+						<th class="container ">#<a ng-click="sortId()" class="pull-right">
+											<span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+						<th class="container ">Nom<a ng-click="sortDateNaissance()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+						<th class="container ">Login<a ng-click="sortPrenom()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+
+						<th class="container ">Roles<a ng-click="sortAjourCotisation()" class="pull-right"> <span class="glyphicon glyphicon-sort"></span>
+									</a></th>
+
+
+
+					</tr>
+				</thead>
+				<tbody class="text-primary">
+					<tr ng-repeat="user in userTab track by $index" ng-click="afficherDetails($index)">
+						<td>{{user.id}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.login}}</td>
+						<td>{{user.credentials}}</td>
+
+
+
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="text-center">
+		<nav aria-label="...">
+			<ul class="pager">
+				<li ng-show="!isFirst"><a ng-click="previous()">Previous</a></li>
+				<li ng-show="!isLast"><a ng-click="next()">Next</a></li>
+			</ul>
+		</nav>
+
+
+
+		<nav aria-label="Page navigation">
+
+			<ul class="pagination-lg pager">
+
+
+
+				<li class="previous" ng-show="!isFirst"><a ng-click="first()"><span
+									aria-hidden="true">&larr;</span> Premiere</a></li>
+				<li class="next" ng-show="!isLast"><a ng-click="last()">Derniere <span
+									aria-hidden="true">&rarr;</span></a></li>
+
+
+			</ul>
+		</nav>
+
+	</div>
+
+</div>
+</div>
+</div>

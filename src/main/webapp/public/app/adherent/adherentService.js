@@ -35,7 +35,7 @@ angular.module('myApp')
             	var resource=$resource(config.apiUrl+'/adherent/search?keyword='+keyword+'&page='+page+'&size='+size);
             	return resource.get();
             },
-            filter:function(field,order,page,size){
+            filter : function(field,order,page,size){
             	var resource=$resource(config.apiUrl+'/adherent/filter?field='+field+'&order='+order+'&page='+page+'&size='+size);
             	return resource.get();
             }
