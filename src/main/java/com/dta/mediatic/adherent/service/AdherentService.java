@@ -4,9 +4,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.dta.mediatic.adherent.dao.AdherentRepository;
@@ -70,12 +74,27 @@ public class AdherentService implements MediaticService<Adherent>, IAdherentServ
 	public <S extends Adherent> S save(S arg0) {
 		Adherent a = adherentRepository.save(arg0);
 		arg0.setIdchar(a.getId().toString());
+		arg0.setAjour(a.getAjour());
 		return adherentRepository.save(arg0);
 	}
 
 	@Override
 	public <S extends Adherent> Iterable<S> save(Iterable<S> arg0) {
-		return adherentRepository.save(arg0);
+		/*//List<Adherent>ads=Lists.newArrayList(arg0);
+		Iterable<S>ads=arg0;
+		ads.forEach(a->a.setAjour());
+		arg0=ads;
+		//ads.stream()
+		 * 
+*/		
+		List<S>ads=adherentRepository.save(arg0);
+		ads.forEach(a->a.setAjour(a.getAjour()));
+		ads.forEach(a->a.setIdchar(a.getId().toString()));
+		//ads.forEach(a->System.out.println(a.getId()));
+		
+		
+		
+		return adherentRepository.save(ads);
 	}
 
 	@Override
@@ -133,21 +152,23 @@ public class AdherentService implements MediaticService<Adherent>, IAdherentServ
 		case "ajour":
 			switch (order) {
 			case "asc": {
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.ASC,"ajour"));
 				
-				return convert(comparatorAJour.reversed(), pageable);
+				return adherentRepository.findAll(pq);
 			}
 			case "desc": {
-				
-				return convert(comparatorAJour, pageable);
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.DESC,"ajour"));
+
+				return adherentRepository.findAll(pq);
 			}
 			}
 		case "nbrMedia":
 			switch (order) {
 			case "asc": {
-				return convert(comparatorNbrMedia, pageable);
+				return adherentRepository.findAllByOrderByNbrMediaAsc(pageable);
 			}
 			case "desc": {
-				return convert(comparatorNbrMedia.reversed(), pageable);
+				return adherentRepository.findAllByOrderByNbrMediaDesc(pageable);
 			}
 			}
 		}
@@ -167,18 +188,30 @@ public class AdherentService implements MediaticService<Adherent>, IAdherentServ
 	
 	
 	
-	public Page<Adherent> convert(Comparator<Adherent> comparator,Pageable pageable){
+	/*public Page<Adherent> convert(Comparator<Adherent> comparator,Pageable pageable){
 		//Page<Adherent> source0=adherentRepository.findAllByOrderByIdDesc(pageable);
-		Iterable<Adherent>source=adherentRepository.findAll();
-		
+		//Page<Adherent>source=adherentRepository.findAll(pageable).so
+		PageRequest pageRequest=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
+				
+				new Sort(Direction.ASC,"nbrMedia")
+				);
+		//Iterable<Adherent>source0=adherentRepository.findAll();
+		Page<Adherent>source=adherentRepository.findAll(pageRequest);
 		int total=pageable.getPageSize();
+		//pageable.getOffset()
+		System.out.println(total+"     TOTAAAAAAAl");
+		int start=pageable.getPageNumber()*total;
+		int end=start+total;
+		
+		
 	
-		List<Adherent> list=Lists.newArrayList(source);
+		List<Adherent> list=Lists.newArrayList(source0);
 		list.sort(comparator.reversed());
 		list.forEach(a->System.out.println(a.getNbrMedia()));
 		
-		return new PageImpl<>(list, pageable, total);
-	}
+		
+		return source;//new PageImpl<>(list, new PageRequest(0, 10), total);
+	}*/
 
 	/*
 	 * static AdherentDao adherentDao;

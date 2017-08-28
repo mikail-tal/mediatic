@@ -28,6 +28,12 @@ public interface IMediaService {
     (String auteur
     		,String titre
     		,Pageable pageable);
+    public Page<Media> findByTitreIgnoreCaseContainingAndTypeAndEmpruntEnCoursIsNull(String titre,TypeMedia type,Pageable pageable);
+    public Page<Media> findByTitreIgnoreCaseContainingAndEmpruntEncoursIsNull(String titre,Pageable pageable);
+    public Page<Media> findByEmpruntEnCoursIsNull(Pageable pageable);
+
+
+
 
 	
 

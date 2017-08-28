@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -53,6 +55,13 @@ public class UserService {
 	
 	public List<User> findAll() {
 		return userRepository.findAll();
+	}
+	public Page<User> findAllByOrderByNameAsc(Pageable pageable){
+		return userRepository.findAllByOrderByNameAsc(pageable);
+	}
+	
+	public Optional<User> findOneByLogin(String login) {
+		return userRepository.findOneByLogin(login);
 	}
 
 	

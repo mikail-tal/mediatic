@@ -3,6 +3,8 @@ package com.dta.mediatic.emprunt.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dta.mediatic.adherent.dao.AdherentRepository;
+import com.dta.mediatic.adherent.model.Adherent;
 import com.dta.mediatic.emprunt.dao.EmpruntRepository;
 import com.dta.mediatic.emprunt.model.Emprunt;
 import com.dta.mediatic.media.dao.MediaRepository;
@@ -14,6 +16,8 @@ public class EmpruntService implements MediaticService<Emprunt>{
 	EmpruntRepository empruntRepository;
 	@Autowired
 	MediaRepository mediaRepository;
+	@Autowired
+	AdherentRepository adherentRepository;
 
 	@Override
 	public long count() {
@@ -67,7 +71,10 @@ public class EmpruntService implements MediaticService<Emprunt>{
 		empruntRepository.save(arg0);
 		Media m=mediaRepository.findOne(arg0.getMedia().getId());
 		m.setEmpruntEnCours(arg0);
+		Adherent a=adherentRepository.findOne(arg0.getAdherent().getId());
+		a.incrementMedia();
 		mediaRepository.save(m);
+		adherentRepository.save(a);
 		
 		return arg0;
 	}

@@ -13,6 +13,8 @@ public interface AdherentRepository extends JpaRepository<Adherent, Long> {
 	
     public Page<Adherent> findAllByOrderByNomAscPrenomAsc(Pageable pageable);
     public Page<Adherent> findAllByOrderByPrenomAsc(Pageable pageable);
+    public Page<Adherent> findAllByOrderByNbrMediaAsc(Pageable pageable);
+    public Page<Adherent> findAllByOrderByNbrMediaDesc(Pageable pageable);
     public Page<Adherent> findAllByOrderByPrenomDesc(Pageable pageable);
     public Page<Adherent> findAllByOrderByNomAsc(Pageable pageable);
     public Page<Adherent> findAllByOrderByNomDesc(Pageable pageable);

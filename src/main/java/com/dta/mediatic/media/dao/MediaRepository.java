@@ -57,6 +57,9 @@ public interface MediaRepository extends JpaRepository<Media, Long>{
     public Page<Media> findByTitreIgnoreCaseContainingOrderByTitreAsc(String titre,Pageable pageable);
     public Page<Media> findByTypeOrderByTitreAsc(TypeMedia type,Pageable pageable);
     public Page<Media> findByAuteurIgnoreCaseContainingOrderByTitreAsc(String auteur,Pageable pageable);
+    public Page<Media> findByTitreIgnoreCaseContainingAndTypeAndEmpruntEnCoursIsNull(String titre,TypeMedia type,Pageable pageable);
+    public Page<Media> findByTitreIgnoreCaseContainingAndEmpruntEnCoursIsNull(String titre,Pageable pageable);
+    public Page<Media> findByEmpruntEnCoursIsNull(Pageable pageable);
 	
 	
 

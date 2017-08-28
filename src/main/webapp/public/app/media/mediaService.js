@@ -23,18 +23,18 @@ angular.module('myApp')
         	var resource=$resource(config.apiUrl+'/media?page='+page+'&size='+size);
         	return resource.get();
         }
-        this.getMediaBy=function(titre,auteur,type){
-        	var resource=$resource(config.apiUrl+'/media?titre='+titre+'&auteur='+auteur+'&type='+type);
+        this.getMediaBy=function(titre,auteur,type,page,size){
+        	var resource=$resource(config.apiUrl+'/media?titre='+titre+'&auteur='+auteur+'&type='+type+'&page='+page+'&size='+size);
         	return resource.get();
         }
         
-        this.search=function(keyword){
+        this.search=function(keyword,page,size){
         	console.log('ABCD')
-        	var resource=$resource(config.apiUrl+'/media/search?keyword='+keyword);
+        	var resource=$resource(config.apiUrl+'/media/search?keyword='+keyword+'&page='+page+'&size='+size);
         	return resource.get();
         }
-        this.filter=function(field,order){
-        	var resource=$resource(config.apiUrl+'/media/filter?field='+field+'&order='+order);
+        this.filter=function(field,order,page,size){
+        	var resource=$resource(config.apiUrl+'/media/filter?field='+field+'&order='+order+'&page='+page+'&size='+size);
         	return resource.get();
         }
         this.removeMedia= function(id){

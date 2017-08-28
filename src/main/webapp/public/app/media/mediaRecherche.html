@@ -18,7 +18,7 @@
                 <li>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
-                        <select class="form-control" ng-model="selected">
+                        <select class="form-control" ng-model="search.type">
 							<option>LIVRE</option>
 							<option>CD</option>
 							<option>DVD</option>
@@ -51,7 +51,7 @@
             </div>
             <div class="container-fluid ">
                 <div class="well-sm h6">Afficher :
-                    <select>
+                    <select ng-model="infosPage.size">
 				<option>10</option>
 				<option>25</option>
 				<option>50</option>
@@ -95,7 +95,7 @@
 
                             </tr>
                         </thead>
-                       
+
                         <tbody class="text-primary">
                             <tr ng-repeat="response in dataMedia |filter track by $index " ng-click="afficherMediaDetail($index)">
                                 <td> {{response.id }}</td>
@@ -103,7 +103,7 @@
                                 <td> {{response.auteur}}</td>
                                 <td> {{response.type}}</td>
                                 <td> {{response.empruntEnCours.adherent.nom}} {{response.empruntEnCours.adherent.prenom}}</td>
-                                <td> {{response.empruntEnCours.dateRetourPrevue |  date:'yyyy-MM-dd' }}</td>
+                                <td> {{response.empruntEnCours.dateRetourPrevue | date:'yyyy-MM-dd' }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -113,27 +113,38 @@
 
             </div>
             <div class="text-center">
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li ng-show="!isFirst"><a ng-click="previous()">Previous</a></li>
+                        <li ng-show="!isLast"><a ng-click="next()">Next</a></li>
+                    </ul>
+                </nav>
+
+
+
                 <nav aria-label="Page navigation">
 
                     <ul class="pagination-lg pager">
-                        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedent</a></li>
-                        <li class="next"><a href="#">Suivant <span aria-hidden="true">&rarr;</span></a></li>
-                        <li>
-                            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-      </a>
-                        </li>
-						<li><a ng-click="change($index)" ng-repeat="(x,y) in range track by $index">{{$index+1}}</a></li>
-                      <!--   <li><a href="#">2</a></li>
-                        <li><a href="#" class="hidden-xs">3</a></li>
-                        <li><a href="#" class="hidden-xs">4</a></li>
-                        <li><a href="#" class="hidden-xs">5</a></li>
- -->
-                        <li>
-                            <a href="#" aria-label="Next">
-                 <span aria-hidden="true">&raquo;</span>
-      </a>
-                        </li>
+
+                        <!-- <li  ng-show="!isFirst"><a ng-click="first()" aria-label="Next">FIRST <span
+								aria-hidden="true">&laquo; </span>
+						</a></li> -->
+
+                        <li class="previous" ng-show="!isFirst"><a ng-click="first()"><span
+									aria-hidden="true">&larr;</span> Premiere</a></li>
+                        <li class="next" ng-show="!isLast"><a ng-click="last()">Derniere <span
+									aria-hidden="true">&rarr;</span></a></li>
+
+                        <!-- <li><a ng-click="change($index)" ng-repeat=" x in infosPage.range | limitTo : end : start  " >{{x}}</a></li>
+                            -->
+                        <!-- <li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#" class="hidden-xs">4</a></li>
+						<li><a href="#" class="hidden-xs">5</a></li> -->
+                        <!-- <li ng-show="!isLast"><a ng-click="last()" aria-label="Previous" >LAST <span
+							aria-hidden="true"> &raquo;</span>
+					</a></li> -->
+
                     </ul>
                 </nav>
 

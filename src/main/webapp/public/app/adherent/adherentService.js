@@ -13,7 +13,7 @@ angular.module('myApp')
             },
                 // RECUPERATION DES ADHERENTS
             getAdherents: function () {
-                var resource= $resource(config.apiUrl + '/adherent/');
+                var resource= $resource(config.apiUrl + '/adherent/name');
                 return resource.get();
             },
             getAdr:function(id){
@@ -22,8 +22,8 @@ angular.module('myApp')
             return 	Adherent.get();
             	
             },
-            getAdrBy:function(id,nom){
-            	var resource=$resource(config.apiUrl+'/adherent?id='+id+'&nom='+nom);
+            getAdrBy:function(id,nom,page,size){
+            	var resource=$resource(config.apiUrl+'/adherent?id='+id+'&nom='+nom+'&page='+page+'&size='+size);
             	return resource.get();
             },
             pageChange:function(page,size){
@@ -31,21 +31,24 @@ angular.module('myApp')
             	return resource.get();
             }
             ,
-            search:function(keyword){
-            	var resource=$resource(config.apiUrl+'/adherent/search?keyword='+keyword);
+            search:function(keyword,page,size){
+            	var resource=$resource(config.apiUrl+'/adherent/search?keyword='+keyword+'&page='+page+'&size='+size);
             	return resource.get();
             },
-            filter:function(field,order,size){
-            	var resource=$resource(config.apiUrl+'/adherent/filter?field='+field+'&order='+order+'&size='+size);
+            filter:function(field,order,page,size){
+            	var resource=$resource(config.apiUrl+'/adherent/filter?field='+field+'&order='+order+'&page='+page+'&size='+size);
             	return resource.get();
             }
             ,
                 // RECUPERATION DES MEDIAS
-            getMedias: function () {
-                return $resource(config.apiUrl + '/media').query();
+            getMedias: function (titre,type,page,size) {
+            	var resource=$resource(config.apiUrl + '/media/nonEmprunte?titre='+titre+'&type='+type+'&page='+page+'&size='+size);
+                return resource.get();
             },
             getNbrMedias:function(){
-            	return $ressource(config.apiUrl+'/nbrMedia').query();
+            	var resource=$ressource(config.apiUrl+'/nbrMedia');
+            	return  	resource.get();
+            
             }
             ,
                 // MODIFICATION D UN ADHERENT EN UTILISANT LA METHODE PUT ET REDIRECTION VERS LA PAGE DE RECHERCHE

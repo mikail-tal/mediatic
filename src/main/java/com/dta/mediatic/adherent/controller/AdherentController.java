@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +38,9 @@ public class AdherentController{
 	
 	@Autowired
 	private AdherentService adherentService;
-
+	
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Adherent findById(@PathVariable Long id){
         return adherentService.findOne(id);
@@ -44,7 +48,7 @@ public class AdherentController{
 	@RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody @Valid Adherent resource) {	
-		System.out.println(resource.getDateNaissance());
+		//System.out.println(resource.getDateNaissance());
 		adherentService.save(resource);
 	}
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -82,6 +86,7 @@ public class AdherentController{
 		}
 		return adherentService.findAllOrderByNomAndPrenomAsc(new PageRequest(page, size));
 	}
+	
 	@JsonView(AdherentViews.AdherentView.class)
 	@RequestMapping(value="/filter" ,method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Page<Adherent> findSorted(

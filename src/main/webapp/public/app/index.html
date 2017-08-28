@@ -2,7 +2,10 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js">
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,56 +16,63 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-  
-     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-     <script src="bower_components/jquery/dist/jquery.js"></script>
-     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  
 
-  
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+
+
 
 </head>
+
 <body>
-<div class="navbar navbar-inverse" ng-if="login">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="navbar-header col-sm-3">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand col-sm-10 text-center" href="#!/mediaRecherche">Mediatic</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#!/mediaRecherche">Media<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#!/mediaAjout">Ajouter</a></li>
-								<li><a href="#!/mediaRecherche">Visualiser</a></li>
+  <div class="navbar navbar-inverse" ng-if="login">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="navbar-header col-sm-3">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					      	<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						    	class="icon-bar"></span>
+				        	</button>
+                 <a class="navbar-brand col-sm-10 text-center" href="#!/mediaRecherche">Mediatic</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar" >
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#!/mediaRecherche">Media<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-show="hasRole"><a href="#!/mediaAjout">Ajouter</a></li>
+                <li><a href="#!/mediaRecherche">Visualiser</a></li>
 
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#!/adherentRecherche">Adherent<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#!/adherentAjout">Ajouter</a></li>
-								<li><a href="#!/adherentRecherche">Visualiser</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#!/adherentRecherche">Adherent<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-show="hasRole"><a href="#!/adherentAjout">Ajouter</a></li>
+                <li><a href="#!/adherentRecherche">Visualiser</a></li>
 
-							</ul></li>
-						
-						<li><a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>
+              </ul>
+            </li>
+            <li class="dropdown" ng-show="hasRole"><a class="dropdown-toggle" data-toggle="dropdown" href="#!/userRecherche">Utilisateurs<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#!/userAjout">Ajouter</a></li>
+                <li><a href="#!/userRecherche">Visualiser</a></li>
+
+              </ul>
+            </li>
+
+            <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>
 								Se deconnecter</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <ul class="menu">
 
-    
+
     <li><a href="#!/view1">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
     <li><a href="#!/adherentRecherche">Recherche</a></li>
@@ -72,9 +82,10 @@
     <li><a href="#!/mediaDetail">mediaDetails</a></li>
     <li><a href="#!/mediaRecherche">mediaRecherche</a></li>
     <li><a href="#!/empruntAjout">empruntAjout</a></li>
-     <li><a href="#!/userAjout">userAjout</a></li>
-   
-    
+    <li><a href="#!/userAjout">userAjout</a></li>
+    <li><a href="#!/userRecherche">userRecherche</a></li>
+
+
     <li><a href="#!/login">login</a></li>
 
   </ul>
@@ -96,10 +107,10 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
-   <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
 
- 
-  
+
+
 
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
@@ -117,17 +128,21 @@
   <script src="media/mediaService.js"></script>
   <script src="media/mediaAjoutEmprunt.js"></script>
 
-  <script src="user/userController.js"></script>
+  <script src="user/UserController.js"></script>
+  <script src="user/UserRecherche.js"></script>
+  <script src="user/UserDetails.js"></script>
+  <script src="user/UserService.js"></script>
 
- 
 
-  
+
+
   <script src="login/login.controller.js"></script>
   <script src="login/login.service.js"></script>
-  
+
 
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 </body>
+
 </html>

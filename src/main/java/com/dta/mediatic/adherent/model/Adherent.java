@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Formula;
 
 import com.dta.mediatic.config.LocalDateDeserializer;
 import com.dta.mediatic.config.LocalDateSerializer;
@@ -68,13 +69,15 @@ public class Adherent implements Comparable<Adherent>{
 	
 	@OneToMany(mappedBy="adherent")
 	@JsonSerialize(converter=AdherentEmpruntConverter.class)
+	//@Column(name="emprunt")
 	private List<Emprunt> emprunt;
 
-	@Transient
+
 	@JsonView(AdherentViews.AdherentView.class)
+	@Column
 	private long nbrMedia;
 	
-	@Transient
+	@Column
 	private String ajour;
 	
 	
@@ -228,14 +231,17 @@ public class Adherent implements Comparable<Adherent>{
 	
 
 	public long getNbrMedia() {
-		return this.emprunt.stream().filter(distinctByKey(e->e.getMedia().getTitre())).count();
+		return this.nbrMedia;//this.emprunt.stream().filter(distinctByKey(e->e.getMedia().getTitre())).count();
 	}
 	public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
 	    Map<Object,Boolean> seen = new ConcurrentHashMap<>();
 	    return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
 	}
-	public void setNbrMedia(long nbrMedia) {
-		this.nbrMedia = nbrMedia;
+	public void incrementMedia() {
+		this.nbrMedia ++;
+	}
+	public void decrementMedia() {
+		this.nbrMedia --;
 	}
 	public String getAjour() {
 		if(cotisation.getDatePaiement()==null) {

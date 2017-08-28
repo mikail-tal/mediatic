@@ -18,10 +18,10 @@ import com.dta.mediatic.cotisation.model.Cotisation;
 public class AdherentGenerator{
 	
 	@Autowired
-	AdherentRepository adherentRepository;
+	AdherentService adherentService;
 	
 	
-	static final int SIZE=100;
+	static final int SIZE=200;
 	@Transactional
 	//@Synchronize(value = { "" })
 	public Iterable<Adherent> saveAll(){
@@ -42,7 +42,7 @@ public class AdherentGenerator{
 			
 			listAdherents.add(a);
 		}
-		return adherentRepository.save(listAdherents);
+		return adherentService.save(listAdherents);
 	}
 	
 
@@ -84,7 +84,7 @@ public class AdherentGenerator{
 			char c=(char) ThreadLocalRandom.current().nextInt(65,90+1);
 			s+=c;
 		}
-		s+="fr";
+		s+=".fr";
 		return s;
 	}
 	Cotisation genreCotisation() {

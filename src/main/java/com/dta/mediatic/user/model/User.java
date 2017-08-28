@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Entity
 @Table(name = "user_")
 public class User implements Serializable {
@@ -41,7 +43,6 @@ public class User implements Serializable {
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="credentials", joinColumns=@JoinColumn(name="user_id"))
 	@Column(name="credential")
-	
 	private List<String> credentials = new ArrayList<>();
 	
 	public User() {

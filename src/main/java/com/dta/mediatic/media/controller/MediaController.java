@@ -145,7 +145,22 @@ public class MediaController {
 		return mediaService.orderBy(field, order, new PageRequest(page, size));
 				
 	}
+	@JsonView(MediaViews.MediaView.class)
+	@RequestMapping(value="/nonEmprunte",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public Page<Media> findAllNonEmpruntee(@RequestParam(value="titre", required =false) String titre,
+									 @RequestParam(value="type", required =false) String type,
+									 @RequestParam(value="page",defaultValue="0" ,required=false) int page,
+									 @RequestParam(value="size",defaultValue="10",required=false) int size) {
+		if(type==null | "".equals(type)) {
+			return mediaService.findByTitreIgnoreCaseContainingAndEmpruntEncoursIsNull(titre,new PageRequest(page, size));
+		}else {
+			return mediaService.findByTitreIgnoreCaseContainingAndTypeAndEmpruntEnCoursIsNull(titre, TypeMedia.valueOf(type),new PageRequest(page, size));
 
+		}
 
+		
+		
+	}
+	
 	
 }

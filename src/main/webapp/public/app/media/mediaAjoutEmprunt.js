@@ -12,27 +12,51 @@ angular.module('myApp')
         var idAdherent = -1; 
         var idMedia=$routeParams.id;
         //var typeMedia=$rootScope.media.typeMedia;
+        var page=0,size=5,id='';
+        $scope.recherche='';
+        $scope.adherent={}
+        $scope.notfound=true;
+        
 
-      AdherentService.getAdherents().$promise.then(function (result)
-              {
-        $scope.adherents = result;
-        console.log(result)
-        $scope.$watch('recherche', function () {
+      
+      
+      
+      $scope.$watch('recherche', function () {
+    	  
+    	  AdherentService.getAdrBy(id,$scope.recherche,page,size).$promise.then(function (result)
+                  {
+            if($scope.recherche){
+            	if(result.numberOfElements){
+            		$scope.adherents = result.content;
+                    $scope.adherent=$scope.adherents[0];
+            	}else{
+            		$scope.adherent={}
+            		$scope.notfound=true;
+            	}
+            
+            }
+           
+
+          });
+    	  
+    	  
+    	  
+    	  
+    	  
           console.log('ABC')
-                $scope.adherents = recherche();
-                idAdherent = rechercherTitreComplet();
+              //  $scope.adherents = recherche();
+             //   idAdherent = rechercherTitreComplet();
             }, true);
-
-      });
-      AdherentService.getAdherents().$promise.then(function (result) {
+      
+      /*AdherentService.getAdherents().$promise.then(function (result) {
             $scope.toutAdherents = result;
-        })
+        })*/
                
             
         
       
 
-      function recherche(){
+      /*function recherche(){
         $scope.rechercheAdherent = [];
         var count= 0;
         
@@ -71,19 +95,20 @@ angular.module('myApp')
                 idAdherent = -1;
             }
             return idAdherent;
-        }
+        }*/
       
 
           $scope.emprunter = function () {
 
             var emprunt = {
                 media: parseInt(idMedia,10),
-                adherent: idAdherent,
+                adherent: $scope.adherent.id,
                 dateEmprunt: $scope.dateE,
                 dateRetourPrevue: AdherentService.getDateRetourPrevue($scope.dateE, $routeParams.typeMedia),
                 dateRetourEffectif: null
             }
             console.log(emprunt)
+        	  console.log($scope.adherent)
             AdherentService.postEmprunt(emprunt).$promise.then(function (result) {
 
                 $scope.redirect();

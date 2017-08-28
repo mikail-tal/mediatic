@@ -61,13 +61,29 @@ angular.module('myApp', [
         templateUrl: 'user/AjoutUser.html',
         controller: 'UserCtrl'
 
+    }).when('/userRecherche', {
+      templateUrl: 'user/UserRecherche.html',
+      controller: 'UserRechercheCtrl'
+
+    }).when('/userDetails/:id', {
+      templateUrl: 'user/UserDetails.html',
+      controller: 'UserDetailsCtrl'
+
     }).otherwise({ redirectTo: '/login' });
 
       }]).constant('config', {
         apiUrl: '/mediatic'
       }).run(['$rootScope','$location', function ($rootScope,$location) {
          $rootScope.$on("$locationChangeStart", function(event, next, current) { 
-           console.log($rootScope.login)
+              
+
+
+
+
+
+         //  $rootScope.hasRole=($rootScope.user.credentials.includes("ADMIN"))
+        //   console.log($rootScope.user.credentials)
+          // console.log($rootScope.login)
                   if(!$rootScope.login){
                     
                     if($location.path()!== '/login'){
@@ -79,9 +95,9 @@ angular.module('myApp', [
                     
                   }
     });
-        $rootScope.adherent;
-        $rootScope.media;
-        $rootScope.login;
+      //  $rootScope.adherent;
+       // $rootScope.media;
+     //   $rootScope.login;
        if($rootScope.login){
           $location.path('/login');
        }

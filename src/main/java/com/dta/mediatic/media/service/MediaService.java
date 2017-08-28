@@ -7,13 +7,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.dta.mediatic.media.dao.MediaRepository;
 import com.dta.mediatic.media.model.Media;
 import com.dta.mediatic.media.model.TypeMedia;
 import com.dta.mediatic.service.MediaticService;
+import com.google.common.collect.Lists;
 @Service
 public class MediaService implements MediaticService<Media>,IMediaService{
 	@Autowired
@@ -119,6 +123,13 @@ public class MediaService implements MediaticService<Media>,IMediaService{
 			case "desc":
 				return mediaRepository.findAllByOrderByIdDesc(pageable);
 			}
+		case "type":
+			switch (order) {
+			case "asc":
+				return mediaRepository.findAllByOrderByTypeAsc(pageable);
+			case "desc":
+				return mediaRepository.findAllByOrderByTypeDesc(pageable);
+			}
 
 		case "titre":
 			switch (order) {
@@ -136,19 +147,33 @@ public class MediaService implements MediaticService<Media>,IMediaService{
 			}
 		case "emprunteepar":
 			switch (order) {
-			case "asc":
-				return convert(comparator, pageable);//mediaRepository.findAllByOrderBy(pageable);
+			case "asc":{
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.ASC,"Emprunt.adherent.nom"));
+
+				return mediaRepository.findAll(pq);
+						
+			}			//convert(comparator, pageable);//mediaRepository.findAllByOrderBy(pageable);
 			case "desc":
-				return convertReverse(comparator.reversed(), pageable);//mediaRepository.findAllByOrderByIdDesc(pageable);
+			{
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.DESC,"Emprunt.adherent.nom"));
+
+				return  mediaRepository.findAll(pq);
+			}			
+						//convertReverse(comparator.reversed(), pageable);//mediaRepository.findAllByOrderByIdDesc(pageable);
 			}
 		case "dateretourprevue":
 			switch (order) {
 			case "asc": {
-				return convert(comparatorDateRetourPrevue, pageable);
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.ASC,"Emprunt.dateRetourPrevue"));
+				return mediaRepository.findAll(pq);
+
+				//return convert(comparatorDateRetourPrevue, pageable);
 			}
 			case "desc": {
+				PageRequest pq=new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),new Sort(Direction.DESC,"Emprunt.dateRetourPrevue"));
+				return mediaRepository.findAll(pq);
 				
-				return convertReverse(comparatorDateRetourPrevue.reversed(), pageable);
+				//return convertReverse(comparatorDateRetourPrevue.reversed(), pageable);
 			}
 			}
 		
@@ -163,11 +188,13 @@ public class MediaService implements MediaticService<Media>,IMediaService{
 	}
 	
 	
-	public Page<Media> convert(Comparator<Media> comparator,Pageable pageable){
-		Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
-		int total=source.getTotalPages();
+	public Page<Media> convert(Comparator<Media> comparator,Pageable pageable){/*
+		//Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
+		Iterable<Media>source=mediaRepository.findAll();
+		int total=pageable.getPageSize();
+		//int total=source.getTotalPages();
 	
-		List<Media> list=source.getContent().stream().collect(Collectors.toList());
+		List<Media> list=Lists.newArrayList(source);
 		List<Media>listNotNull=list.stream().filter(m->m.getEmpruntEnCours()!=null)
 		.collect(Collectors.toList());
 		listNotNull.sort(comparator);
@@ -177,12 +204,15 @@ public class MediaService implements MediaticService<Media>,IMediaService{
 		listNotNull.addAll(listNull);
 		
 		return new PageImpl<>(listNotNull, pageable, total);
+	*/
+	return null;	
 	}
 	public Page<Media> convertReverse(Comparator<Media> comparator,Pageable pageable){
-		Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
-		int total=source.getTotalPages();
+		//Page<Media> source=mediaRepository.findAllByOrderByTitreAsc(pageable);
+		Iterable<Media>source=mediaRepository.findAll();
+		int total=pageable.getPageSize();
 	
-		List<Media> list=source.getContent().stream().collect(Collectors.toList());
+		List<Media> list=Lists.newArrayList(source);
 		List<Media>listNotNull=list.stream().filter(m->m.getEmpruntEnCours()!=null)
 		.collect(Collectors.toList());
 		listNotNull.sort(comparator);
@@ -227,6 +257,21 @@ public class MediaService implements MediaticService<Media>,IMediaService{
 	public Page<Media> findByTitreIgnoreCaseContainingOrAuteurIgnoreCaseContainingOrderByTitreAsc(
 			String titre,String auteur, Pageable pageable) {
 		return mediaRepository.findByTitreIgnoreCaseContainingOrAuteurIgnoreCaseContainingOrderByTitreAsc(titre,auteur, pageable);
+	}
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingAndTypeAndEmpruntEnCoursIsNull(String titre, TypeMedia type,Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingAndTypeAndEmpruntEnCoursIsNull(titre, type,pageable);
+	}
+
+	@Override
+	public Page<Media> findByTitreIgnoreCaseContainingAndEmpruntEncoursIsNull(String titre,Pageable pageable) {
+		return mediaRepository.findByTitreIgnoreCaseContainingAndEmpruntEnCoursIsNull(titre,pageable);
+	}
+
+	@Override
+	public Page<Media> findByEmpruntEnCoursIsNull(Pageable pageable) {
+		return findByEmpruntEnCoursIsNull(pageable);
 	}
 
 	

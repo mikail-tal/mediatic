@@ -10,12 +10,12 @@
 
         });
 
-    LoginService.$inject = ['$localStorage', '$rootScope', '$http', '$location'];
+    LoginService.$inject = ['$localStorage', '$rootScope', '$http', '$location','$resource','config'];
 
     
     
     
-    function LoginService($localStorage, $rootScope, $http, $location) {
+    function LoginService($localStorage, $rootScope, $http, $location,$resource,config) {
 
         var service = {
             storeUser: storeUser,
@@ -45,9 +45,31 @@
         		
         		
         	}).then(function successCallback(response){
-        	console.log('success')	
+
+                var User=$resource(config.apiUrl + '/api/users?login='+user.login);
+                User.get().$promise.then(function (result) {
+                    $rootScope.user=result
+                    console.log($rootScope.user)
+                    storeUser($rootScope.user)
+                    $location.path('/adherentRecherche');
+
+
+
+                });
+
+
+                
+
+                    
+
+            //console.log('success')
+           // console.log(user)
+            // $rootScope.login=user.login
+             
+       
         	},function errorCallBack(response){
-        		console.log('error');
+                console.log('error');
+                 
         	}
         	)
         	
@@ -60,6 +82,11 @@
             $localStorage.$reset();
             $localStorage.$default(user);
             $rootScope.login = $localStorage.$default().login;
+            console.log('HEEEEEEERE')
+            console.log($localStorage.$default())
+           // $rootScope.hasRole=($ruser.credentials.includes("ADMIN"))
+        
+           // $rootScope.roles=user.
             addAuthorization();
         }
 

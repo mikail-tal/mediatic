@@ -6,11 +6,11 @@ angular.module('myApp')
     $scope.user = {};
     
     $scope.login = function () {
-    		LoginService.login($scope.user);
+        LoginService.login($scope.user);
+        
     	
-      LoginService.storeUser($scope.user);
-      $location.path('/adherentRecherche');
-      
+      //LoginService.storeUser($scope.user);
+     
       
     }
   }]);

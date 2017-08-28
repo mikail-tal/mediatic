@@ -29,9 +29,11 @@ public class Emprunt {
 	@ManyToOne
 	
 	@Cascade(CascadeType.MERGE)
+	//@Column(name="media")
 	private Media media;
 	@ManyToOne
 	@Cascade(CascadeType.MERGE)
+	
 	private Adherent adherent;
 	@Column(name="date_emprunt")
 	@JsonDeserialize(using=LocalDateDeserializer.class)

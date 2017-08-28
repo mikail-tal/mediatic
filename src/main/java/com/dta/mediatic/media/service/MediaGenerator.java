@@ -17,7 +17,7 @@ import com.dta.mediatic.media.model.TypeMedia;
 public class MediaGenerator {
 	
 	
-	static final int SIZE=100;
+	static final int SIZE=300;
 	
 	@Autowired
 	MediaRepository mediaRepository;

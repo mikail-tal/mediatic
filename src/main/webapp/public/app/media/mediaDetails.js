@@ -3,14 +3,21 @@ angular.module('myApp')
     .controller('MediaDetailsCtrl', ['$scope', '$rootScope', '$location', 'MediaService','$routeParams',
         function ($scope, $rootScope, $location, MediaService,$routeParams) {
     	
-   
+            $scope.autorisee=true;
+            $scope.disabled=true;
 	
 	
 	
     //	console.log($routeParams.id);
+    
             
             MediaService.getMedia($routeParams.id).$promise.then(function (result) {
             	$scope.media=result;
+            	
+            	
+            	if($scope.media.empruntEnCours){
+            		$scope.autorisee=false;
+            	}
             	console.log(result)
             /*	angular.forEach($scope.media.emprunt,function(value,key){
             		console.log(value)

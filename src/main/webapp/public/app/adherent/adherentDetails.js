@@ -39,9 +39,11 @@ angular.module('myApp')
             Modification de la date de fin d abonnement quand la date de paiement est modifiee
         */
 
-        $scope.$watch('$scope.adherent.cotisation.datePaiement', function () {
+        $scope.$watch('adherent.cotisation.datePaiement', function () {
+        	 
             if ($scope.adherent.cotisation.datePaiement) {
-                $scope.adherent.cotisation.dateFinAbonnement = AdherentService.getDateFin($scope.adherent.cotisation.dateFinAbonnement);
+                $scope.adherent.cotisation.dateFinAbonnement = AdherentService.getDateFin($scope.adherent.cotisation.datePaiement);
+                console.log($scope.adherent.cotisation.dateFinAbonnement)
             }
         })
         })
